@@ -1,0 +1,17 @@
+.container {
+  position: relative;
+  height: 14rem;
+  /*border: 1px solid;*/
+}
+
+.container-fluid {
+	/*border: 1px solid;*/
+}
+
+.centered {
+  position: absolute;
+  top: 50%;
+  left:50%;
+  transform: translate(-50%,-50%);
+  border: 1px dashed deeppink;
+}
