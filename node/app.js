@@ -10,7 +10,6 @@ var users = require('./routes/users');
 
 var app = express();
 
-var serverPort = 3000;
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -59,7 +58,3 @@ app.use(function(err, req, res, next) {
 });
 
 module.exports = app;
-
-app.listen(serverPort, function(){
-  console.log('Server listening on port ' + serverPort + '.');
-});
