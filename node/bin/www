@@ -88,5 +88,4 @@ function onListening() {
     : 'port ' + addr.port;
   debug('Listening on ' + bind);
   console.log('Server listening on port ' + addr.port + '.');
-  console.log("debug: addr=" + addr)
 }
