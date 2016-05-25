@@ -1,24 +1,23 @@
-"""
 #!/usr/bin/env python
--*- coding: utf-8 -*-
-
-Creation:    25.05.2016
-
-Copyright (c) 2013-2015 by Georg Kainzbauer <http://www.gtkdb.de>
-
-This program is free software; you can redistribute it and/or modify
-it under the terms of the GNU General Public License as published by
-the Free Software Foundation; either version 2 of the License, or
-(at your option) any later version.
-"""
+# -*- coding: utf-8 -*-
+#
+# Creation:    25.05.2016
+#
+# Copyright (c) 2013-2015 by Georg Kainzbauer <http://www.gtkdb.de>
+#
+# This program is free software; you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation; either version 2 of the License, or
+# (at your option) any later version.
+# 
 
 # import required modules
 import time
 import RPi.GPIO as GPIO
 
 # define GPIO pins
-TRIG = 18
-ECHO    = 17
+TRIG = 4
+ECHO = 18
 
 # function to measure the distance
 def MeasureDistance():
@@ -27,6 +26,7 @@ def MeasureDistance():
 
   # set trigger after 10µs to low
   time.sleep(0.00001)
+  # time.sleep(3.0)
   GPIO.output(TRIG, False)
 
   # store initial start time
