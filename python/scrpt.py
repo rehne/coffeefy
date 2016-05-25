@@ -1,17 +1,16 @@
+"""
 #!/usr/bin/env python
-# -*- coding: utf-8 -*-
+-*- coding: utf-8 -*-
 
-#
-# Creation:    03.08.2013
-# Last Update: 07.04.2015
-#
-# Copyright (c) 2013-2015 by Georg Kainzbauer <http://www.gtkdb.de>
-#
-# This program is free software; you can redistribute it and/or modify
-# it under the terms of the GNU General Public License as published by
-# the Free Software Foundation; either version 2 of the License, or
-# (at your option) any later version.
-#
+Creation:    25.05.2016
+
+Copyright (c) 2013-2015 by Georg Kainzbauer <http://www.gtkdb.de>
+
+This program is free software; you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation; either version 2 of the License, or
+(at your option) any later version.
+"""
 
 # import required modules
 import time
