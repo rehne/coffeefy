@@ -1,32 +1,28 @@
-import RPi.GPIO as GPIO
 import time
 
-GPIO.setmode(GPIO.BOARD)
+zahl1 = 1
+zahl2 = 2
+zahl3 = 3
+zahl4 = 4
+zahl5 = 5
 
-TRIG = 7
-ECHO = 12
+def testMethode():
+    print "testMethode"
 
-GPIO.setup(TRIG, GPIO.OUT)
-GPIO.output(TRIG, 0)
+def returnMethode():
+    return "return Wert"
 
-GPIO.setup(ECHO, GPIO.IN)
+def main():
+    while (True):
+        print zahl1
+        time.sleep(0.5)
+        print zahl2
+        time.sleep(0.5)
+        print zahl3
+        time.sleep(0.5)
+        print zahl4
+        time.sleep(0.5)
+        print zahl5
+        time.sleep(0.5)
 
-time.sleep(0.1)
-
-print "Starting Measurment.."
-
-GPIO.output(TRIG, 1)
-time.sleep(3) #0.00001
-GPIO.output(TRIG, 0)
-
-while GPIO.input(ECHO) == 0:
-    pass
-start = time.time()
-
-while GPIO.input(ECHO) == 1:
-    pass
-stop = time.time()
-
-print (stop - start) * 17000
-
-GPIO.cleanup()
+main()
