@@ -10,6 +10,7 @@
 # the Free Software Foundation; either version 2 of the License, or
 # (at your option) any later version.
 # 
+# Notice by Vanakh Chea: Minor modifications were applied to the code
 
 # import required modules
 import time
