@@ -12,7 +12,7 @@ def testMethode():
 def returnMethode():
     return "return Wert"
 
-def main():
+def count():
     while (True):
         print zahl1
         time.sleep(0.5)
@@ -24,5 +24,8 @@ def main():
         time.sleep(0.5)
         print zahl5
         time.sleep(0.5)
+
+def main():
+    print "42"
 
 main()
