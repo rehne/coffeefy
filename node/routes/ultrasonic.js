@@ -1,6 +1,6 @@
 var express = require('express');
 var python = require('python-shell');
-var script = new python('../python/test.py');
+var script = new python('../python/ultrasonic.py');
 var router = express.Router();
 var data;
 
