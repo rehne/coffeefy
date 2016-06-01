@@ -51,6 +51,7 @@ def MeasureDistance():
 def main():
     Distance = MeasureDistance()
     print(Distance)
+    GPIO.cleanup()
 
   # try:
   #   while True:
