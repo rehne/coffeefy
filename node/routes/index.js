@@ -1,6 +1,8 @@
 var express = require('express');
 var router = express.Router();
 var pythonshell = require('python-shell');
+var data;
+
 
 var zerorpc = require("zerorpc");
 var client = new zerorpc.Client();
@@ -8,7 +10,11 @@ client.connect("tcp://127.0.0.1:4242");
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
-  res.render('index', { title: 'Coffeefy' });
+    pythonshell.run('../python/ultrasonic.py', function(err, results){
+        if (err) throw err;
+        data = results;
+    })
+  res.render('index', { title: 'Coffeefy', distance: data });
 });
 
 router.get('/test', function(req, res, next){
