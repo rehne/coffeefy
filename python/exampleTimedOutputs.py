@@ -25,12 +25,5 @@ client.connect("iot.eclipse.org", 1883, 60)
 # manual interface.
 client.loop_forever()
 
-# def main():
-#  	print "Starting machine..."
-# 	time.sleep(10)
-# 	print "Working..."
-# 	time.sleep(10)
-# 	print "Done!"
 
-# main()
 
