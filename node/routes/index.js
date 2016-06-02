@@ -4,9 +4,9 @@ var pythonshell = require('python-shell');
 var data;
 
 
-var zerorpc = require("zerorpc");
-var client = new zerorpc.Client();
-client.connect("tcp://127.0.0.1:4242");
+//var zerorpc = require("zerorpc");
+//var client = new zerorpc.Client();
+//client.connect("tcp://127.0.0.1:4242");
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
@@ -17,10 +17,12 @@ router.get('/', function(req, res, next) {
   res.render('index', { title: 'Coffeefy', distance: data });
 });
 
+/* GET Test page */
 router.get('/test', function(req, res, next){
     res.render('test');
 });
 
+/* run script "helloworld.py" */
 router.get('/scripts/1/', function(req, res, next){
     pythonshell.run('../python/helloworld.py', function(err, results){
         if (err) throw err;
@@ -30,7 +32,7 @@ router.get('/scripts/1/', function(req, res, next){
     res.end();
 });
 
-
+/* run script "exampleTimedOutputs.py" */
 router.get('/scripts/2/', function(req, res, next){
     runscript();
 

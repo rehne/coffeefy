@@ -7,6 +7,7 @@
 var app = require('../app');
 var debug = require('debug')('coffeefy:server');
 var http = require('http');
+var faye = require('faye');
 
 /**
  * Get port from environment and store in Express.
@@ -20,6 +21,16 @@ app.set('port', port);
  */
 
 var server = http.createServer(app);
+
+// Faye
+// NoteAdapter konfigurieren
+var bayeux = new faye.NodeAdapter({
+  mount: '/faye',
+  timeout: 45
+});
+
+// Nodeadapter zum http-Server hinzufuegen
+bayeux.attach(server);
 
 /**
  * Listen on provided port, on all network interfaces.

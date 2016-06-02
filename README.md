@@ -4,12 +4,19 @@
 
 Coffeefy let you control a Coffee maker via Internet
 
+## Required Hardware
+
+- Raspberry Pi
+
 ## Installation
 - clone repository
 - navigate to ./node
 - run **npm install** to install the dependencies
 - To start the webserver, run: **nodemon app**
 - open **http://localhost:3000** in browser
+
+## required python libraries
+- RPi.GPIO via **sudo apt-get install rpi.gpio**
 
 
 ## Authors

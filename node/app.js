@@ -26,6 +26,8 @@ var ultrasonic = require('./routes/ultrasonic');
 
 var app = express();
 
+// Notiz: Fuer server config, siehe bin/wwww
+
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
