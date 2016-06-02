@@ -22,15 +22,7 @@ app.set('port', port);
 
 var server = http.createServer(app);
 
-// Faye
-// NoteAdapter konfigurieren
-var bayeux = new faye.NodeAdapter({
-  mount: '/faye',
-  timeout: 45
-});
-
-// Nodeadapter zum http-Server hinzufuegen
-bayeux.attach(server);
+startfayeserver();
 
 /**
  * Listen on provided port, on all network interfaces.
@@ -99,4 +91,17 @@ function onListening() {
     : 'port ' + addr.port;
   debug('Listening on ' + bind);
   console.log('Server listening on port ' + addr.port + '.');
+}
+
+function startfayeserver(){
+  // Faye
+  // NoteAdapter konfigurieren
+  var bayeux = new faye.NodeAdapter({
+    mount: '/faye',
+    timeout: 45
+  });
+
+  // Nodeadapter zum http-Server hinzufuegen
+  bayeux.attach(server);
+  console.log("Faye Server is running...");
 }
