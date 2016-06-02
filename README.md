@@ -20,7 +20,8 @@ Coffeefy let you control a Coffee maker via Internet
 - paho-mqtt via `pip install paho-mqtt`
 
 ## Troubleshooting
-Installing paho-mqtt might throw an error. Install the python developer package via `apt-get install python2.7-dev`
+- Installing paho-mqtt causes an error. Missing "Python.h"? → Install the python developer package via `apt-get install python2.7-dev`.
+- `node app.js` results in a crash. → I dunno Y,  just install `nodemon` via npm.
 
 
 ## Authors
