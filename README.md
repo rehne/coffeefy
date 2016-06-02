@@ -17,6 +17,10 @@ Coffeefy let you control a Coffee maker via Internet
 
 ## required python libraries
 - RPi.GPIO via **sudo apt-get install rpi.gpio**
+- paho-mqtt via **pip install paho-mqtt**
+
+## Troubleshooting
+Installing paho-mqtt might throw an error. Install the python developer package via **apt-get install python2.7-dev**
 
 
 ## Authors
