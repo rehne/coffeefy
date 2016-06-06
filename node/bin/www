@@ -8,6 +8,9 @@ var app = require('../app');
 var debug = require('debug')('coffeefy:server');
 var http = require('http');
 var faye = require('faye');
+var mqtt    = require('mqtt');
+
+var mqttURL = 'mqtt://iot.eclipse.org';
 
 /**
  * Get port from environment and store in Express.
@@ -23,6 +26,19 @@ app.set('port', port);
 var server = http.createServer(app);
 
 startfayeserver();
+
+var client  = mqtt.connect(mqttURL);
+
+
+client.on('connect', function () {
+  client.subscribe('coffeefy');
+  client.publish('coffeefy', '[mqtt] client is listening to ' +mqttURL);
+});
+ 
+client.on('message', function (topic, message) {
+  // message is Buffer 
+  console.log(message.toString());
+});
 
 /**
  * Listen on provided port, on all network interfaces.
@@ -68,11 +84,11 @@ function onError(error) {
   // handle specific listen errors with friendly messages
   switch (error.code) {
     case 'EACCES':
-      console.error(bind + ' requires elevated privileges');
+      console.error('[Express] ' + bind + ' requires elevated privileges');
       process.exit(1);
       break;
     case 'EADDRINUSE':
-      console.error(bind + ' is already in use');
+      console.error('[Express] ' + bind + ' is already in use');
       process.exit(1);
       break;
     default:
@@ -90,7 +106,7 @@ function onListening() {
     ? 'pipe ' + addr
     : 'port ' + addr.port;
   debug('Listening on ' + bind);
-  console.log('Server listening on port ' + addr.port + '.');
+  console.log('[Express] Server listening on port ' + addr.port + '.');
 }
 
 function startfayeserver(){
@@ -103,5 +119,5 @@ function startfayeserver(){
 
   // Nodeadapter zum http-Server hinzufuegen
   bayeux.attach(server);
-  console.log("Faye Server is running...");
+  console.log("[Faye] Server is running...");
 }

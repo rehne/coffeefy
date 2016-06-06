@@ -22,7 +22,7 @@ var bodyParser = require('body-parser');
 
 var routes = require('./routes/index');
 var users = require('./routes/users');
-var ultrasonic = require('./routes/ultrasonic');
+//var ultrasonic = require('./routes/ultrasonic');
 
 var app = express();
 
@@ -42,7 +42,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', routes);
 app.use('/users', users);
-app.use('/ultrasonic', ultrasonic);
+//app.use('/ultrasonic', ultrasonic);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
