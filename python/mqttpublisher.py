@@ -4,15 +4,15 @@ import time
 
 mqttc = mqtt.Client("python_pub")
 mqttc.connect("iot.eclipse.org", 1883, 60)
-mqttc.publish("coffeefy", "Hello, World!")
+mqttc.publish("coffeefy/messages", "Hello, World!")
 #timeout = 2s
 #mqttc.loop(2)
 
 def main():
- 	mqttc.publish("coffeefy", "Starting machine...")
+ 	mqttc.publish("coffeefy/messages", "Starting machine...")
 	time.sleep(10)
-	mqttc.publish("coffeefy", "Working...")
+	mqttc.publish("coffeefy/messages", "Working...")
 	time.sleep(10)
-	mqttc.publish("coffeefy", "Done!")
+	mqttc.publish("coffeefy/messages", "Done!")
 
 main()

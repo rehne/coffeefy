@@ -13,7 +13,7 @@
 <script>
 	var table = document.getElementById("messages");
       var client = mqtt.connect('ws://iot.eclipse.org:80/ws'); // you add a ws:// url here
-      client.subscribe("coffeefy");
+      client.subscribe("coffeefy/messages");
 
       client.on("message", function(topic, payload) {
         //alert([topic, payload].join(": "));

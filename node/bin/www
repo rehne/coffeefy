@@ -31,8 +31,8 @@ var client  = mqtt.connect(mqttURL);
 
 
 client.on('connect', function () {
-  client.subscribe('coffeefy');
-  client.publish('coffeefy', '[mqtt] client is listening to ' +mqttURL);
+  client.subscribe('coffeefy/messages');
+  client.publish('coffeefy/messages', '[mqtt] client is listening to ' +mqttURL);
 });
  
 client.on('message', function (topic, message) {
