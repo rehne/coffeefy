@@ -3,7 +3,6 @@ var router = express.Router();
 var pythonshell = require('python-shell');
 var data;
 
-
 //var zerorpc = require("zerorpc");
 //var client = new zerorpc.Client();
 //client.connect("tcp://127.0.0.1:4242");
@@ -44,8 +43,6 @@ router.get('/scripts/3/', function(req, res, next){
 
     res.end();
 });
-
-
 
 module.exports = router;
 
