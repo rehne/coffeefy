@@ -18,7 +18,7 @@ GPIO.output(17, False)
 GPIO.output(17, True)
 time.sleep(0.01)
 GPIO.output(17, False)
-mqttc.publish("coffeefy/messages", "Maschine läuft.")
+mqttc.publish("coffeefy/messages", "Maschine laeuft.")
 
 time.sleep(3)
 
