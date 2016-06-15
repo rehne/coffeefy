@@ -40,6 +40,13 @@ router.get('/scripts/3/', function(req, res, next){
     res.end();
 });
 
+router.get('/scripts/powerbtn/', function(req, res, next){
+    runbuttontest();
+
+    res.end();
+});
+
+
 module.exports = router;
 
 function runscript(){
@@ -54,3 +61,10 @@ function invoke(){
         console.log(res);
     });
 };
+
+function runbuttontest(){
+    var pyshell = new pythonshell('../python/powerbtn.py');
+    pyshell.on('message', function (message){
+        console.log(message);
+    });
+}
