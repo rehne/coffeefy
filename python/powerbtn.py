@@ -11,20 +11,20 @@ mqttc.connect("iot.eclipse.org", 1883, 60)
 GPIO.setmode(GPIO.BCM)
 
 # set up GPIO pins
-GPIO.setup(4, GPIO.OUT)
+GPIO.setup(17, GPIO.OUT)
 # set trigger to false
-GPIO.output(4, False)
+GPIO.output(17, False)
 
-GPIO.output(4, True)
+GPIO.output(17, True)
 time.sleep(0.01)
-GPIO.output(4, False)
+GPIO.output(17, False)
 mqttc.publish("coffeefy/messages", "Maschine läuft.")
 
 time.sleep(3)
 
-GPIO.output(4, True)
+GPIO.output(17, True)
 time.sleep(0.01)
-GPIO.output(4, False)
+GPIO.output(17, False)
 mqttc.publish("coffeefy/messages", "Maschine ist ausgeschaltet.")
 
 GPIO.cleanup()
