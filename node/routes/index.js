@@ -42,7 +42,7 @@ router.get('/scripts/3/', function(req, res, next){
 
 router.get('/scripts/powerbtn/', function(req, res, next){
     runbuttontest();
-
+    res.render('index');
     res.end();
 });
 
