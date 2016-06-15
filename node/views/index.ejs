@@ -7,18 +7,14 @@
     <link rel='stylesheet' href='/css/style.css'>
     <script src="js/scripts.js" type="text/javascript"></script>
     <script src="js/browserMqtt.js"></script>
-
-      <!-- Latest compiled and minified CSS -->
+    <!-- Latest compiled and minified CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
 
-<!-- Optional theme , results in button with gradient-->
-<!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css" integrity="sha384-fLW2N01lMqjakBkx3l/M9EahuwpSfeNvV63J5ezn3uZzapT0u7EYsXMjQV+0En5r" crossorigin="anonymous"> -->
-
-<!-- Latest compiled and minified JavaScript -->
+    <!-- Latest compiled and minified JavaScript -->
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
 
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8">
   </head>
   <body>
       <div class="container text-center">
@@ -35,22 +31,37 @@
               </div>
           </div>
           <div class="container-fluid">
-              <h2 class="page-header">Controlls</h2>
+              <h2 class="page-header">Controls</h2>
               <div class="panel panel-default panel-body"><p id="messages"></p></div>
-              <button class="btn btn-primary btn-lg">Give me Coffee!</button>
-              <a href="/scripts/powerbtn">
-                  <button class="btn btn-primary btn-lg">Test Powerbutton</button>
-              </a>
+
+              <form action="/scripts/makecoffee" method="get" target="hiddenFrame">
+                <button class="btn btn-primary btn-lg">Give me Coffee!</button>
+              </form>
+              <!-- http://stackoverflow.com/a/5733858 -->
+              <form action="/scripts/powerbtn" method="get" target="hiddenFrame">
+                <button class="btn btn-primary btn-lg">Test Powerbutton</button>
+              </form>
           </div>
       </div>
     <script>
-      var output = document.getElementById("messages");
+      var output_messages = document.getElementById("messages");
+      var output_distance = document.getElementById("distance");
       var client = mqtt.connect('ws://iot.eclipse.org:80/ws'); // you add a ws:// url here
       client.subscribe("coffeefy/messages");
+      client.subscribe("coffeefy/sensors/ultrasonic");
       client.on("message", function(topic, payload) {
-        output.innerHTML = payload;
+        if (topic=="coffeefy/messages") {
+          output_messages.innerHTML = payload;
+        }
+        if (topic=="coffeefy/sensors/ultrasonic") {
+          output_distance.innerHTML = payload;
+        }
       });
       client.publish("coffeefy", "hi, this is browser!");
     </script>
+    <style>
+      .hide { position:absolute; top:-1px; left:-1px; width:1px; height:1px; }
+    </style>
+    <iframe name="hiddenFrame" class="hide"></iframe>
   </body>
 </html>

@@ -5,11 +5,9 @@ var data;
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
-    pythonshell.run('../python/ultrasonic.py', function(err, results){
-        if (err) throw err;
-        data = results;
-    });
+    data = readUltrasonicSensor();
     res.render('index', { title: 'Coffeefy', distance: data });
+    res.end;
 });
 
 /* GET Test page */
@@ -42,7 +40,10 @@ router.get('/scripts/3/', function(req, res, next){
 
 router.get('/scripts/powerbtn/', function(req, res, next){
     runbuttontest();
-    res.render('index');
+    res.end();
+});
+router.get('/scripts/makecoffee/', function(req, res, next){
+    makecoffee();
     res.end();
 });
 
@@ -67,4 +68,18 @@ function runbuttontest(){
     pyshell.on('message', function (message){
         console.log(message);
     });
+}
+function makecoffee(){
+    var pyshell = new pythonshell('../python/makecoffee.py');
+    pyshell.on('message', function (message){
+        console.log(message);
+    });
+}
+function readUltrasonicSensor(){
+    var data;
+    pythonshell.run('../python/ultrasonic.py', function(err, results){
+        if (err) throw err;
+        data = results;
+    });
+    return data;
 }

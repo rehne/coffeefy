@@ -19,9 +19,10 @@ Coffeefy let you control a Coffee maker via Internet
 - RPi.GPIO via `sudo apt-get install rpi.gpio`
 - paho-mqtt via `pip install paho-mqtt`
 
-## Useful node.js modules
+## Useful node.js modules and other ressources
 - [mqtt.js](https://github.com/mqttjs/MQTT.js)
 - [python-shell](https://github.com/extrabacon/python-shell)
+- [Correct usage of GPIO.cleanup()](http://raspi.tv/2013/rpi-gpio-basics-3-how-to-exit-gpio-programs-cleanly-avoid-warnings-and-protect-your-pi)
 
 ## Troubleshooting
 - Installing paho-mqtt causes an error. Missing "Python.h"? → Install the python developer package via `apt-get install python2.7-dev`.

@@ -8,23 +8,26 @@ import paho.mqtt.client as mqtt
 mqttc = mqtt.Client("python_pub")
 mqttc.connect("iot.eclipse.org", 1883, 60)
 
+SIG = 19
+
 GPIO.setmode(GPIO.BCM)
 
 # set up GPIO pins
-GPIO.setup(17, GPIO.OUT)
+GPIO.setup(SIG, GPIO.OUT)
 # set trigger to false
-GPIO.output(17, False)
+GPIO.output(SIG, False)
 
-GPIO.output(17, True)
-time.sleep(0.01)
-GPIO.output(17, False)
+GPIO.output(SIG, True)
+time.sleep(0.5)
+GPIO.output(SIG, False)
 mqttc.publish("coffeefy/messages", "Maschine laeuft.")
+print "ON"
 
-time.sleep(3)
+time.sleep(1)
 
-GPIO.output(17, True)
-time.sleep(0.01)
-GPIO.output(17, False)
+GPIO.output(SIG, True)
+time.sleep(0.5)
+GPIO.output(SIG, False)
 mqttc.publish("coffeefy/messages", "Maschine ist ausgeschaltet.")
-
+print "OFF"
 GPIO.cleanup()

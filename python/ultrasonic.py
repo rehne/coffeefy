@@ -15,6 +15,10 @@
 # import required modules
 import time
 import RPi.GPIO as GPIO
+import paho.mqtt.client as mqtt
+
+mqttc = mqtt.Client("python_pub")
+mqttc.connect("iot.eclipse.org", 1883, 60)
 
 # define GPIO pins
 TRIG = 4
@@ -49,22 +53,25 @@ def MeasureDistance():
 
 # main function
 def main():
-    Distance = MeasureDistance()
-    print(Distance)
-    GPIO.cleanup()
+  #  Distance = MeasureDistance()
+  #  print(Distance)
+  #  GPIO.cleanup()
 
-  # try:
-  #   while True:
-  #     Distance = MeasureDistance()
-  #     print("Measured Distance = %.1f cm" % Distance)
-  #     time.sleep(1)
+  try:
+    while True:
+      Distance = MeasureDistance()
+      print("Measured Distance = %.1f cm" % Distance)
+      mqttc.publish("coffeefy/sensors/ultrasonic", "Measured Distance = %.1f cm" % Distance)
+      time.sleep(1)
 
   # reset GPIO settings if user pressed Ctrl+C
-  # except KeyboardInterrupt:
-  #   print("Measurement stopped by user")
-  #   GPIO.cleanup()
+  except KeyboardInterrupt:
+    print("Measurement stopped by user")
+  finally:
+    GPIO.cleanup()
 
 if __name__ == '__main__':
+  GPIO.setwarnings(False)
   # use GPIO pin numbering convention
   GPIO.setmode(GPIO.BCM)
 
