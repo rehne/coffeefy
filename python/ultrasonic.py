@@ -53,11 +53,8 @@ def MeasureDistance():
 
 # main function
 def main():
-  #  Distance = MeasureDistance()
-  #  print(Distance)
-  #  GPIO.cleanup()
-
   try:
+    #Kontinuierliches Veröffentlichen der Distanzwerte auf das Topic "coffeefy/sensors/ultrasonic"
     while True:
       Distance = MeasureDistance()
       print("Measured Distance = %.1f cm" % Distance)

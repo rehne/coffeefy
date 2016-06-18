@@ -1,5 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
+# Testprogram: Nicht Projektrelevant.
+# Schaltet das angeschlossene Relais.
 
 import RPi.GPIO as GPIO
 import time

@@ -3,19 +3,19 @@ var router = express.Router();
 var pythonshell = require('python-shell');
 var data;
 
-/* GET home page. */
+/* GET resource "/" aka homepage */
 router.get('/', function(req, res, next) {
     data = readUltrasonicSensor();
     res.render('index', { title: 'Coffeefy', distance: data });
     res.end;
 });
 
-/* GET Test page */
+/* GET resource "/test" aka secret page for testing purposes*/
 router.get('/test', function(req, res, next){
     res.render('test');
 });
 
-/* run script "helloworld.py" */
+/* GET resource "/scripts/1" aka run script "helloworld.py" */
 router.get('/scripts/1/', function(req, res, next){
     pythonshell.run('../python/helloworld.py', function(err, results){
         if (err) throw err;
@@ -25,53 +25,43 @@ router.get('/scripts/1/', function(req, res, next){
     res.end();
 });
 
-/* run script "exampleTimedOutputs.py" */
-router.get('/scripts/2/', function(req, res, next){
-    runscript();
-
-    res.end();
-});
-
-router.get('/scripts/3/', function(req, res, next){
-    invoke();
-
-    res.end();
-});
-
+/* GET resource "/scripts/powerbtn/" aka run powerbutton test */
 router.get('/scripts/powerbtn/', function(req, res, next){
     runbuttontest();
     res.end();
 });
+
+/* GET resource "/scripts/makecoffee" aka make coffee */
 router.get('/scripts/makecoffee/', function(req, res, next){
     makecoffee();
     res.end();
 });
 
+/* run script "exampleTimedOutputs.py" */
+/*router.get('/scripts/2/', function(req, res, next){
+    runscript();
+
+    res.end();
+});*/
 
 module.exports = router;
 
-function runscript(){
+/*function runscript(){
     var pyshell = new pythonshell('../python/exampleTimedOutputs.py');
     pyshell.on('message', function (message){
         console.log(message);
     });
-};
-
-function invoke(){
-    client.invoke("test", function(error, res, more){
-        console.log(res);
-    });
-};
-
+};*/
+//TODO: Testen, ob readUltrasonicSensor() und makecoffee() sich nicht gegenseitig behindern. 
 function runbuttontest(){
-    var pyshell = new pythonshell('../python/powerbtn.py');
-    pyshell.on('message', function (message){
+    var pyshell_power = new pythonshell('../python/powerbtn.py');
+    pyshell_power.on('message', function (message){
         console.log(message);
     });
 }
 function makecoffee(){
-    var pyshell = new pythonshell('../python/makecoffee.py');
-    pyshell.on('message', function (message){
+    var pyshell_makecoffee = new pythonshell('../python/makecoffee.py');
+    pyshell_makecoffee.on('message', function (message){
         console.log(message);
     });
 }
