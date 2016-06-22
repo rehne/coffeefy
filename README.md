@@ -30,7 +30,7 @@ Coffeefy let you control a Coffee maker via Internet
 
 
 ## Authors
-[Vanakh Chea](https://github.com/kanonenfutter/), [Alexander Thürling](https://github.com/athuerli), [René Honnen](https://github.com/rehne)
+[Vanakh Chea](https://github.com/kanonenfutter/), [Alexander Thürling](https://github.com/revanjin), [René Honnen](https://github.com/rehne)
 
 ## License
 
