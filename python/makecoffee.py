@@ -57,9 +57,9 @@ try:
 		time.sleep(1)
 	# Auswahl des 1CUP Programms
 	press1CupBtn()
-	for x in xrange(0,30):
+	for x in xrange(0,40):
 		#print 'Cooking one cup... %d' % (3-x)
-		mqttc.publish("coffeefy/messages", 'Preparing one cup... %d' % (30-x))
+		mqttc.publish("coffeefy/messages", 'Preparing one cup... %d' % (40-x))
 		time.sleep(1)
 	mqttc.publish("coffeefy/messages", "Done!")
 	# Kaffeemaschine ausschalten
