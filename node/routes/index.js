@@ -3,7 +3,7 @@ var router = express.Router();
 var pythonshell = require('python-shell');
 var gpio = require('rpi-gpio');
 var mqtt = require('mqtt');
-var client = mqtt.connect("iot.eclipse.org", 1883, 60);
+var client = mqtt.connect("mqtt://iot.eclipse.org", 1883, 60);
 var data;
 
 /* GET resource "/" aka homepage */
