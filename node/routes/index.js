@@ -47,7 +47,7 @@ router.get('scripts/powerbtn/', function(req, res){
     res.end();
 });*/
 /* NODE.JS */
-router.get('/scripts/makecoffee/', function(req, res){
+router.get('/scripts/makecoffee/', function(req, res, next){
   makeCoffeePython();
   res.end();
 });
