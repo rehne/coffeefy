@@ -19,12 +19,13 @@
     "body-parser": "~1.13.2",
     "cookie-parser": "~1.3.5",
     "debug": "~2.2.0",
-    "express": "~4.13.1",
     "ejs": "~2.3.3",
-    "morgan": "~1.6.1",
-    "serve-favicon": "~2.3.0",
-    "python-shell": "*",
+    "express": "~4.13.1",
     "faye": "*",
-    "mqtt": "*"
+    "morgan": "~1.6.1",
+    "mqtt": "^1.11.2",
+    "python-shell": "*",
+    "rpi-gpio": "^0.7.0",
+    "serve-favicon": "~2.3.0"
   }
 }
