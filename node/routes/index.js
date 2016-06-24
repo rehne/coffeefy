@@ -62,7 +62,9 @@ module.exports = router;
 // NODE.JS functions
 function pressPowerButton(){
   console.log('On Knopf gedrueckt');
-  setTimeout(500);
+  setTimeout(function(){
+    console.log('waiting.. ');
+  }, 3000);
   console.log('On Knopf losgelassen. Maschine laeuft.');
 }
 function makeSmallCoffee(){
