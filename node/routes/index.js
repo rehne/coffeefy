@@ -60,7 +60,6 @@ router.get('/makeBigCoffee', function(req, res, next){
 module.exports = router;
 
 // NODE.JS functions
-/*
 function pressPowerButton(){
   gpio.setMode(MODE_BCM);
   gpio.setup(19, gpio.DIR_OUT, write);
@@ -112,14 +111,6 @@ function makeBigCoffee(){
   pressPowerButton();
   gpio.destroy();
 }
-function wait(time){
-  for(var i = time; i == 0; i--){
-    client.publish('coffeefy/messages', 'waiting.. ' + i);
-    console.log('waiting.. ' + i);
-    setTimeout(1000);
-  }
-}
-*/
 
 // PYTHON functions
 //TODO: Testen, ob readUltrasonicSensor() und makecoffee() sich nicht gegenseitig behindern.

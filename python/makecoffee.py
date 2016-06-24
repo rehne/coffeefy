@@ -31,8 +31,8 @@ GPIO.setmode(GPIO.BCM)
 
 # set up GPIO pins. Set output-mode.
 GPIO.setup(SIG_1CUP, GPIO.OUT)
-GPIO.setup(SIG_POWER, GPIO.OUT)
 GPIO.setup(SIG_2CUP, GPIO.OUT)
+GPIO.setup(SIG_POWER, GPIO.OUT)
 
 # Die folgenden Funktionen geben ein High Signal an die Knoepfe aus.
 # Sie simulieren einen 0.5 sekuendigen Knopfdruck
@@ -56,6 +56,7 @@ def press2CupBtn():
 try:
 	GPIO.output(SIG_POWER, False)
 	GPIO.output(SIG_1CUP, False)
+	GPIO.output(SIG_2Cup, False)
 
 	# Kaffeemaschine einschalten
 	pressPowerBtn()
