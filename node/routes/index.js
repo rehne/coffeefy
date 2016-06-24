@@ -41,18 +41,18 @@ router.get('/scripts/1/', function(req, res, next){
 }); */
 
 // NODE.JS
-//GET resource "/scripts/powerbtn" aka run powerbutton test */
-router.get('/powerbtn', function(req, res){
+//GET resource "/powerButton" aka run powerbutton test */
+router.get('/powerButton', function(req, res){
   pressPowerButton();
   res.end();
 });
-// GET resource "/scripts/makesmallcoffee" aka make coffee
-router.get('/makesmallcoffee', function(req, res, next){
+// GET resource "/makeSmallCoffee" aka make coffee
+router.get('/makeSmallCoffee', function(req, res, next){
   makeSmallCoffee();
   res.end();
 });
-// GET resource "/scripts/makebigcoffee" aka make coffee
-router.get('/makebigcoffee', function(req, res, next){
+// GET resource "/makeBigCoffee" aka make coffee
+router.get('/makeBigCoffee', function(req, res, next){
   makeBigCoffee();
   res.end();
 });

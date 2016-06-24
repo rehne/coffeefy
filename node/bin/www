@@ -4,10 +4,10 @@
  * Module dependencies.
  */
 
-var app = require('../app');
-var debug = require('debug')('coffeefy:server');
-var http = require('http');
-var faye = require('faye');
+var app     = require('../app');
+var debug   = require('debug')('coffeefy:server');
+var http    = require('http');
+var faye    = require('faye');
 var mqtt    = require('mqtt');
 var mqttURL = 'mqtt://iot.eclipse.org';
 
