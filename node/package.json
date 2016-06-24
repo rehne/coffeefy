@@ -25,6 +25,7 @@
     "morgan": "~1.6.1",
     "mqtt": "^1.11.2",
     "python-shell": "*",
+    "r-pi-usonic": "^2.5.0",
     "rpi-gpio": "^0.7.0",
     "serve-favicon": "~2.3.0"
   }

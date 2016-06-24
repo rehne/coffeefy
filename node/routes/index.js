@@ -3,7 +3,7 @@ var router = express.Router();
 var pythonshell = require('python-shell');
 var gpio = require('rpi-gpio');
 var mqtt = require('mqtt');
-var client = mqtt.connect("mqtt://iot.eclipse.org", 1883, 60);
+var client = mqtt.connect("ws://iot.eclipse.org:80/ws");
 var data;
 
 /* GET resource "/" aka homepage */
@@ -28,116 +28,98 @@ router.get('/scripts/1/', function(req, res, next){
     res.end();
 });
 
-/* GET resource "/scripts/powerbtn/" aka run powerbutton test */
-/* PYTHON */
-/*router.get('/scripts/powerbtn/', function(req, res, next){
+// PYTHON
+// GET resource "/scripts/powerbtn/" aka run powerbutton test
+/* router.get('/scripts/powerbtn/', function(req, res, next){
     runbuttontest();
     res.end();
-});*/
-/* NODE.JS */
-router.get('scripts/powerbtn/', function(req, res){
-  buttonOnOffTest();
-  res.end();
-});
-
-/* GET resource "/scripts/makecoffee" aka make coffee */
-/* PYTHON */
-/*router.get('/scripts/makecoffee/', function(req, res, next){
+}); */
+// GET resource "/scripts/makecoffee" aka make coffee
+/* router.get('/scripts/makecoffee/', function(req, res, next){
     makecoffeePython();
     res.end();
-});*/
-/* NODE.JS */
-router.get('/scripts/makecoffee/', function(req, res, next){
-  makeCoffeePython();
+}); */
+
+// NODE.JS
+//GET resource "/scripts/powerbtn/" aka run powerbutton test */
+router.get('scripts/powerbtn/', function(req, res){
+  pressPowerButton();
+  res.end();
+});
+// GET resource "/scripts/makesmallcoffee" aka make coffee
+router.get('/scripts/makesmallcoffee/', function(req, res, next){
+  makeSmallCoffee();
+  res.end();
+});
+// GET resource "/scripts/makebigcoffee" aka make coffee
+router.get('/scripts/makebigcoffee/', function(req, res, next){
+  makeBigCoffee();
   res.end();
 });
 
 module.exports = router;
 
-function buttonOnOffTest(){
-  var sig = 19;
-  gpio.setMode(MODE_BCM);
-  gpio.setup(sig, gpio.DIR_OUT);
-  gpio.write(sig, 0, function(err){
-    if(err) throw err;
-    console.log('written to pin (off)');
-  });
-  gpio.write(sig, 1, function(err){
-    if(err) throw err;
-    console.log('written to pin (on)');
-  });
-  setTimeout(500);
-  gpio.write(sig, 0, function(err){
-    if(err) throw err;
-    console.log('written to pin (off)');
-  });
-  mqtt.publish('coffeefy/messages', 'Maschine laeuft.');
-  console.log('ON');
-  setTimeout(1000);
-  gpio.write(sig, 1, function(err){
-    if(err) throw err;
-    console.log('written to pin (on)');
-  });
-  setTimeout(500);
-  gpio.write(sig, 0, function(err){
-    if(err) throw err;
-    console.log('written to pin (off)');
-  })
-  gpio.destroy(function(){
-    mytt.publish('coffeefy/messages', 'Maschine ist ausgeschaltet.');
-    console.log('OFF');
-  });
-}
-
-function makeCoffee(){
-  var pow = 19;
-  var cup1 = 13;
-  gpio.setMode(MODE_BCM);
-  gpio.setup(pow, gpio.DIR_OUT);
-  gpio.setup(cup1, gpio.DIR_OUT);
-
-  // Kaffeemaschine einschalten
-  pressPowerButton();
-
-  // 90 Sekunden warten
-  for(var i = 90; i == 0; i--){
-    mqtt.publish('coffeefy/messages', 'Heating water.. ' + i);
-    console.log('Heating water.. ' + i);
-    setTimeout(1000);
-  }
-
-  // Auswahl des 1Cup Programms
-  press1CupButton();
-
-  // 30 Sekunden warten
-  for(var i = 30; i == 0; i--){
-    mqtt.publish('coffeefy/messages', 'Brewing the coffee for 1 cup.. ' + i);
-    console.log('Brewing coffee.. ' + i);
-    setTimeout(1000);
-  }
-  mqtt.publish('coffeefy/messages', 'Done!');
-  pressPowerButton();
-}
+// NODE.JS functions
 function pressPowerButton(){
-  gpio.write(sig, 1, function(err){
+  gpio.setMode(MODE_BCM);
+  gpio.setup(19, gpio.DIR_OUT);
+  gpio.write(19, 1, function(err){
     if(err) throw err;
     mqtt.publish('coffeefy/messages', 'On Knopf gedrueckt');
-    consol.log('On Knopf gedrueckt');
+    console.log('On Knopf gedrueckt');
   });
   setTimeout(500);
-  gpio.write(sig, 0, function(err){
+  gpio.write(19, 0, function(err){
     if(err) throw err;
     mqtt.publish('coffeefy/messages', 'On Knopf losgelassen. Maschine laeuft');
     console.log('On Knopf losgelassen. Maschine laeuft.');
   });
 }
-function press1CupButton(){
-
+function makeSmallCoffee(){
+  pressPowerButton();
+  wait(90);
+  gpio.setMode(MODE_BCM);
+  gpio.setup(13, gpio.DIR_OUT);
+  gpio.write(13, 1, function(err){
+    mqtt.publish('coffeefy/messages', '1Cup Button gedrueckt');
+    console.log('1Cup Button gedrueckt');
+  });
+  setTimeout(500);
+  gpio.write(13, 0, function(err){
+    mqtt.publish('coffeefy/message', '1Cup Button losgelassen');
+    console.log('1Cup Button losgelassen');
+  });
+  wait(40);
+  pressPowerButton();
+  gpio.destroy();
 }
-function press2CupButton(){
-
+function makeBigCoffee(){
+  pressPowerButton();
+  wait(90);
+  gpio.setMode(MODE_BCM);
+  gpio.setup(PINNUMMER NOCH VERGEBEN, gpio.DIR_OUT);
+  gpio.write(PINNUMMER, 1, function(err){
+    mqtt.publish('coffeefy/messages', '2Cup Button gedrueckt');
+    console.log('2Cup Button gedrueckt');
+  });
+  setTimeout(500);
+  gpio.write(PINNUMMER, 0, function(err){
+    mqtt.publish('coffeefy/messages', '2Cup Button losgelassen');
+    console.log('2Cup Button losgelassen');
+  });
+  wait(40);
+  pressPowerButton();
+  gpio.destroy();
+}
+function wait(time){
+  for(var i = time; i == 0; i--){
+    mqtt.publish('coffeefy/messages', 'waiting.. ' + i);
+    console.log('waiting.. ' + i);
+    setTimeout(1000);
+  }
 }
 
+// PYTHON functions
 //TODO: Testen, ob readUltrasonicSensor() und makecoffee() sich nicht gegenseitig behindern.
 function runbuttontest(){
     var pyshell_power = new pythonshell('../python/powerbtn.py');
