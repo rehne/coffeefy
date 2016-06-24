@@ -30,15 +30,15 @@ router.get('/scripts/1/', function(req, res, next){
 
 // PYTHON
 // GET resource "/scripts/powerbtn/" aka run powerbutton test
-/* router.get('/scripts/powerbtn/', function(req, res, next){
+router.get('/scripts/powerbtn/', function(req, res, next){
     runbuttontest();
     res.end();
-}); */
+});
 // GET resource "/scripts/makecoffee" aka make coffee
-/* router.get('/scripts/makecoffee/', function(req, res, next){
+router.get('/scripts/makecoffee/', function(req, res, next){
     makecoffeePython();
     res.end();
-}); */
+});
 
 // NODE.JS
 //GET resource "/powerButton" aka run powerbutton test */
@@ -60,6 +60,7 @@ router.get('/makeBigCoffee', function(req, res, next){
 module.exports = router;
 
 // NODE.JS functions
+/*
 function pressPowerButton(){
   gpio.setMode(MODE_BCM);
   gpio.setup(19, gpio.DIR_OUT, write);
@@ -118,6 +119,7 @@ function wait(time){
     setTimeout(1000);
   }
 }
+*/
 
 // PYTHON functions
 //TODO: Testen, ob readUltrasonicSensor() und makecoffee() sich nicht gegenseitig behindern.

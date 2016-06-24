@@ -24,6 +24,8 @@ mqttc.connect("iot.eclipse.org", 1883, 60)
 SIG_1CUP = 13
 # POWER Taste / Relais #2
 SIG_POWER = 19
+# 2CUP Taste / Relais #3
+SIG_2CUP = 26
 
 GPIO.setmode(GPIO.BCM)
 
@@ -31,7 +33,7 @@ GPIO.setmode(GPIO.BCM)
 GPIO.setup(SIG_1CUP, GPIO.OUT)
 GPIO.setup(SIG_POWER, GPIO.OUT)
 
-# Die folgenden Funktionen geben ein High Signal an die Knoepfe aus. 
+# Die folgenden Funktionen geben ein High Signal an die Knoepfe aus.
 # Sie simulieren einen 0.5 sekuendigen Knopfdruck
 def pressPowerBtn():
 	GPIO.output(SIG_POWER, True)
@@ -42,6 +44,11 @@ def press1CupBtn():
 	GPIO.output(SIG_1CUP, True)
 	time.sleep(0.5)
 	GPIO.output(SIG_1CUP, False)
+
+def press2CupBtn():
+	GPIO.output(SIG_2CUP, True)
+	time.sleep(0.5)
+	GPIO.output(SIG_2CUP, False)
 
 # Der folgende try-Konstruktion erlaubt bei Auftritt von Errors und Exceptions das GPIO-Programm sauber zu beenden.
 # Mit GPIO.cleanup() werden saemtliche GPIO Ports zurueckgesetzt (in den input Modus) und freigegeben.
@@ -56,7 +63,7 @@ try:
 		mqttc.publish("coffeefy/messages", 'Heating water... %d' % (90-x))
 		time.sleep(1)
 	# Auswahl des 1CUP Programms
-	press1CupBtn()
+	press2CupBtn()
 	for x in xrange(0,40):
 		#print 'Cooking one cup... %d' % (3-x)
 		mqttc.publish("coffeefy/messages", 'Preparing one cup... %d' % (40-x))
