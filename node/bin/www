@@ -9,7 +9,6 @@ var debug = require('debug')('coffeefy:server');
 var http = require('http');
 var faye = require('faye');
 var mqtt    = require('mqtt');
-
 var mqttURL = 'mqtt://iot.eclipse.org';
 
 /**
@@ -29,14 +28,13 @@ startfayeserver();
 
 var client  = mqtt.connect(mqttURL);
 
-
 client.on('connect', function () {
   client.subscribe('coffeefy/messages');
-  client.publish('coffeefy/messages', '[mqtt] client is listening to ' +mqttURL);
+  client.publish('coffeefy/messages', '[mqtt] client is listening to ' + mqttURL);
 });
- 
+
 client.on('message', function (topic, message) {
-  // message is Buffer 
+  // message is Buffer
   console.log(message.toString());
 });
 
