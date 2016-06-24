@@ -61,6 +61,7 @@ module.exports = router;
 
 // NODE.JS functions
 function pressPowerButton(){
+  gpio.setMode(MODE_BCM);
   gpio.setup(19, gpio.DIR_OUT, function(err){
     if(err) throw err;
   });
