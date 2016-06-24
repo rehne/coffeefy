@@ -29,30 +29,30 @@ router.get('/scripts/1/', function(req, res, next){
 });
 
 // PYTHON
-// GET resource "/scripts/powerButton" aka run powerbutton test
-router.get('/scripts/powerButton', function(req, res, next){
+// GET resource "/python/powerButton" aka run powerbutton test
+router.get('/python/powerButton', function(req, res, next){
     runbuttontest();
     res.end();
 });
-// GET resource "/scripts/makecoffee" aka make coffee
-router.get('/scripts/makeBigCoffee', function(req, res, next){
+// GET resource "/python/makecoffee" aka make coffee
+router.get('/python/makeBigCoffee', function(req, res, next){
     makecoffeePython();
     res.end();
 });
 
 // NODE.JS
-//GET resource "/powerButton" aka run powerbutton test */
-router.get('/powerButton', function(req, res){
+//GET resource "/node/powerButton" aka run powerbutton test */
+router.get('/node/powerButton', function(req, res){
   pressPowerButton();
   res.end();
 });
-// GET resource "/makeSmallCoffee" aka make coffee
-router.get('/makeSmallCoffee', function(req, res, next){
+// GET resource "/node/makeSmallCoffee" aka make coffee
+router.get('/node/makeSmallCoffee', function(req, res, next){
   makeSmallCoffee();
   res.end();
 });
-// GET resource "/makeBigCoffee" aka make coffee
-router.get('/makeBigCoffee', function(req, res, next){
+// GET resource "/node/makeBigCoffee" aka make coffee
+router.get('/node/makeBigCoffee', function(req, res, next){
   makeBigCoffee();
   res.end();
 });
@@ -65,13 +65,11 @@ function pressPowerButton(){
   gpio.setup(19, gpio.DIR_OUT, write);
   gpio.write(19, 1, function(err){
     if(err) throw err;
-    client.publish('coffeefy/messages', 'On Knopf gedrueckt');
     console.log('On Knopf gedrueckt');
   });
   setTimeout(500);
   gpio.write(19, 0, function(err){
     if(err) throw err;
-    client.publish('coffeefy/messages', 'On Knopf losgelassen. Maschine laeuft');
     console.log('On Knopf losgelassen. Maschine laeuft.');
   });
 }
