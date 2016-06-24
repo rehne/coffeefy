@@ -62,7 +62,7 @@ module.exports = router;
 // NODE.JS functions
 function pressPowerButton(){
   gpio.setMode(MODE_BCM);
-  gpio.setup(19, gpio.DIR_OUT);
+  gpio.setup(19, gpio.DIR_OUT, write);
   gpio.write(19, 1, function(err){
     if(err) throw err;
     client.publish('coffeefy/messages', 'On Knopf gedrueckt');
@@ -79,7 +79,7 @@ function makeSmallCoffee(){
   pressPowerButton();
   wait(90);
   gpio.setMode(MODE_BCM);
-  gpio.setup(13, gpio.DIR_OUT);
+  gpio.setup(13, gpio.DIR_OUT, write);
   gpio.write(13, 1, function(err){
     client.publish('coffeefy/messages', '1Cup Button gedrueckt');
     console.log('1Cup Button gedrueckt');
@@ -97,7 +97,7 @@ function makeBigCoffee(){
   pressPowerButton();
   wait(90);
   gpio.setMode(MODE_BCM);
-  gpio.setup(26, gpio.DIR_OUT);
+  gpio.setup(26, gpio.DIR_OUT, write);
   gpio.write(26, 1, function(err){
     client.publish('coffeefy/messages', '2Cup Button gedrueckt');
     console.log('2Cup Button gedrueckt');
