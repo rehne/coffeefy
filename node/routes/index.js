@@ -97,13 +97,13 @@ function makeBigCoffee(){
   pressPowerButton();
   wait(90);
   gpio.setMode(MODE_BCM);
-  gpio.setup(PINNUMMER NOCH VERGEBEN, gpio.DIR_OUT);
-  gpio.write(PINNUMMER, 1, function(err){
+  gpio.setup(26, gpio.DIR_OUT);
+  gpio.write(26, 1, function(err){
     mqtt.publish('coffeefy/messages', '2Cup Button gedrueckt');
     console.log('2Cup Button gedrueckt');
   });
   setTimeout(500);
-  gpio.write(PINNUMMER, 0, function(err){
+  gpio.write(26, 0, function(err){
     mqtt.publish('coffeefy/messages', '2Cup Button losgelassen');
     console.log('2Cup Button losgelassen');
   });
