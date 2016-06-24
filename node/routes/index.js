@@ -61,11 +61,19 @@ module.exports = router;
 
 // NODE.JS functions
 function pressPowerButton(){
-  console.log('On Knopf gedrueckt');
+  gpio.setup(19, gpio.DIR_OUT, function(err){
+    if(err) throw err;
+  });
+  gpio.write(19, true, function(err){
+    if(err) throw err;
+    console.log('knopf gedrueckt');
+  });
   setTimeout(function(){
-    console.log('waiting.. ');
-  }, 3000);
-  console.log('On Knopf losgelassen. Maschine laeuft.');
+    gpio.write(19, false, function(err){
+      if(err) throw err;
+      console.log('knopf losgelassen');
+    })
+  }, 500);
 }
 function makeSmallCoffee(){
   pressPowerButton();
