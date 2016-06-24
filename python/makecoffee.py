@@ -56,7 +56,7 @@ def press2CupBtn():
 try:
 	GPIO.output(SIG_POWER, False)
 	GPIO.output(SIG_1CUP, False)
-	GPIO.output(SIG_2Cup, False)
+	GPIO.output(SIG_2CUP, False)
 
 	# Kaffeemaschine einschalten
 	pressPowerBtn()

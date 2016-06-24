@@ -29,13 +29,13 @@ router.get('/scripts/1/', function(req, res, next){
 });
 
 // PYTHON
-// GET resource "/scripts/powerbtn/" aka run powerbutton test
-router.get('/scripts/powerbtn/', function(req, res, next){
+// GET resource "/scripts/powerButton" aka run powerbutton test
+router.get('/scripts/powerButton', function(req, res, next){
     runbuttontest();
     res.end();
 });
 // GET resource "/scripts/makecoffee" aka make coffee
-router.get('/scripts/makecoffee/', function(req, res, next){
+router.get('/scripts/makeBigCoffee', function(req, res, next){
     makecoffeePython();
     res.end();
 });

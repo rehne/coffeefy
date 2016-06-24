@@ -25,7 +25,7 @@ GPIO.output(SIG, False)
 mqttc.publish("coffeefy/messages", "Maschine laeuft.")
 print "ON"
 
-time.sleep(1)
+time.sleep(3)
 
 GPIO.output(SIG, True)
 time.sleep(0.5)
