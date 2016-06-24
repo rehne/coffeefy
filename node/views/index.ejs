@@ -2,8 +2,10 @@
 <html>
   <head>
     <title><%= title %></title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
-      <script src="//code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
+    <script src="//code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
     <link rel='stylesheet' href='/css/style.css'>
     <script src="js/scripts.js" type="text/javascript"></script>
     <script src="js/browserMqtt.js"></script>
@@ -12,42 +14,39 @@
 
     <!-- Latest compiled and minified JavaScript -->
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
-
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta charset="utf-8">
   </head>
   <body>
-      <div class="container text-center">
-          <div class="container-fluid">
-              <h1 class="page-header"><%= title %></h1>
-              <p>Welcome to <%= title %></p>
-          </div>
-          <div class="container-fluid">
-              <h2 class="page-header">Status</h2>
-              <div class="row">
-                <div class="col-md-4 panel panel-default panel-body" id="distance"><%= distance %></div>
-                <div class="col-md-4 panel panel-default panel-body">lorem ipsum</div>
-                <div class="col-md-4 panel panel-default panel-body">lorem ipsum</div>
-              </div>
-          </div>
-          <div class="container-fluid">
-              <h2 class="page-header">Controls</h2>
-              <div class="panel panel-default panel-body"><p id="messages"></p></div>
-
-              <form action="/scripts/makesmallcoffee" method="get" target="hiddenFrame">
-                <button class="btn btn-primary btn-lg">small coffee!</button>
-              </form>
-
-              <!-- http://stackoverflow.com/a/5733858 -->
-              <form action="/scripts/powerbtn" method="get" target="hiddenFrame">
-                <button class="btn btn-primary btn-lg">Test Powerbutton</button>
-              </form>
-
-              <form action="/scripts/makebigcoffee" method="get" target="hiddenFrame">
-                <button class="btn btn-primary btn-lg">big coffee!</button>
-              </form>
-          </div>
+    <div class="container text-center">
+      <div class="container-fluid">
+        <h1 class="page-header"><%= title %></h1>
+        <p>Welcome to <%= title %></p>
       </div>
+      <div class="container-fluid">
+        <h2 class="page-header">Status</h2>
+        <div class="row">
+          <div class="col-md-4 panel panel-default panel-body" id="distance"><%= distance %></div>
+          <div class="col-md-4 panel panel-default panel-body">lorem ipsum</div>
+          <div class="col-md-4 panel panel-default panel-body">lorem ipsum</div>
+        </div>
+      </div>
+      <div class="container-fluid">
+        <h2 class="page-header">Controls</h2>
+        <div class="panel panel-default panel-body"><p id="messages"></p></div>
+
+        <form action="/scripts/makesmallcoffee" method="get" target="hiddenFrame">
+          <button class="btn btn-primary btn-lg">small coffee!</button>
+        </form>
+
+        <!-- http://stackoverflow.com/a/5733858 -->
+        <form action="/scripts/powerbtn" method="get" target="hiddenFrame">
+          <button class="btn btn-primary btn-lg">Test Powerbutton</button>
+        </form>
+
+        <form action="/scripts/makebigcoffee" method="get" target="hiddenFrame">
+          <button class="btn btn-primary btn-lg">big coffee!</button>
+        </form>
+      </div>
+    </div>
     <script>
       var output_messages = document.getElementById("messages");
       var output_distance = document.getElementById("distance");
