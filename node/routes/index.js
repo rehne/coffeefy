@@ -42,17 +42,17 @@ router.get('/scripts/1/', function(req, res, next){
 
 // NODE.JS
 //GET resource "/scripts/powerbtn" aka run powerbutton test */
-router.get('/scripts/powerbtn', function(req, res){
+router.get('/powerbtn', function(req, res){
   pressPowerButton();
   res.end();
 });
 // GET resource "/scripts/makesmallcoffee" aka make coffee
-router.get('/scripts/makesmallcoffee', function(req, res, next){
+router.get('/makesmallcoffee', function(req, res, next){
   makeSmallCoffee();
   res.end();
 });
 // GET resource "/scripts/makebigcoffee" aka make coffee
-router.get('/scripts/makebigcoffee', function(req, res, next){
+router.get('/makebigcoffee', function(req, res, next){
   makeBigCoffee();
   res.end();
 });
