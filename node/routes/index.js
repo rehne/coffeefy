@@ -34,6 +34,11 @@ router.get('/python/powerButton', function(req, res, next){
     runbuttontest();
     res.end();
 });
+// GET resource "/python/makeSmallCoffee" aka make coffee
+router.get('/python/makeSmallCoffee', function(req, res, next){
+    makeSmallCoffeePython();
+    res.end();
+});
 // GET resource "/python/makecoffee" aka make coffee
 router.get('/python/makeBigCoffee', function(req, res, next){
     makecoffeePython();
@@ -123,6 +128,12 @@ function runbuttontest(){
 }
 function makecoffeePython(){
     var pyshell_makecoffee = new pythonshell('../python/makecoffee.py');
+    pyshell_makecoffee.on('message', function (message){
+        console.log(message);
+    });
+}
+function makeSmallCoffeePython(){
+    var pyshell_makecoffee = new pythonshell('../python/makeSmallCoffee.py');
     pyshell_makecoffee.on('message', function (message){
         console.log(message);
     });
