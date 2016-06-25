@@ -8,7 +8,7 @@ var data;
 
 /* GET resource "/" aka homepage */
 router.get('/', function(req, res, next) {
-    data = readUltrasonicSensor();
+    data = readUltrasonicSensorPython();
     res.render('index', { title: 'Coffeefy', distance: data });
     res.end();
 });
@@ -41,12 +41,12 @@ router.get('/python/makeSmallCoffee', function(req, res, next){
 });
 // GET resource "/python/makecoffee" aka make coffee
 router.get('/python/makeBigCoffee', function(req, res, next){
-    makecoffeePython();
+    makeBigCoffeePython();
     res.end();
 });
 
 // NODE.JS
-//GET resource "/node/powerButton" aka run powerbutton test */
+// GET resource "/node/powerButton" aka run powerbutton test */
 router.get('/node/powerButton', function(req, res){
   pressPowerButton();
   res.end();
@@ -126,19 +126,19 @@ function runbuttontest(){
         console.log(message);
     });
 }
-function makecoffeePython(){
-    var pyshell_makecoffee = new pythonshell('../python/makecoffee.py');
-    pyshell_makecoffee.on('message', function (message){
-        console.log(message);
-    });
-}
 function makeSmallCoffeePython(){
     var pyshell_makecoffee = new pythonshell('../python/makeSmallCoffee.py');
     pyshell_makecoffee.on('message', function (message){
         console.log(message);
     });
 }
-function readUltrasonicSensor(){
+function makeBigCoffeePython(){
+    var pyshell_makecoffee = new pythonshell('../python/makeBigCoffee.py');
+    pyshell_makecoffee.on('message', function (message){
+        console.log(message);
+    });
+}
+function readUltrasonicSensorPython(){
     var data;
     pythonshell.run('../python/ultrasonic.py', function(err, results){
         if (err) throw err;
