@@ -67,19 +67,14 @@ module.exports = router;
 // NODE.JS functions
 function pressPowerButton(){
   gpio.setMode(MODE_BCM);
-  gpio.setup(19, gpio.DIR_OUT, function(err){
-    if(err) throw err;
-  });
-  gpio.write(19, true, function(err){
-    if(err) throw err;
-    console.log('knopf gedrueckt');
-  });
+  gpio.setup(19, gpio.DIR_OUT, write);
+  write();
   setTimeout(function(){
-    gpio.write(19, false, function(err){
-      if(err) throw err;
-      console.log('knopf losgelassen');
-    })
+    gpio.write(19, false);
   }, 500);
+  function write(){
+    gpio.write(19, true);
+  }
 }
 function makeSmallCoffee(){
   pressPowerButton();
