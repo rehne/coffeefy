@@ -48,16 +48,9 @@ router.get('/python/makeBigCoffee', function(req, res, next){
 // NODE.JS
 // GET resource "/node/powerButton" aka run powerbutton test */
 router.get('/node/powerButton', function(req, res, next){
-  gpio.setup(35, gpio.DIR_OUT, write);
-  gpio.write(35, true, function(err){
-    if(err) throw err;
-    console.log('written to pin');
-  })
-  setTimeout(gpio.write(35, false, function(err){
-    if(err) throw err;
-    console.log('written to pin');
-  }), 500);
-  console.log('Test');
+  for(var i = 90; i == 0; i--){
+    setTimeout(console.log('Heating water.. ' + i), 1000);
+  }
   res.end();
 });
 // GET resource "/node/makeSmallCoffee" aka make small coffee
