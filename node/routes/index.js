@@ -1,6 +1,6 @@
 var express = require('express');
 var router = express.Router();
-var pythonshell = require('python-shell');
+//var pythonshell = require('python-shell');
 var gpio = require('rpi-gpio');
 var mqtt = require('mqtt');
 var client = mqtt.connect("ws://iot.eclipse.org:80/ws");
@@ -50,10 +50,6 @@ router.get('/python/makeBigCoffee', function(req, res, next){
 // GET resource "/node/powerButton" aka run powerbutton test */
 router.get('/node/powerButton', function(req, res, next){
   pressPowerButton();
-  gpio.setMode(MODE_BCM);
-  gpio.setup(19, gpio.DIR_OUT);
-  gpio.setup(35, gpio.DIR_OUT);
-  console.log('Test');
   res.end();
 });
 // GET resource "/node/makeSmallCoffee" aka make small coffee
