@@ -1,6 +1,6 @@
 var express = require('express');
 var router = express.Router();
-//var pythonshell = require('python-shell');
+var pythonshell = require('python-shell');
 var gpio = require('rpi-gpio');
 var mqtt = require('mqtt');
 var client = mqtt.connect("ws://iot.eclipse.org:80/ws");
