@@ -9,6 +9,7 @@ var debug   = require('debug')('coffeefy:server');
 var http    = require('http');
 var mqtt    = require('mqtt');
 var mqttURL = 'mqtt://iot.eclipse.org';
+var pythonshell = require('python-shell');
 
 /**
  * Get port from environment and store in Express.
@@ -35,6 +36,8 @@ client.on('message', function (topic, message) {
   // message is Buffer
   console.log(message.toString());
 });
+
+readUltrasonicSensorPython();
 
 /**
  * Listen on provided port, on all network interfaces.
@@ -103,4 +106,14 @@ function onListening() {
     : 'port ' + addr.port;
   debug('Listening on ' + bind);
   console.log('[Express] Server listening on port ' + addr.port + '.');
+}
+
+function readUltrasonicSensorPython(){
+    var data;
+    pythonshell.run('../python/ultrasonic.py', function(err, results){
+        if (err) throw err;
+        data = results;
+    });
+    console.log("ultrasonic.py");
+    //return data;
 }

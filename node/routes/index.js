@@ -8,7 +8,8 @@ var data;
 
 /* GET resource "/" aka homepage */
 router.get('/', function(req, res, next) {
-    data = readUltrasonicSensorPython();
+    //data = readUltrasonicSensorPython();
+    var data = 0;
     res.render('index', { title: 'Coffeefy', distance: data });
     res.end();
 });
