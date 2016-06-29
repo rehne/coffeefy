@@ -48,7 +48,11 @@ router.get('/python/makeBigCoffee', function(req, res, next){
 // NODE.JS
 // GET resource "/node/powerButton" aka run powerbutton test */
 router.get('/node/powerButton', function(req, res, next){
+<<<<<<< HEAD
   pressPowerButton();
+=======
+  console.log('Test');
+>>>>>>> parent of 28023fd... node testing again
   res.end();
 });
 // GET resource "/node/makeSmallCoffee" aka make small coffee
