@@ -2,11 +2,16 @@
 
 ## Description
 
-Coffeefy let you control a Coffee maker via Internet
+Coffeefy let you control a coffee maker via Internet
 
 ## Used hardware
 
-- Raspberry Pi
+- Raspberry Pi 3
+- Senseo 7810 Coffee Machine
+- HC-SR04 Ultrasonic Sensor
+- 3 Relays
+- 2 Resistors(680Ohm/1kOhm)
+- minor small parts (optinal breadboard, wires etc.)
 
 ## Installation
 - clone repository
