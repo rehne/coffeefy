@@ -66,7 +66,13 @@ module.exports = router;
 
 // NODE.JS functions
 function pressPowerButton(){
-  gpio.setMode(MODE_BCM);
+  gpio.setup(35, DIR_OUT, write);
+  function write() {
+    gpio.write(35, true, function(err) {
+        if (err) throw err;
+        console.log('Written to pin');
+    });
+  }
   console.log('Test');
 }
 function makeSmallCoffee(){
