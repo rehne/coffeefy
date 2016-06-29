@@ -66,7 +66,7 @@ module.exports = router;
 
 // NODE.JS functions
 function pressPowerButton(){
-  gpio.setup(35, DIR_OUT, write;
+  gpio.setup(35, DIR_OUT, write);
   function write() {
     gpio.write(35, true, function(err) {
         if (err) throw err;
