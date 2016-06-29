@@ -66,6 +66,7 @@ module.exports = router;
 
 // NODE.JS functions
 function pressPowerButton(){
+  gpio.setMode(MODE_BCM);
   console.log('Test');
 }
 function makeSmallCoffee(){
