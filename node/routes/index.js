@@ -34,12 +34,12 @@ router.get('/python/powerButton', function(req, res, next){
     runbuttontest();
     res.end();
 });
-// GET resource "/python/makeSmallCoffee" aka make coffee
+// GET resource "/python/makeSmallCoffee" aka make small coffee
 router.get('/python/makeSmallCoffee', function(req, res, next){
     makeSmallCoffeePython();
     res.end();
 });
-// GET resource "/python/makecoffee" aka make coffee
+// GET resource "/python/makecoffee" aka make big coffee
 router.get('/python/makeBigCoffee', function(req, res, next){
     makeBigCoffeePython();
     res.end();
@@ -51,12 +51,12 @@ router.get('/node/powerButton', function(req, res, next){
   pressPowerButton();
   res.end();
 });
-// GET resource "/node/makeSmallCoffee" aka make coffee
+// GET resource "/node/makeSmallCoffee" aka make small coffee
 router.get('/node/makeSmallCoffee', function(req, res, next){
   makeSmallCoffee();
   res.end();
 });
-// GET resource "/node/makeBigCoffee" aka make coffee
+// GET resource "/node/makeBigCoffee" aka make big coffee
 router.get('/node/makeBigCoffee', function(req, res, next){
   makeBigCoffee();
   res.end();
@@ -67,8 +67,15 @@ module.exports = router;
 // NODE.JS functions
 function pressPowerButton(){
   gpio.setMode(MODE_BCM);
-  gpio.write(19, gpio.DIR_OUT);
+  gpio.write(19, gpio.DIR_OUT, write);
+
   setTimeout(gpio.destroy(), 500);
+}
+function write(){
+  gpio.write(19, true, function(err){
+    if(err) throw err;
+    console.log('written to pin');
+  })
 }
 function makeSmallCoffee(){
   pressPowerButton();
