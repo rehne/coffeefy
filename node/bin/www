@@ -7,7 +7,6 @@
 var app     = require('../app');
 var debug   = require('debug')('coffeefy:server');
 var http    = require('http');
-var faye    = require('faye');
 var mqtt    = require('mqtt');
 var mqttURL = 'mqtt://iot.eclipse.org';
 
@@ -24,7 +23,6 @@ app.set('port', port);
 
 var server = http.createServer(app);
 
-startfayeserver();
 
 var client  = mqtt.connect(mqttURL);
 
@@ -105,17 +103,4 @@ function onListening() {
     : 'port ' + addr.port;
   debug('Listening on ' + bind);
   console.log('[Express] Server listening on port ' + addr.port + '.');
-}
-
-function startfayeserver(){
-  // Faye
-  // NoteAdapter konfigurieren
-  var bayeux = new faye.NodeAdapter({
-    mount: '/faye',
-    timeout: 45
-  });
-
-  // Nodeadapter zum http-Server hinzufuegen
-  bayeux.attach(server);
-  console.log("[Faye] Server is running...");
 }
