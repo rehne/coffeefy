@@ -1,4 +1,4 @@
-// TODO: soon: move to a different file, like "faye_client.js"?
+// TODO: faye brauchen wa net -> entfernen! ^^
 
 
     // PubSub client erstellen
