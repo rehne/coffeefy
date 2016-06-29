@@ -23,6 +23,8 @@ mqttc.connect("iot.eclipse.org", 1883, 60)
 # define GPIO pins
 TRIG = 4
 ECHO = 18
+StartTime = 0
+StopTime = 0
 
 # function to measure the distance
 def MeasureDistance():
