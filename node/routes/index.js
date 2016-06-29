@@ -49,8 +49,11 @@ router.get('/python/makeBigCoffee', function(req, res, next){
 // GET resource "/node/powerButton" aka run powerbutton test */
 router.get('/node/powerButton', function(req, res, next){
 <<<<<<< HEAD
+<<<<<<< HEAD
   pressPowerButton();
 =======
+=======
+>>>>>>> parent of 28023fd... node testing again
   console.log('Test');
 >>>>>>> parent of 28023fd... node testing again
   res.end();
