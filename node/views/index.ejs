@@ -61,11 +61,20 @@
         }
         if (topic=="coffeefy/sensors/ultrasonic") {
           output_distance.innerHTML = payload;
+
           if(payload > 5){
-            $('button').prop('disabled', true);
+            document.getElementByClassName('btn').classList.add('disabled');
           } else {
-            $('button').prop('disabled', false);
+            document.getElementByClassName('btn').classList.remove('disabled');
           }
+
+          //$(document).ready(function(){
+          //  if(payload > 5){
+          //    $('button').prop('disabled', true);
+          //  } else {
+          //    $('button').prop('disabled', false);
+          //  }
+          //})
         }
       });
       client.publish("coffeefy", "hi, this is browser!");
