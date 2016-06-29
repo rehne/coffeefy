@@ -61,6 +61,9 @@
         }
         if (topic=="coffeefy/sensors/ultrasonic") {
           output_distance.innerHTML = payload;
+          if(payload > 5){
+            document.getElementByClassName('btn').prop('disabled', true);
+          }
         }
       });
       client.publish("coffeefy", "hi, this is browser!");
