@@ -109,10 +109,9 @@ function onListening() {
 }
 
 function readUltrasonicSensorPython(){
-    var data;
-    pythonshell.run('../python/ultrasonic.py', function(err, results){
-        if (err) throw err;
-        data = results;
+    var pyshell_sensor = new pythonshell('../python/ultrasonic.py');
+    pyshell_sensor.on('message', function (message){
+        console.log(message);
     });
     console.log("ultrasonic.py");
     //return data;
