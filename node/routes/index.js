@@ -50,10 +50,15 @@ router.get('/python/makeBigCoffee', function(req, res, next){
 router.get('/node/powerButton', function(req, res, next){
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
   pressPowerButton();
 =======
 =======
 >>>>>>> parent of 28023fd... node testing again
+=======
+  gpio.setMode(MODE_BCM);
+  gpio.setup(19, gpio.DIR_OUT);
+>>>>>>> parent of ad78f1a... node testing again
   console.log('Test');
 >>>>>>> parent of 28023fd... node testing again
   res.end();
