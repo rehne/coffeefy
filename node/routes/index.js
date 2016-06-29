@@ -49,6 +49,14 @@ router.get('/python/makeBigCoffee', function(req, res, next){
 // GET resource "/node/powerButton" aka run powerbutton test */
 router.get('/node/powerButton', function(req, res, next){
   gpio.setup(35, gpio.DIR_OUT);
+  gpio.write(35, true, function(err){
+    if(err) throw err;
+    console.log('written to pin');
+  })
+  setTimeout(gpio.write(35, false, function(err){
+    if(err) throw err;
+    console.log('written to pin');
+  }), 500);
   console.log('Test');
   res.end();
 });
