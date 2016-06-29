@@ -62,7 +62,9 @@
         if (topic=="coffeefy/sensors/ultrasonic") {
           output_distance.innerHTML = payload;
           if(payload > 5){
-            document.getElementByClassName('btn').prop('disabled', true);
+            $('button').prop('disabled', true);
+          } else {
+            $('button').prop('disabled', false);
           }
         }
       });
