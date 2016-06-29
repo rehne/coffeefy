@@ -75,21 +75,7 @@ module.exports = router;
 
 // NODE.JS functions
 function pressPowerButton(){
-  gpio.setMode(MODE_BCM);
-  gpio.write(19, gpio.DIR_OUT, write);
-  function write(){
-    gpio.write(19, true, function(err){
-      if(err) throw err;
-      console.log('written to pin');
-    })
-  }
-  setTimeout(gpio.destroy(), 500);
-}
-function write(){
-  gpio.write(19, true, function(err){
-    if(err) throw err;
-    console.log('written to pin');
-  })
+
 }
 function makeSmallCoffee(){
   pressPowerButton();
