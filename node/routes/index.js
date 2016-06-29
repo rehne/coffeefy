@@ -48,9 +48,7 @@ router.get('/python/makeBigCoffee', function(req, res, next){
 // NODE.JS
 // GET resource "/node/powerButton" aka run powerbutton test */
 router.get('/node/powerButton', function(req, res, next){
-  for(var i = 90; i == 0; i--){
-    setTimeout(console.log('Heating water.. ' + i), 1000);
-  }
+  pressPowerButton();
   res.end();
 });
 // GET resource "/node/makeSmallCoffee" aka make small coffee
@@ -68,7 +66,7 @@ module.exports = router;
 
 // NODE.JS functions
 function pressPowerButton(){
-
+  console.log('Test');
 }
 function makeSmallCoffee(){
   pressPowerButton();
