@@ -45,16 +45,16 @@ try:
     mqttc.publish("coffeefy/sensors/ultrasonic", "%.1f" % Distance)
     time.sleep(1)
 
-  # reset GPIO settings if user pressed Ctrl+C
-  except KeyboardInterrupt:
-    print("Measurement stopped by user")
-  except:
-    # Behandlung anderer Exceptions
-    print "An error or exception occured!"
-    #mqttc.publish("coffeefy/messages", "An error or exception occured!")
-  finally:
-    GPIO.cleanup()
-    print "clean up"
+# reset GPIO settings if user pressed Ctrl+C
+except KeyboardInterrupt:
+  print("Measurement stopped by user")
+except:
+  # Behandlung anderer Exceptions
+  print "An error or exception occured!"
+  #mqttc.publish("coffeefy/messages", "An error or exception occured!")
+finally:
+  GPIO.cleanup()
+  print "clean up"
 
 # function to measure the distance
 def MeasureDistance():
