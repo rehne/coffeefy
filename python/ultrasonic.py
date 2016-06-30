@@ -72,6 +72,7 @@ def main():
     print("Measurement stopped by user")
   finally:
     GPIO.cleanup()
+    print "clean up"
 
 if __name__ == '__main__':
   GPIO.setwarnings(False)
