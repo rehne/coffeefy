@@ -57,6 +57,13 @@
       client.on("message", function(topic, payload) {
         if (topic=="coffeefy/messages") {
           output_messages.innerHTML = payload;
+          $(document).ready(function(){
+            if(payload.length > 5){
+              $('.btn').prop('disabled', true);
+            } else {
+              $('.btn').prop('disabled', false);
+            }
+          })
         }
         if (topic=="coffeefy/sensors/ultrasonic") {
           output_distance.innerHTML = payload;
