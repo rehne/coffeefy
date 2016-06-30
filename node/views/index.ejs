@@ -8,7 +8,7 @@
     <script src="//code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
     <link rel='stylesheet' href='/css/style.css'>
     <script src="js/external/browserMqtt.js"></script>
-    <script src="js/script.js"></script>
+    <!-- <script src="js/script.js"></script> -->
     <!-- Latest compiled and minified CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
 
@@ -49,40 +49,40 @@
         </div>
       </div>
     </div>
-    <!--
     <script>
-      var output_messages = document.getElementById("messages");
-      var output_distance = document.getElementById("distance");
-      var client = mqtt.connect('ws://iot.eclipse.org:80/ws'); // you add a ws:// url here
-      client.subscribe("coffeefy/messages");
-      client.subscribe("coffeefy/sensors/ultrasonic");
-      client.on("message", function(topic, payload) {
-        if (topic=="coffeefy/messages") {
-          output_messages.innerHTML = payload;
-          $(document).ready(function(){
-            if(payload.length > 5){
-              $('.btn').prop('disabled', true);
-            } else {
-              $('.btn').prop('disabled', false);
-            }
-          })
-        }
-        if (topic=="coffeefy/sensors/ultrasonic") {
-          output_distance.innerHTML = payload;
-          $(document).ready(function(){
-            if(payload > 5){
-              $('.btn').prop('disabled', true);
-              $('#distance').html('no Cup !');
-            } else {
-              $('.btn').prop('disabled', false);
-              $('#distance').html('OK');
-            }
-          })
-        }
-      });
-      client.publish("coffeefy", "hi, this is browser!");
+    var output_messages = document.getElementById("messages");
+    var output_distance = document.getElementById("distance");
+    var client = mqtt.connect('ws://iot.eclipse.org:80/ws'); // you add a ws:// url here
+
+    client.subscribe("coffeefy/messages");
+    client.subscribe("coffeefy/sensors/ultrasonic");
+
+    client.on("message", function(topic, payload) {
+      if (topic=="coffeefy/messages") {
+        output_messages.innerHTML = payload;
+        $(document).ready(function(){
+          if(payload.length > 5){
+            $('.btn').prop('disabled', true);
+          } else {
+            $('.btn').prop('disabled', false);
+          }
+        })
+      }
+      if (topic=="coffeefy/sensors/ultrasonic") {
+        //output_distance.innerHTML = payload;
+        $(document).ready(function(){
+          if(payload > 5){
+            $('.btn').prop('disabled', true);
+            $('#distance').html('no Cup !');
+          } else {
+            $('.btn').prop('disabled', false);
+            $('#distance').html('OK');
+          }
+        })
+      }
+    });
+    client.publish("coffeefy", "hi, this is browser!");
     </script>
-    -->
     <style>
       .hide { position:absolute; top:-1px; left:-1px; width:1px; height:1px; }
     </style>
