@@ -27,9 +27,6 @@ ECHO = 18
 StartTime = 0
 StopTime = 0
 
-# Ignore ERRNO 32
-signal(SIGPIPE, SIG_DFL)
-
 # function to measure the distance
 def MeasureDistance():
   # set trigger to high
@@ -59,6 +56,10 @@ def MeasureDistance():
 
 # main function
 def main():
+
+    # Ignore ERRNO 32
+    signal(SIGPIPE, SIG_DFL)
+    
   try:
     #Kontinuierliches Veröffentlichen der Distanzwerte auf das Topic "coffeefy/sensors/ultrasonic"
     while True:

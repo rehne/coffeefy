@@ -32,6 +32,8 @@ time.sleep(0.5)
 GPIO.output(SIG, False)
 mqttc.publish("coffeefy/messages", "Maschine ist ausgeschaltet.")
 print "OFF"
+
+# sleep weil mqtt nachrichten sonst zu schnell hintereinander liegen
 time.sleep(0.5)
 mqttc.publish("coffeefy/messages", "Done")
 GPIO.cleanup()
