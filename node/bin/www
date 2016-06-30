@@ -37,7 +37,7 @@ client.on('message', function (topic, message) {
   console.log(message.toString());
 });
 
-readUltrasonicSensorPython();
+// readUltrasonicSensorPython();
 
 /**
  * Listen on provided port, on all network interfaces.
