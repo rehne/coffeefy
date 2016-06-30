@@ -13,6 +13,7 @@
 # Notice by Vanakh Chea: Minor modifications were applied to the code
 
 # import required modules
+from signal import signal, SIGPIPE, SIG_DFL
 import time
 import RPi.GPIO as GPIO
 import paho.mqtt.client as mqtt
@@ -25,6 +26,9 @@ TRIG = 4
 ECHO = 18
 StartTime = 0
 StopTime = 0
+
+# Ignore ERRNO 32
+signal(SIGPIPE, SIG_DFL)
 
 # function to measure the distance
 def MeasureDistance():
