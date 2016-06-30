@@ -17,6 +17,7 @@ import paho.mqtt.client as mqtt
 # Setup des mqtt-Clients
 mqttc = mqtt.Client("python_pub")
 mqttc.connect("iot.eclipse.org", 1883, 60)
+mqttc.loop_start()
 
 
 # GPIO Pin Nummer zur Steuerung der Geraete Knoepfe
