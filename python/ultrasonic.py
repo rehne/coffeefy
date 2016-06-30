@@ -57,9 +57,9 @@ def MeasureDistance():
 # main function
 def main():
 
-    # Ignore ERRNO 32
-    signal(SIGPIPE, SIG_DFL)
-    
+  # Ignore ERRNO 32
+  signal(SIGPIPE, SIG_DFL)
+
   try:
     #Kontinuierliches Veröffentlichen der Distanzwerte auf das Topic "coffeefy/sensors/ultrasonic"
     while True:
