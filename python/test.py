@@ -22,6 +22,7 @@ sys.stdout.flush()
 
 mqttc = mqtt.Client("python_pub")
 mqttc.connect("iot.eclipse.org", 1883, 60)
+mqttc.loop_start()
 
 # define GPIO pins
 TRIG = 4
