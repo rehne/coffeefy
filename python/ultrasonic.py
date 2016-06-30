@@ -71,6 +71,10 @@ def main():
   # reset GPIO settings if user pressed Ctrl+C
   except KeyboardInterrupt:
     print("Measurement stopped by user")
+  except:
+	# Behandlung anderer Exceptions
+	print "An error or exception occured!"
+	#mqttc.publish("coffeefy/messages", "An error or exception occured!")
   finally:
     GPIO.cleanup()
     print "clean up"

@@ -17,7 +17,6 @@ client.on("message", function(topic, payload) {
     })
   }
   if (topic=="coffeefy/sensors/ultrasonic") {
-    //output_distance.innerHTML = payload;
     $(document).ready(function(){
       if(payload > 5){
         $('.btn').prop('disabled', true);
