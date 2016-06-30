@@ -14,8 +14,11 @@
 
 # import required modules
 import time
+import sys
 import RPi.GPIO as GPIO
 import paho.mqtt.client as mqtt
+
+sys.stdout.flush()
 
 mqttc = mqtt.Client("python_pub")
 mqttc.connect("iot.eclipse.org", 1883, 60)
@@ -83,3 +86,4 @@ except Exception,e:
 finally:
   time.sleep(1)
   GPIO.cleanup()
+  sys.stdout.flush()

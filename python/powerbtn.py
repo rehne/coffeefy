@@ -5,7 +5,10 @@
 
 import RPi.GPIO as GPIO
 import time
+import sys
 import paho.mqtt.client as mqtt
+
+sys.stdout.flush()
 
 mqttc = mqtt.Client("python_pub")
 mqttc.connect("iot.eclipse.org", 1883, 60)
@@ -36,5 +39,7 @@ mqttc.publish("coffeefy/messages", "Maschine ist ausgeschaltet.")
 # sleep weil mqtt nachrichten sonst zu schnell hintereinander liegen
 time.sleep(0.5)
 mqttc.publish("coffeefy/messages", "Done")
+
+sys.stdout.flush()
 
 GPIO.cleanup()
