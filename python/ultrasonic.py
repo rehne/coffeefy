@@ -80,7 +80,7 @@ def main():
     print "clean up"
 
 if __name__ == '__main__':
-  GPIO.setwarnings(False)
+  GPIO.setwarnings(True)
   # use GPIO pin numbering convention
   GPIO.setmode(GPIO.BCM)
 
