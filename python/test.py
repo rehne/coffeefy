@@ -81,5 +81,6 @@ except Exception,e:
   print "An error or exception occured!"
   #mqttc.publish("coffeefy/messages", "An error or exception occured!")
 finally:
+  time.sleep(1)
   GPIO.cleanup()
   print "clean up"
