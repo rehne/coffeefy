@@ -83,4 +83,3 @@ except Exception,e:
 finally:
   time.sleep(1)
   GPIO.cleanup()
-  print "clean up"
