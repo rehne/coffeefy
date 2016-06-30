@@ -17,8 +17,16 @@ Coffeefy let you control a coffee maker via Internet
 - clone repository
 - navigate to ./node
 - run `npm install` to install the dependencies
-- To start the webserver, run: `nodemon app`
-- open `http://localhost:3000` in browser
+- To start the webserver, run: `nodemon app` or `node ./bin/www`
+- open `http://localhost:3000` in your browser
+
+You can run Coffeefy as a daemon service using "forever". (see below)
+After Installation you can start the node.js server by running `forever start ./bin/www`.
+To see what's going on, determine the logfile path by running `forever list` and run
+`tail -f <logfilepath>`
+
+(Instructions for running `ultrasonic.py` in background)
+
 
 ## Required Python libraries
 - RPi.GPIO via `sudo apt-get install rpi.gpio`
@@ -29,10 +37,11 @@ Coffeefy let you control a coffee maker via Internet
 - [python-shell](https://github.com/extrabacon/python-shell)
 - [Correct usage of GPIO.cleanup()](http://raspi.tv/2013/rpi-gpio-basics-3-how-to-exit-gpio-programs-cleanly-avoid-warnings-and-protect-your-pi)
 - Running a node js server.. [forever(Github-Repo)](https://github.com/foreverjs/forever)
+- [nodemon](http://nodemon.io/) monitors for any changes in source, restarts the server automatically if necessary.
 
 ## Troubleshooting
 - Installing paho-mqtt causes an error. Missing "Python.h"? → Install the python developer package via `apt-get install python2.7-dev`.
-- `node app.js` results in a crash. → I dunno Y,  just install `nodemon` via npm.
+- `node app.js` results in a crash. → <s>I dunno Y,  just install `nodemon` via npm.</s> →  `node ./bin/www`
 
 
 ## Authors
