@@ -70,6 +70,7 @@ def MeasureDistance():
 try:
 #Kontinuierliches Veröffentlichen der Distanzwerte auf das Topic "coffeefy/sensors/ultrasonic"
   while True:
+    print "running..."
     Distance = MeasureDistance()
     #print("Measured Distance = %.1f cm" % Distance)
     mqttc.publish("coffeefy/sensors/ultrasonic", "%.1f" % Distance)
