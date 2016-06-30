@@ -48,7 +48,8 @@ try:
 # reset GPIO settings if user pressed Ctrl+C
 except KeyboardInterrupt:
   print("Measurement stopped by user")
-except:
+except Exception,e:
+  print str(e)
   # Behandlung anderer Exceptions
   print "An error or exception occured!"
   #mqttc.publish("coffeefy/messages", "An error or exception occured!")
