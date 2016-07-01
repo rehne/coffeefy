@@ -53,7 +53,7 @@
     var output_messages = document.getElementById("messages");
     var output_distance = document.getElementById("distance");
     var client = mqtt.connect('ws://iot.eclipse.org:80/ws'); // you add a ws:// url here
-
+    var active = false;
     client.subscribe("coffeefy/messages");
     client.subscribe("coffeefy/sensors/ultrasonic");
 
@@ -62,8 +62,10 @@
         output_messages.innerHTML = payload;
         $(document).ready(function(){
           if(payload.length > 5){
+            active = true;
             $('.btn').prop('disabled', true);
           } else {
+            active = false;
             $('.btn').prop('disabled', false);
           }
         })
@@ -71,17 +73,16 @@
       if (topic=="coffeefy/sensors/ultrasonic") {
         //output_distance.innerHTML = payload;
         $(document).ready(function(){
-          if(payload > 5){
+          if(payload > 5 && active == false){
             $('.btn').prop('disabled', true);
             $('#distance').html('no Cup !');
-          } else {
+          } else if (payload <= 5 && active == false) {
             $('.btn').prop('disabled', false);
             $('#distance').html('OK');
           }
         })
       }
     });
-    client.publish("coffeefy", "hi, this is browser!");
     </script>
     <style>
       .hide { position:absolute; top:-1px; left:-1px; width:1px; height:1px; }
