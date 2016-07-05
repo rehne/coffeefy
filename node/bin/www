@@ -8,7 +8,8 @@ var app     = require('../app');
 var debug   = require('debug')('coffeefy:server');
 var http    = require('http');
 var mqtt    = require('mqtt');
-var mqttURL = 'mqtt://iot.eclipse.org';
+//var mqttURL = 'mqtt://iot.eclipse.org';
+var mqttURL = 'mqtt://test.mosquitto.org/';
 var pythonshell = require('python-shell');
 
 /**

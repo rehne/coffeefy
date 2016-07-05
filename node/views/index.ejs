@@ -50,7 +50,8 @@
     <script>
       var output_messages = document.getElementById("messages");
       var output_distance = document.getElementById("distance");
-      var client = mqtt.connect('ws://iot.eclipse.org:80/ws'); // you add a ws:// url here
+      //var client = mqtt.connect('ws://iot.eclipse.org:80/ws');
+      var client = mqtt.connect('ws://test.mosquitto.org:8080');
       var active = false;
       client.subscribe("coffeefy/messages");
       client.subscribe("coffeefy/sensors/ultrasonic");
