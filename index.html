@@ -31,85 +31,97 @@
 			<!-- Any section element inside of this container is displayed as a slide -->
 			<div class="slides">
 				<section>
-					<h1>Reveal.js</h1>
-					<h3>The HTML Presentation Framework</h3>
+					<h1>Coffeefy</h1>
+					<h3>The Senseo Whisperer</h3>
 					<p>
-						<small>Created by <a href="http://hakim.se">Hakim El Hattab</a> / <a href="http://twitter.com/hakimel">@hakimel</a></small>
+						<small>Created by :
+							<ul>
+								<ul><a href="https://github.com/revanjin/">Alexander Thürling</a></ul>
+								<ul><a href="https://github.com/kanonenfutter/">Vanakh Chea</a></ul>
+								<ul><a href="https://github.com/rehne/">René Honnen</a></ul>
+							</ul>
+						</small>
 					</p>
 				</section>
 
 				<section>
-					<h2>Hello There</h2>
-					<p>
-						reveal.js enables you to create beautiful interactive slide decks using HTML. This presentation will show you examples of what it can do.
-					</p>
-				</section>
-
-				<!-- Example of nested vertical slides -->
-				<section>
 					<section>
-						<h2>Vertical Slides</h2>
-						<p>Slides can be nested inside of each other.</p>
-						<p>Use the <em>Space</em> key to navigate through all slides.</p>
-						<br>
-						<a href="#" class="navigate-down">
-							<img width="178" height="238" data-src="https://s3.amazonaws.com/hakim-static/reveal-js/arrow.png" alt="Down arrow">
-						</a>
+						<h2>Idea</h2>
+						<p>Bilder von der 1. Präsentation ?</p>
 					</section>
 					<section>
-						<h2>Basement Level 1</h2>
-						<p>Nested slides are useful for adding additional detail underneath a high level horizontal slide.</p>
+						<h2>Idea</h2>
+						<p>Mehr Bilder von der 1. Präsentation ?</p>
 					</section>
 					<section>
-						<h2>Basement Level 2</h2>
-						<p>That's it, time to go back up.</p>
-						<br>
-						<a href="#/2">
-							<img width="178" height="238" data-src="https://s3.amazonaws.com/hakim-static/reveal-js/arrow.png" alt="Up arrow" style="transform: rotate(180deg); -webkit-transform: rotate(180deg);">
-						</a>
+						<h3>Auf deutsch oder englisch eigentlich das Ganze ?!</h3>
 					</section>
 				</section>
 
 				<section>
-					<h2>Slides</h2>
-					<p>
-						Not a coder? Not a problem. There's a fully-featured visual editor for authoring these, try it out at <a href="http://slides.com" target="_blank">http://slides.com</a>.
-					</p>
+					<h2>Used Hardware</h2>
+					<ul>
+						<li>Raspberry Pi 3</li>
+						<li>Senseo 7810 Coffee Machine</li>
+						<li>HC-SR04 Ultrasonic Sensor</li>
+						<li>3 Relays</li>
+						<li>2 Resistors(680Ohm/1kOhm)</li>
+						<li>minor small parts (optinal breadboard, wires etc.)</li>
+					</ul>
 				</section>
 
 				<section>
-					<h2>Point of View</h2>
-					<p>
-						Press <strong>ESC</strong> to enter the slide overview.
-					</p>
-					<p>
-						Hold down alt and click on any element to zoom in on it using <a href="http://lab.hakim.se/zoom-js">zoom.js</a>. Alt + click anywhere to zoom back out.
-					</p>
+					<h2>Umsetzung</h2>
 				</section>
 
 				<section>
-					<h2>Touch Optimized</h2>
-					<p>
-						Presentations look great on touch devices, like mobile phones and tablets. Simply swipe through your slides.
-					</p>
+					<section>
+						<h3>Der Umbau</h3>
+						<img width="640" height="400" data-src="images/bildschirmfoto_youtube.png" alt="Youtube Video">
+						<small><a href="https://www.youtube.com/watch?v=VxuD05Z9ex4">https://www.youtube.com/watch?v=VxuD05Z9ex4</a></small>
+					</section>
+					<section>
+						<h3>Knöpfe anlöten & Kabel verlegen</h3>
+						<img width="640" height="480" data-src="images/IMG_0457.jpg" alt="Lötaktion">
+						<img width="480" height="640" data-src="images/IMG_0462.jpg" alt="Lötaktion">
+					</section>
 				</section>
 
-				<section data-markdown>
-					<script type="text/template">
-						## Markdown support
-
-						Write content using inline or external Markdown.
-						Instructions and more info available in the [readme](https://github.com/hakimel/reveal.js#markdown).
-
-						```
-						<section data-markdown>
-						  ## Markdown support
-
-						  Write content using inline or external Markdown.
-						  Instructions and more info available in the [readme](https://github.com/hakimel/reveal.js#markdown).
-						</section>
-						```
-					</script>
+				<section>
+					<section>
+						<h2>Programmierung</h2>
+						<p>Auf den folgenden Folien wollen wir ein paar Code Schnipsel zeigen</p>
+					</section>
+					<section>
+						<h2>Ultrasonic sensor</h2>
+						<pre><code class="hljs" data-trim contenteditable>
+try:
+#Kontinuierliches pushen der Distanzwerte auf das mqtt Topic
+  while True:
+    date = str(datetime.datetime.now())
+    print "[" + date + "] " + Distance + "cm .Running..."
+    Distance = MeasureDistance()
+    mqttc.publish("coffeefy/sensors/ultrasonic", "%.1f" % Distance)
+    time.sleep(1)
+						</code></pre>
+					</section>
+					<section>
+						<pre><code class="hljs" data-trim contenteditable>
+client.subscribe("coffeefy/messages");
+client.subscribe("coffeefy/sensors/ultrasonic");
+client.on("message", function(topic, payload) {
+  if (topic=="coffeefy/messages") {
+    output_messages.innerHTML = payload;
+    $(document).ready(function(){
+      if(payload.length > 5){
+        $('.btn').prop('disabled', true);
+      } else {
+        $('.btn').prop('disabled', false);
+      }
+    })
+  }
+						</code></pre>
+					</section>
 				</section>
 
 				<section>
@@ -145,25 +157,6 @@
 						<a href="?transition=convex#/transitions">Convex</a> -
 						<a href="?transition=concave#/transitions">Concave</a> -
 						<a href="?transition=zoom#/transitions">Zoom</a>
-					</p>
-				</section>
-
-				<section id="themes">
-					<h2>Themes</h2>
-					<p>
-						reveal.js comes with a few themes built in: <br>
-						<!-- Hacks to swap themes after the page has loaded. Not flexible and only intended for the reveal.js demo deck. -->
-						<a href="#" onclick="document.getElementById('theme').setAttribute('href','css/theme/black.css'); return false;">Black (default)</a> -
-						<a href="#" onclick="document.getElementById('theme').setAttribute('href','css/theme/white.css'); return false;">White</a> -
-						<a href="#" onclick="document.getElementById('theme').setAttribute('href','css/theme/league.css'); return false;">League</a> -
-						<a href="#" onclick="document.getElementById('theme').setAttribute('href','css/theme/sky.css'); return false;">Sky</a> -
-						<a href="#" onclick="document.getElementById('theme').setAttribute('href','css/theme/beige.css'); return false;">Beige</a> -
-						<a href="#" onclick="document.getElementById('theme').setAttribute('href','css/theme/simple.css'); return false;">Simple</a> <br>
-						<a href="#" onclick="document.getElementById('theme').setAttribute('href','css/theme/serif.css'); return false;">Serif</a> -
-						<a href="#" onclick="document.getElementById('theme').setAttribute('href','css/theme/blood.css'); return false;">Blood</a> -
-						<a href="#" onclick="document.getElementById('theme').setAttribute('href','css/theme/night.css'); return false;">Night</a> -
-						<a href="#" onclick="document.getElementById('theme').setAttribute('href','css/theme/moon.css'); return false;">Moon</a> -
-						<a href="#" onclick="document.getElementById('theme').setAttribute('href','css/theme/solarized.css'); return false;">Solarized</a>
 					</p>
 				</section>
 
@@ -210,27 +203,6 @@
 						You can override background transitions per-slide.
 					</p>
 					<pre><code class="hljs" style="word-wrap: break-word;">&lt;section data-background-transition="zoom"&gt;</code></pre>
-				</section>
-
-				<section>
-					<h2>Pretty Code</h2>
-					<pre><code class="hljs" data-trim contenteditable>
-function linkify( selector ) {
-  if( supports3DTransforms ) {
-
-    var nodes = document.querySelectorAll( selector );
-
-    for( var i = 0, len = nodes.length; i &lt; len; i++ ) {
-      var node = nodes[i];
-
-      if( !node.className ) {
-        node.className += ' roll';
-      }
-    }
-  }
-}
-					</code></pre>
-					<p>Code syntax highlighting courtesy of <a href="http://softwaremaniacs.org/soft/highlight/en/description/">highlight.js</a>.</p>
 				</section>
 
 				<section>
@@ -364,6 +336,26 @@ Reveal.addEventListener( 'customevent', function() {
 						- <a href="https://github.com/hakimel/reveal.js">Source code &amp; documentation</a>
 					</p>
 				</section>
+
+				<section id="themes">
+					<h2>Themes</h2>
+					<p>
+						reveal.js comes with a few themes built in: <br>
+						<!-- Hacks to swap themes after the page has loaded. Not flexible and only intended for the reveal.js demo deck. -->
+						<a href="#" onclick="document.getElementById('theme').setAttribute('href','css/theme/black.css'); return false;">Black (default)</a> -
+						<a href="#" onclick="document.getElementById('theme').setAttribute('href','css/theme/white.css'); return false;">White</a> -
+						<a href="#" onclick="document.getElementById('theme').setAttribute('href','css/theme/league.css'); return false;">League</a> -
+						<a href="#" onclick="document.getElementById('theme').setAttribute('href','css/theme/sky.css'); return false;">Sky</a> -
+						<a href="#" onclick="document.getElementById('theme').setAttribute('href','css/theme/beige.css'); return false;">Beige</a> -
+						<a href="#" onclick="document.getElementById('theme').setAttribute('href','css/theme/simple.css'); return false;">Simple</a> <br>
+						<a href="#" onclick="document.getElementById('theme').setAttribute('href','css/theme/serif.css'); return false;">Serif</a> -
+						<a href="#" onclick="document.getElementById('theme').setAttribute('href','css/theme/blood.css'); return false;">Blood</a> -
+						<a href="#" onclick="document.getElementById('theme').setAttribute('href','css/theme/night.css'); return false;">Night</a> -
+						<a href="#" onclick="document.getElementById('theme').setAttribute('href','css/theme/moon.css'); return false;">Moon</a> -
+						<a href="#" onclick="document.getElementById('theme').setAttribute('href','css/theme/solarized.css'); return false;">Solarized</a>
+					</p>
+				</section>
+
 			</div>
 		</div>
 		<script src="lib/js/head.min.js"></script>
