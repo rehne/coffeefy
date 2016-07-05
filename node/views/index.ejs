@@ -4,14 +4,15 @@
     <title><%= title %></title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
-    <script src="//code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
     <link rel='stylesheet' href='/css/style.css'>
-    <script src="js/external/browserMqtt.js"></script>
-    <!-- <script src="js/script.js"></script> -->
+    <link rel='stylesheet' href='/css/timeCircles.css'>
     <!-- Latest compiled and minified CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
-
+    <script src="js/jquery.js"></script>
+    <script src="//code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
+    <script src="js/external/browserMqtt.js"></script>
+    <script src="js/timeCircles.js"></script>
+    <!-- <script src="js/script.js"></script> -->
     <!-- Latest compiled and minified JavaScript -->
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
   </head>
@@ -31,16 +32,19 @@
         <h2 class="page-header">Controls</h2>
         <div class="col-md-4 panel panel-default panel-body">
           <form action="python/makeSmallCoffee/" method="get" target="hiddenFrame">
-            <button class="btn btn-primary btn-lg">small coffee!</button>
+            <button class="btn btn-primary btn-lg start">small coffee!</button>
           </form>
         </div>
-        <div class="col-md-4 panel panel-default panel-body"><p id="messages"></p></div>
+        <div class="col-md-4 panel panel-default panel-body"><p id="messages"></p>
+          <div class="text-center">
+            <div class="countdown stopwatch" data-timer="130" style="width: 150px; height: 150px;"></div>
+          </div>
+        </div>
         <div class="col-md-4 panel panel-default panel-body">
           <form action="python/makeBigCoffee/" method="get" target="hiddenFrame">
-            <button class="btn btn-primary btn-lg">big coffee!</button>
+            <button class="btn btn-primary btn-lg start">big coffee!</button>
           </form>
         </div>
-
         <div class="row">
           <!-- http://stackoverflow.com/a/5733858 -->
           <form action="python/powerButton/" method="get" target="hiddenFrame">
@@ -50,39 +54,54 @@
       </div>
     </div>
     <script>
-    var output_messages = document.getElementById("messages");
-    var output_distance = document.getElementById("distance");
-    var client = mqtt.connect('ws://iot.eclipse.org:80/ws'); // you add a ws:// url here
-    var active = false;
-    client.subscribe("coffeefy/messages");
-    client.subscribe("coffeefy/sensors/ultrasonic");
+      var output_messages = document.getElementById("messages");
+      var output_distance = document.getElementById("distance");
+      var client = mqtt.connect('ws://iot.eclipse.org:80/ws'); // you add a ws:// url here
+      var active = false;
+      client.subscribe("coffeefy/messages");
+      client.subscribe("coffeefy/sensors/ultrasonic");
 
-    client.on("message", function(topic, payload) {
-      if (topic=="coffeefy/messages") {
-        output_messages.innerHTML = payload;
-        $(document).ready(function(){
-          if(payload.length > 5){
-            active = true;
-            $('.btn').prop('disabled', true);
-          } else {
-            active = false;
-            $('.btn').prop('disabled', false);
-          }
-        })
-      }
-      if (topic=="coffeefy/sensors/ultrasonic") {
-        //output_distance.innerHTML = payload;
-        $(document).ready(function(){
-          if(payload > 5 && active == false){
-            $('.btn').prop('disabled', true);
-            $('#distance').html('no Cup !');
-          } else if (payload <= 5 && active == false) {
-            $('.btn').prop('disabled', false);
-            $('#distance').html('OK');
-          }
-        })
-      }
-    });
+      client.on("message", function(topic, payload) {
+        if (topic=="coffeefy/messages") {
+          output_messages.innerHTML = payload;
+          $(document).ready(function(){
+            if(payload.length > 5){
+              active = true;
+              $('.btn').prop('disabled', true);
+            } else {
+              active = false;
+              $('.btn').prop('disabled', false);
+            }
+          })
+        }
+        if (topic=="coffeefy/sensors/ultrasonic") {
+          //output_distance.innerHTML = payload;
+          $(document).ready(function(){
+            if(payload > 5 && active == false){
+              $('.btn').prop('disabled', true);
+              $('#distance').html('no Cup !');
+            } else if (payload <= 5 && active == false) {
+              $('.btn').prop('disabled', false);
+              $('#distance').html('OK');
+            }
+          })
+        }
+      });
+    </script>
+    <script>
+      $(".countdown").TimeCircles({
+        time: {Days: {show: false}, Hours: {show: false}, Minutes: {show: true}},
+        start: false,
+        "animation": "ticks",
+        "bg_width": 1.2,
+        "fg_width": 0.14
+      });
+      $(".stop").click(function(){
+        $(".countdown.stopwatch").TimeCircles().stop();
+      });
+      $(".start").click(function(){
+        $(".countdown.stopwatch").TimeCircles().start();
+      });
     </script>
     <style>
       .hide { position:absolute; top:-1px; left:-1px; width:1px; height:1px; }

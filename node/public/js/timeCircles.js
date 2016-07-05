@@ -79,7 +79,7 @@
     };
     var secondsIn = {
         Seconds: 1,
-        Minutes: 130,
+        Minutes: 130, // changed that, because we want 1 circle count down 1 time
         Hours: 3600,
         Days: 86400,
         Months: 2678400,
@@ -508,8 +508,7 @@
                         if (Math.floor(visible_times.time[lastKey]) > Math.floor(visible_times.old_time[lastKey])) {
                             this.radialFade(x, y, color, 1, key);
                             this.data.state.fading[key] = true;
-                        }
-                        else if (Math.floor(visible_times.time[lastKey]) < Math.floor(visible_times.old_time[lastKey])) {
+                        } else if (Math.floor(visible_times.time[lastKey]) < Math.floor(visible_times.old_time[lastKey])) {
                             this.radialFade(x, y, color, 0, key);
                             this.data.state.fading[key] = true;
                         }
@@ -517,8 +516,7 @@
                     if (!this.data.state.fading[key]) {
                         this.drawArc(x, y, color, visible_times.pct[key]);
                     }
-                }
-                else {
+                } else {
                     this.animateArc(x, y, color, visible_times.pct[key], visible_times.old_pct[key], (new Date()).getTime() + tick_duration);
                 }
             }
@@ -541,8 +539,7 @@
         if (this.config.animation === "smooth") {
             // Smooth animation, Queue up the next frame
             this.data.animation_frame = useWindow.requestAnimationFrame(update, _this.element, _this);
-        }
-        else {
+        } else {
             // Tick animation, Don't queue until very slightly after the next second happens
             var delay = (diff % 1) * 1000;
             if (delay < 0)
@@ -563,8 +560,7 @@
         if (Math.abs(diff) > 0.5) {
             if (target_pct === 0) {
                 this.radialFade(x, y, color, 1);
-            }
-            else {
+            } else {
                 this.radialFade(x, y, color, 0);
             }
         }
@@ -621,8 +617,7 @@
             counterClockwise = false;
             startAngle -= (offset / 2);
             endAngle = startAngle + offset;
-        }
-        else {
+        } else {
             if (this.config.direction === "Clockwise") {
                 counterClockwise = false;
                 endAngle = startAngle + offset;
@@ -691,8 +686,7 @@
             if (this.data.paused) {
                 this.data.attributes.ref_date = (new Date()).getTime() + (this.data.timer * 1000);
             }
-        }
-        else {
+        } else {
             // Try to get data-timer
             var attr_data_timer = $(this.element).data('timer');
             if (typeof attr_data_timer === "undefined") {
@@ -704,8 +698,7 @@
             if (typeof attr_data_timer === "number") {
                 this.data.timer = attr_data_timer;
                 this.data.attributes.ref_date = (new Date()).getTime() + (attr_data_timer * 1000);
-            }
-            else {
+            } else {
                 // data-timer and data-date were both not set
                 // use config date
                 this.data.attributes.ref_date = this.config.ref_date;
@@ -752,8 +745,7 @@
         // Use window.top if use_top_frame is true
         if(this.config.use_top_frame) {
             useWindow = window.top;
-        }
-        else {
+        } else {
             useWindow = window;
         }
         updateUsedWindow();
@@ -763,8 +755,7 @@
             if (typeof secondsIn[this.data.total_duration] !== "undefined") {
                 // If set to Years, Months, Days, Hours or Minutes, fetch the secondsIn value for that
                 this.data.total_duration = secondsIn[this.data.total_duration];
-            }
-            else if (this.data.total_duration === "Auto") {
+            } else if (this.data.total_duration === "Auto") {
                 // If set to auto, total_duration is the size of 1 unit, of the unit type bigger than the largest shown
                 for(var i = 0; i < Object.keys(this.config.time).length; i++) {
                     var unit = Object.keys(this.config.time)[i];
@@ -773,8 +764,7 @@
                         break;
                     }
                 }
-            }
-            else {
+            } else {
                 // If it's a string, but neither of the above, user screwed up.
                 this.data.total_duration = secondsIn["Years"];
                 console.error("Valid values for TimeCircles config.total_duration are either numeric, or (string) Years, Months, Days, Hours, Minutes, Auto");
@@ -861,8 +851,7 @@
             }
             instance = new TC_Instance(element, options);
             TC_Instance_List[cur_id] = instance;
-        }
-        else {
+        } else {
             instance = TC_Instance_List[cur_id];
             if (typeof this.options !== "undefined") {
                 instance.setOptions(this.options);
