@@ -106,11 +106,12 @@ try:
 						</code></pre>
 					</section>
 					<section>
+						<h2>script in der index.html</h2>
 						<pre><code class="hljs" data-trim contenteditable>
 client.subscribe("coffeefy/messages");
 client.subscribe("coffeefy/sensors/ultrasonic");
 client.on("message", function(topic, payload) {
-  if (topic=="coffeefy/messages") {
+  if (topic == "coffeefy/messages") {
     output_messages.innerHTML = payload;
     $(document).ready(function(){
       if(payload.length > 5){
