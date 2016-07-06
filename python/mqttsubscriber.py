@@ -7,7 +7,7 @@ def on_connect(client, userdata, rc):
 # Subscribing in on_connect() means that if we lose the connection and
 # reconnect then subscriptions will be renewed.
 	#client.subscribe("coffeefy/messages")
-	client.subscribe("coffeefy/sensors/ultrasonic")
+	client.subscribe("coffeefy/messages")
 
 # The callback for when a PUBLISH message is received from the server.
 def on_message(client, userdata, msg):
@@ -25,6 +25,3 @@ client.connect("test.mosquitto.org", 1883, 60)
 # Other loop*() functions are available that give a threaded interface and a
 # manual interface.
 client.loop_forever()
-
-
-
