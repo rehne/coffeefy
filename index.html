@@ -45,21 +45,22 @@
 				</section>
 
 				<section>
+					<h2>Idee</h2>
+					<img width="900" height="506" data-src="images/brainstorm.jpg" alt="Brainstorm">
+				</section>
+
+				<section>
 					<section>
-						<h2>Idee</h2>
 						<img width="640" height="480" data-src="images/1.jpg" alt="Lötaktion" style="float: left; width: 48%; height: 48%;">
 						<img width="640" height="480" data-src="images/2.jpg" alt="Lötaktion" style="float: right; width: 48%; height: 48%;">
 					</section>
 					<section>
-						<h2>Idee</h2>
 						<img width="640" height="480" data-src="images/4.jpg" alt="Lötaktion" style="float: center; width: 48%; height: 48%;">
 					</section>
 					<section data-transition="fade-in slide-out">
-						<h2>Idee</h2>
 						 <img width="640" height="480" data-src="images/5.jpg" alt="Lötaktion" style="width: 48%; height: 48%;">
 					</section>
 					<section>
-						<h2>Idee</h2>
 						<img width="640" height="480" data-src="images/8.jpg" alt="Lötaktion" style="float: center; width: 48%; height: 48%;">
 					</section>
 				</section>
@@ -169,6 +170,31 @@ try:
     Distance = MeasureDistance()
     mqttc.publish("coffeefy/sensors/ultrasonic", "%.1f" % Distance)
     time.sleep(1)
+						</code></pre>
+					</section>
+					<section>
+						<h2>make coffee</h2>
+						<pre><code class="hljs" data-trim contenteditable>
+# Kaffeemaschine einschalten
+pressPowerBtn()
+for x in xrange(0,90):
+	mqttc.publish("coffeefy/messages", 'Heating water.. %d' % (90-x))
+	time.sleep(1)
+
+# Auswahl des Programms
+press2CupBtn()
+for x in xrange(0,40):
+	mqttc.publish("coffeefy/messages", 'Preparing cup.. %d' % (40-x))
+	time.sleep(1)
+mqttc.publish("coffeefy/messages", "Done!")
+
+pressPowerBtn()
+						</code></pre>
+						<pre><code class="hljs" data-trim contenteditable>
+def press2CupBtn():
+	GPIO.output(SIG_2CUP, True)
+	time.sleep(0.5)
+	GPIO.output(SIG_2CUP, False)
 						</code></pre>
 					</section>
 					<section>
