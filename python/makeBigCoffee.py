@@ -16,7 +16,7 @@ import paho.mqtt.client as mqtt
 
 # Setup des mqtt-Clients
 mqttc = mqtt.Client("python_pub")
-mqttc.connect("iot.eclipse.org", 1883, 60)
+mqttc.connect("test.mosquitto.org", 1883, 60)
 mqttc.loop_start()
 
 
@@ -42,11 +42,6 @@ def pressPowerBtn():
 	time.sleep(0.5)
 	GPIO.output(SIG_POWER, False)
 
-def press1CupBtn():
-	GPIO.output(SIG_1CUP, True)
-	time.sleep(0.5)
-	GPIO.output(SIG_1CUP, False)
-
 def press2CupBtn():
 	GPIO.output(SIG_2CUP, True)
 	time.sleep(0.5)
@@ -65,10 +60,10 @@ try:
 		#print 'Heating water... %d' % (9-x)
 		mqttc.publish("coffeefy/messages", 'Heating water... %d' % (90-x))
 		time.sleep(1)
-	# Auswahl des 1CUP Programms
+	# Auswahl des 1Cup Programms
 	press2CupBtn()
 	for x in xrange(0,40):
-		#print 'Cooking one cup... %d' % (3-x)
+		#print 'Cooking one cup... %d' % (4-x)
 		mqttc.publish("coffeefy/messages", 'Preparing one cup... %d' % (40-x))
 		time.sleep(1)
 	mqttc.publish("coffeefy/messages", "Done!")
