@@ -136,6 +136,31 @@
 					<section>
 						<h2>Ultrasonic sensor</h2>
 						<pre><code class="hljs" data-trim contenteditable>
+def MeasureDistance():
+  GPIO.output(TRIG, True)
+
+  time.sleep(0.00001)
+
+	GPIO.output(TRIG, False)
+
+	StartTime = time.time()
+
+	while GPIO.input(ECHO) == 0:
+    StartTime = time.time()
+
+	while GPIO.input(ECHO) == 1:
+    StopTime = time.time()
+
+	TimeElapsed = StopTime - StartTime
+
+	Distance = (TimeElapsed * 34300) / 2
+
+	return Distance
+						</code></pre>
+					</section>
+					<section>
+						<h2>Ultrasonic sensor</h2>
+						<pre><code class="hljs" data-trim contenteditable>
 try:
 #Kontinuierliches pushen der Distanzwerte auf das mqtt Topic
   while True:
