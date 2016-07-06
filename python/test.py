@@ -30,7 +30,6 @@ TRIG = 4
 ECHO = 18
 StartTime = 0
 StopTime = 0
-Distance = 0
 
 GPIO.setwarnings(False)
 # use GPIO pin numbering convention
@@ -75,7 +74,7 @@ try:
   while True:
     date = str(datetime.datetime.now())
     Distance = MeasureDistance()
-    print "[" + date + "] " + Distance + "cm .Running..."
+    print "[" + date + "] " + str(Distance) + "cm .Running..."
     #print("Measured Distance = %.1f cm" % Distance)
     mqttc.publish("coffeefy/sensors/ultrasonic", "%.1f" % Distance)
     time.sleep(1)
