@@ -11,7 +11,7 @@ Coffeefy let you control a coffee maker via Internet
 - HC-SR04 Ultrasonic Sensor
 - 3 Relays
 - 2 Resistors(680Ohm/1kOhm)
-- minor small parts (optinal breadboard, wires etc.)
+- minor small parts (optional breadboard, wires etc.)
 
 ## Installation
 - clone repository
