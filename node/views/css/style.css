@@ -4,7 +4,6 @@ body{
   background-image: url('../img/background.jpg');
   background-size: cover;
   font-family: 'Yanone Kaffeesatz', sans-serif;
-  text-shadow: 0 0 10px white;
   color: #663200;
 }
 h1{
@@ -30,22 +29,4 @@ p{
 }
 .btn{
   letter-spacing: 210%;
-}
-
-.container {
-  position: relative;
-  height: 14rem;
-  /*border: 1px solid;*/
-}
-
-.container-fluid {
-	/*border: 1px solid;*/
-}
-
-.centered {
-  position: absolute;
-  top: 50%;
-  left:50%;
-  transform: translate(-50%,-50%);
-  border: 1px dashed deeppink;
 }
