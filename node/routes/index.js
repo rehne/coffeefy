@@ -10,7 +10,7 @@ var device_is_working = 0;
 /* GET resource "/" aka homepage */
 router.get('/', function(req, res, next) {
     //data = readUltrasonicSensorPython();
-    var data = 0;
+    //var data = 0;
     res.render('index', { title: 'Coffeefy', distance: data, status: device_is_working });
     res.end();
 });
