@@ -32,7 +32,7 @@ router.get('/scripts/1/', function(req, res, next){
 // PYTHON
 // GET resource "/python/powerButton" aka run powerbutton test
 router.get('/python/powerButton', function(req, res, next){
-    runbuttontest();
+    pressPowerButton();
     res.end();
 });
 // GET resource "/python/makeSmallCoffee" aka make small coffee
@@ -62,19 +62,25 @@ router.get('/node/makeBigCoffee', function(req, res, next){
   makeBigCoffee();
   res.end();
 });
+// GET device status
+router.get('/status', function(req, res, next){
+
+});
 
 module.exports = router;
 
 // NODE.JS functions
 function pressPowerButton(){
-  gpio.setup(35, DIR_OUT, write);
-  function write() {
-    gpio.write(35, true, function(err) {
-        if (err) throw err;
-        console.log('Written to pin');
-    });
-  }
-  console.log('Test');
+  gpio.setMode(MODE_BCM);
+  gpio.setup(19, DIR_OUT, write);
+  gpio.write(19, 1, function(err){
+    console.log('pwr Button gedrueckt');
+  });
+  setTimeout(500);
+  gpio.write(19, 0, function(err){
+    console.log('pwr Button losgelassen');
+  });
+  gpio.destroy();
 }
 function makeSmallCoffee(){
   pressPowerButton();
