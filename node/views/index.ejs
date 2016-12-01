@@ -54,7 +54,7 @@
       var client = mqtt.connect('ws://test.mosquitto.org:8080');
       //var active = false;
       var active = <%= status %>;
-      if(active = 0){
+      if(active == 0){
         $('.btn').prop('disabled', true);
       } else {
         $('.btn').prop('disabled', false);
@@ -66,22 +66,12 @@
 
 
       client.on("message", function(topic, payload) {
-        /*if (topic=="coffeefy/messages") {
+        if (topic=="coffeefy/messages") {
           output_messages.innerHTML = payload;
-          $(document).ready(function(){
-            if(payload.length > 5){
-              active = true;
-              $('.btn').prop('disabled', true);
-            } else {
-              active = false;
-              $('.btn').prop('disabled', false);
-            }
-          })
-        }*/
+        }
         if (topic=="coffeefy/status") {
-          output_messages.innerHTML = payload;
           $(document).ready(function(){
-            if(payload = 1){
+            if(payload == 1){
               active = 1;
               $('.btn').prop('disabled', true);
             } else {
