@@ -53,7 +53,7 @@
       var output_distance = document.getElementById("distance");
       var client = mqtt.connect('ws://test.mosquitto.org:8080');
       //var active = false;
-      var active = <&= status %>;
+      var active = <%= status %>;
       if(active = 1){
         $('.btn').prop('disabled', true);
       } else {
@@ -79,6 +79,7 @@
           })
         }*/
         if (topic=="coffeefy/status") {
+          output_messages.innerHTML = payload;
           $(document).ready(function(){
             if(payload = 1){
               active = 1;

@@ -130,6 +130,7 @@ function runbuttontest(){
 }
 function makeSmallCoffeePython(){
     device_is_working = 1;
+    console.log(device_is_working);
     var pyshell_makecoffee = new pythonshell('../python/makeSmallCoffee.py');
     pyshell_makecoffee.on('message', function (message){
         console.log(message);
@@ -137,6 +138,7 @@ function makeSmallCoffeePython(){
     pyshell_makecoffee.end(function (err) {
       if (err) throw err;
       device_is_working = 0;
+      console.log(device_is_working);
     })
 }
 function makeBigCoffeePython(){
