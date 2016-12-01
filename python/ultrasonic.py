@@ -63,10 +63,11 @@ def main():
   try:
     #Kontinuierliches Veröffentlichen der Distanzwerte auf das Topic "coffeefy/sensors/ultrasonic"
     while True:
+      print "reading..."
       Distance = MeasureDistance()
       #print("Measured Distance = %.1f cm" % Distance)
       mqttc.publish("coffeefy/sensors/ultrasonic", "%.1f" % Distance)
-      mqttc.publish("coffeefy/sensors/ultrasonic"), "Hello World")
+      mqttc.publish("coffeefy/sensors/ultrasonic", "Hello World")
       time.sleep(1)
 
   # reset GPIO settings if user pressed Ctrl+C
@@ -88,7 +89,7 @@ if __name__ == '__main__':
   # set up GPIO pins
   GPIO.setup(TRIG, GPIO.OUT)
   GPIO.setup(ECHO, GPIO.IN)
-
+  print "setup done"
   # set trigger to false
   GPIO.output(TRIG, False)
 
