@@ -20,7 +20,7 @@
       <div class="container-fluid">
         <h2 class="page-header">Status</h2>
         <div class="row">
-          <div class="col-md-12 panel panel-default panel-body" id="distance"><%= distance %></div>
+          <div class="col-md-12 panel panel-default panel-body" id="status"></div>
         </div>
       </div>
       <div class="container-fluid">
@@ -50,7 +50,7 @@
     </div>
     <script>
       var output_messages = document.getElementById("messages");
-      var output_distance = document.getElementById("distance");
+      var output_status = document.getElementById("status");
       var client = mqtt.connect('ws://test.mosquitto.org:8080');
       //var active = false;
       var active = <%= status %>;
@@ -70,6 +70,7 @@
           output_messages.innerHTML = payload;
         }
         if (topic=="coffeefy/status") {
+          output_status.innerHTML = payload;
           $(document).ready(function(){
             if(payload == 1){
               active = 1;
