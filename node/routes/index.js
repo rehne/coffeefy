@@ -5,12 +5,13 @@ var gpio = require('rpi-gpio');
 var mqtt = require('mqtt');
 var client = mqtt.connect("ws://iot.eclipse.org:80/ws");
 var data;
+var device_is_working = 0;
 
 /* GET resource "/" aka homepage */
 router.get('/', function(req, res, next) {
     //data = readUltrasonicSensorPython();
     var data = 0;
-    res.render('index', { title: 'Coffeefy', distance: data });
+    res.render('index', { title: 'Coffeefy', distance: data, status: device_is_working });
     res.end();
 });
 
@@ -128,16 +129,26 @@ function runbuttontest(){
     });
 }
 function makeSmallCoffeePython(){
+    device_is_working = 1;
     var pyshell_makecoffee = new pythonshell('../python/makeSmallCoffee.py');
     pyshell_makecoffee.on('message', function (message){
         console.log(message);
     });
+    pyshell_makecoffee.end(function (err) {
+      if (err) throw err;
+      device_is_working = 0;
+    })
 }
 function makeBigCoffeePython(){
+    device_is_working = 1;
     var pyshell_makecoffee = new pythonshell('../python/makeBigCoffee.py');
     pyshell_makecoffee.on('message', function (message){
         console.log(message);
     });
+    pyshell_makecoffee.end(function (err) {
+      if (err) throw err;
+      device_is_working = 0;
+    })
 }
 function readUltrasonicSensorPython(){
     var data;

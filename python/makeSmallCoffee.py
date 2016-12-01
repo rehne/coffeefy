@@ -54,6 +54,9 @@ try:
 	GPIO.output(SIG_1CUP, False)
 	GPIO.output(SIG_2CUP, False)
 
+	# Lock UI
+	mqttc.publish("coffeefy/status", '1');
+
 	# Kaffeemaschine einschalten
 	pressPowerBtn()
 	for x in xrange(0,90):
@@ -69,6 +72,8 @@ try:
 	mqttc.publish("coffeefy/messages", "Done!")
 	# Kaffeemaschine ausschalten
 	pressPowerBtn()
+	# unLock UI
+	mqttc.publish("coffeefy/status", '0');
 
 except KeyboardInterrupt:
 	print "Program terminated by KeyboardInterrupt"
