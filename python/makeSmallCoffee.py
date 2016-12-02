@@ -72,11 +72,12 @@ try:
 		#print 'Cooking one cup... %d' % (4-x)
 		mqttc.publish("coffeefy/messages", 'Preparing one cup... %d' % (4-x))
 		time.sleep(1)
-	mqttc.publish("coffeefy/messages", "Done!")
+		# unLock UI
+	time.sleep(5)
+	mqttc.publish("coffeefy/status", '0');
+	#mqttc.publish("coffeefy/messages", "Done!")
 	# Kaffeemaschine ausschalten
 	pressPowerBtn()
-	# unLock UI
-	mqttc.publish("coffeefy/status", '0');
 
 except KeyboardInterrupt:
 	print "Program terminated by KeyboardInterrupt"
