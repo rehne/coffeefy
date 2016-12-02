@@ -136,7 +136,7 @@ function makeSmallCoffeePython(){
         console.log(message);
     });
     pyshell_makecoffee.end(function (err) {
-      if (err) throw err;
+      //if (err) throw err;
       device_is_working = 0;
       console.log(device_is_working);
     })
