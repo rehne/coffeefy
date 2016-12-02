@@ -14,6 +14,9 @@ import RPi.GPIO as GPIO
 import time
 import paho.mqtt.client as mqtt
 
+debug = 0.1
+
+
 # Setup des mqtt-Clients
 mqttc = mqtt.Client("python_pub")
 mqttc.connect("test.mosquitto.org", 1883, 60)
@@ -59,15 +62,15 @@ try:
 
 	# Kaffeemaschine einschalten
 	pressPowerBtn()
-	for x in xrange(0,90):
+	for x in xrange(0,(90*debug)):
 		#print 'Heating water... %d' % (9-x)
-		mqttc.publish("coffeefy/messages", 'Heating water... %d' % (90-x))
+		mqttc.publish("coffeefy/messages", 'Heating water... %d' % ((90*debug)-x))
 		time.sleep(1)
 	# Auswahl des 1Cup Programms
 	press1CupBtn()
-	for x in xrange(0,40):
+	for x in xrange(0,(40*debug)):
 		#print 'Cooking one cup... %d' % (4-x)
-		mqttc.publish("coffeefy/messages", 'Preparing one cup... %d' % (40-x))
+		mqttc.publish("coffeefy/messages", 'Preparing one cup... %d' % ((40*debug)-x))
 		time.sleep(1)
 	mqttc.publish("coffeefy/messages", "Done!")
 	# Kaffeemaschine ausschalten
