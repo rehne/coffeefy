@@ -80,11 +80,11 @@ try:
 	count = 4
 	while (count >=0):
 		time.sleep(1)
-		mqttc.publish("coffeefy/messages", 'Heating water... %d' % count)
+		mqttc.publish("coffeefy/messages", 'Preparing one cup... %d' % count)
 		count -= 1
-	time.sleep(5)
-	mqttc.publish("coffeefy/status", '00');
-	#mqttc.publish("coffeefy/messages", "Done!")
+	for x in xrange(1,10):
+		mqttc.publish("coffeefy/status", '00');
+	mqttc.publish("coffeefy/messages", "Done!")
 	# Kaffeemaschine ausschalten
 	pressPowerBtn()
 
