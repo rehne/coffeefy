@@ -19,7 +19,7 @@ debug = 0.1
 
 # Setup des mqtt-Clients
 mqttc = mqtt.Client("python_pub")
-mqttc.connect("test.mosquitto.org", 1883, 60)
+mqttc.connect("test.mosquitto.org", 1883, 30)
 mqttc.loop_start()
 
 
