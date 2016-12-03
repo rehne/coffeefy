@@ -69,7 +69,7 @@ try:
 	count = 90
 	while (count >=0):
 		time.sleep(1)
-		mqttc.publish("coffeefy/messages", 'Heating water... %d %' % (count/90))
+		mqttc.publish("coffeefy/messages", 'Heating water... %d%%' % (count/90))
 		count -= 1
 	# Auswahl des 1Cup Programms
 	press1CupBtn()
@@ -80,7 +80,7 @@ try:
 	count = 40
 	while (count >=0):
 		time.sleep(1)
-		mqttc.publish("coffeefy/messages", 'Preparing one cup... %d %' % (count/40))
+		mqttc.publish("coffeefy/messages", 'Preparing one cup... %d%%' % (count/40))
 		count -= 1
 	for x in xrange(1,10):
 		mqttc.publish("coffeefy/status", '00');
