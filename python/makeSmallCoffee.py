@@ -62,17 +62,26 @@ try:
 
 	# Kaffeemaschine einschalten
 	pressPowerBtn()
-	for x in xrange(0,9):
-		#print 'Heating water... %d' % (9-x)
-		mqttc.publish("coffeefy/messages", 'Heating water... %d' % (9-x))
+	# for x in xrange(0,9):
+	# 	#print 'Heating water... %d' % (9-x)
+	# 	time.sleep(1)
+	# 	mqttc.publish("coffeefy/messages", 'Heating water... %d' % x)
+	count = 9
+	while (count >=0):
 		time.sleep(1)
+		mqttc.publish("coffeefy/messages", 'Heating water... %d' % count)
+		count -= 1
 	# Auswahl des 1Cup Programms
 	press1CupBtn()
-	for x in xrange(0,4):
-		#print 'Cooking one cup... %d' % (4-x)
-		mqttc.publish("coffeefy/messages", 'Preparing one cup... %d' % (4-x))
+	# for x in xrange(0,4):
+	# 	#print 'Cooking one cup... %d' % (4-x)
+	# 	time.sleep(1)
+	# 	mqttc.publish("coffeefy/messages", 'Preparing one cup... %d' % x)
+	count = 4
+	while (count >=0):
 		time.sleep(1)
-		# unLock UI
+		mqttc.publish("coffeefy/messages", 'Heating water... %d' % count)
+		count -= 1
 	time.sleep(5)
 	mqttc.publish("coffeefy/status", '00');
 	#mqttc.publish("coffeefy/messages", "Done!")
