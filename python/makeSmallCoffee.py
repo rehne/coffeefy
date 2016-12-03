@@ -74,7 +74,7 @@ try:
 		time.sleep(1)
 		# unLock UI
 	time.sleep(5)
-	mqttc.publish("coffeefy/status", '0');
+	mqttc.publish("coffeefy/status", '00');
 	#mqttc.publish("coffeefy/messages", "Done!")
 	# Kaffeemaschine ausschalten
 	pressPowerBtn()
@@ -88,3 +88,4 @@ except:
 	mqttc.publish("coffeefy/messages", "An error or exception occured!")
 finally:
 	GPIO.cleanup()
+	sys.stdout.flush()
