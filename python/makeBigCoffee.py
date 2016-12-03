@@ -81,8 +81,10 @@ try:
 		count -= 1
 	for x in xrange(1,5):
 		mqttc.publish("coffeefy/status", '00');
+		time.sleep(1)
 	for x in xrange(1,5):
 		mqttc.publish("coffeefy/messages", "Done!")
+		time.sleep(1)
 	# Kaffeemaschine ausschalten
 	pressPowerBtn()
 
