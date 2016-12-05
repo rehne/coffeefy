@@ -16,7 +16,7 @@ import paho.mqtt.client as mqtt
 
 # Setup des mqtt-Clients
 mqttc = mqtt.Client("python_pub")
-mqttc.connect("test.mosquitto.org", 1883, 60)
+mqttc.connect("test.mosquitto.org", 1883, 30)
 mqttc.loop_start()
 
 
@@ -54,19 +54,37 @@ try:
 	GPIO.output(SIG_1CUP, False)
 	GPIO.output(SIG_2CUP, False)
 
+	# Lock UI
+	mqttc.publish("coffeefy/status", '1');
+
 	# Kaffeemaschine einschalten
 	pressPowerBtn()
-	for x in xrange(0,90):
-		#print 'Heating water... %d' % (9-x)
-		mqttc.publish("coffeefy/messages", 'Heating water... %d' % (90-x))
+	# for x in xrange(0,9):
+	# 	#print 'Heating water... %d' % (9-x)
+	# 	time.sleep(1)
+	# 	mqttc.publish("coffeefy/messages", 'Heating water... %d' % x)
+	count = 9
+	while (count >=0):
 		time.sleep(1)
+		mqttc.publish("coffeefy/messages", 'Heating water... %6.2f%%' % (100-(count/9.0)*100))
+		count -= 1
 	# Auswahl des 1Cup Programms
 	press1CupBtn()
-	for x in xrange(0,40):
-		#print 'Cooking one cup... %d' % (4-x)
-		mqttc.publish("coffeefy/messages", 'Preparing one cup... %d' % (40-x))
+	# for x in xrange(0,4):
+	# 	#print 'Cooking one cup... %d' % (4-x)
+	# 	time.sleep(1)
+	# 	mqttc.publish("coffeefy/messages", 'Preparing one cup... %d' % x)
+	count = 4
+	while (count >=0):
 		time.sleep(1)
-	mqttc.publish("coffeefy/messages", "Done!")
+		mqttc.publish("coffeefy/messages", 'Preparing one cup... %6.2f%%' % (100-(count/4.0)*100))
+		count -= 1
+	for x in xrange(1,5):
+		mqttc.publish("coffeefy/status", '00');
+		time.sleep(1)
+	for x in xrange(1,5):
+		mqttc.publish("coffeefy/messages", "Done!")
+		time.sleep(1)
 	# Kaffeemaschine ausschalten
 	pressPowerBtn()
 
@@ -79,3 +97,4 @@ except:
 	mqttc.publish("coffeefy/messages", "An error or exception occured!")
 finally:
 	GPIO.cleanup()
+	sys.stdout.flush()

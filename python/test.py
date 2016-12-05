@@ -77,7 +77,7 @@ try:
     print "[" + date + "] " + str(Distance) + "cm .Running..."
     #print("Measured Distance = %.1f cm" % Distance)
     mqttc.publish("coffeefy/sensors/ultrasonic", "%.1f" % Distance)
-    time.sleep(1)
+    time.sleep(5)
 
 # reset GPIO settings if user pressed Ctrl+C
 except KeyboardInterrupt:

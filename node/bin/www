@@ -38,7 +38,7 @@ client.on('message', function (topic, message) {
   console.log(message.toString());
 });
 
-// readUltrasonicSensorPython();
+//   readUltrasonicSensorPython();
 
 /**
  * Listen on provided port, on all network interfaces.
@@ -110,10 +110,10 @@ function onListening() {
 }
 
 function readUltrasonicSensorPython(){
-    var pyshell_sensor = new pythonshell('../python/ultrasonic.py');
+    var pyshell_sensor = new pythonshell('../python/test.py');
     pyshell_sensor.on('message', function (message){
         console.log(message);
     });
-    console.log("ultrasonic.py");
+    console.log("test.py");
     //return data;
 }
