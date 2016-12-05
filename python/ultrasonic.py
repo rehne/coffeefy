@@ -21,7 +21,7 @@ import paho.mqtt.client as mqtt
 mqttc = mqtt.Client("python_pub")
 mqttc.connect("iot.eclipse.org", 1883, 60)
 
-# define GPIO pins
+# define GPIO pins 
 TRIG = 4
 ECHO = 18
 StartTime = 0
@@ -66,7 +66,7 @@ def main():
       Distance = MeasureDistance()
       #print("Measured Distance = %.1f cm" % Distance)
       mqttc.publish("coffeefy/sensors/ultrasonic", "%.1f" % Distance)
-      mqttc.publish("coffeefy/sensors/ultrasonic"), "Hello World")
+      mqttc.publish("coffeefy/sensors/ultrasonic", "Hello World")
       time.sleep(1)
 
   # reset GPIO settings if user pressed Ctrl+C

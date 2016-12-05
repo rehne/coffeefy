@@ -30,3 +30,7 @@ p{
 .btn{
   letter-spacing: 210%;
 }
+.gh-list{
+  display: inline;
+  list-style-type: none;
+}
