@@ -31,6 +31,9 @@
           </form>
         </div>
         <div class="col-md-4 panel panel-default panel-body"><p id="messages"></p>
+          <div class="animation">
+            <img src="img/coffeefy.gif">
+          </div>
         </div>
         <div class="col-md-4 panel panel-default panel-body">
           <form action="python/makeBigCoffee/" method="get" target="hiddenFrame">
@@ -75,9 +78,11 @@
             if(payload == 1){
               active = 1;
               $('.btn').prop('disabled', true);
+              $('animation').prop('hidden', true);
             } else {
               active = 0;
               $('.btn').prop('disabled', false);
+              $('animation').prop('hidden', false);
             }
           })
         }

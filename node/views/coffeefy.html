@@ -77,11 +77,11 @@
             if(payload == 1){
               active = 1;
               $('.btn').prop('disabled', true);
-              $('animation').prop('hidden');
+              $('animation').prop('hidden', true);
             } else {
               active = 0;
               $('.btn').prop('disabled', false);
-              $('animation').prop('hidden');
+              $('animation').prop('hidden', false);
             }
           })
         }
