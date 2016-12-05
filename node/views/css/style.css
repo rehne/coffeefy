@@ -1,7 +1,7 @@
 @import url('https://fonts.googleapis.com/css?family=Yanone+Kaffeesatz');
 
 body{
-  background-image: url('../img/background.jpg');
+  background-image: url('../../public/img/background.jpg');
   background-size: cover;
   font-family: 'Yanone Kaffeesatz', sans-serif;
   color: #663200;
