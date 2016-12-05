@@ -31,6 +31,9 @@
           </form>
         </div>
         <div class="col-md-4 panel panel-default panel-body"><p id="messages"></p>
+          <div class="animation">
+            <img src="img/coffeefy.gif">
+          </div>
         </div>
         <div class="col-md-4 panel panel-default panel-body">
           <form action="python/makeBigCoffee/" method="get" target="hiddenFrame">
@@ -50,31 +53,44 @@
     </div>
     <script>
       var output_messages = document.getElementById("messages");
-      var output_distance = document.getElementById("distance");
+      var output_status = document.getElementById("status");
       var client = mqtt.connect('ws://test.mosquitto.org:8080');
-      var active = false;
+      //var active = false;
+      var active = <%= status %>;
+      if(active == 1){
+        $('.btn').prop('disabled', true);
+      } else {
+        $('.btn').prop('disabled', false);
+      }
+
       client.subscribe("coffeefy/messages");
       client.subscribe("coffeefy/sensors/ultrasonic");
+      client.subscribe("coffeefy/status");
 
       client.on("message", function(topic, payload) {
         if (topic=="coffeefy/messages") {
           output_messages.innerHTML = payload;
+        }
+        if (topic=="coffeefy/status") {
+          output_status.innerHTML = payload;
           $(document).ready(function(){
-            if(payload.length > 5){
-              active = true;
+            if(payload == 1){
+              active = 1;
               $('.btn').prop('disabled', true);
+              $('animation').prop('hidden', true);
             } else {
-              active = false;
+              active = 0;
               $('.btn').prop('disabled', false);
+              $('animation').prop('hidden', false);
             }
           })
         }
         if (topic=="coffeefy/sensors/ultrasonic") {
           $(document).ready(function(){
-            if(payload > 5 && active == false){
+            if(payload > 5 && active == 0){
               $('.btn').prop('disabled', true);
               $('#distance').html('no Cup !');
-            } else if (payload <= 5 && active == false) {
+            } else if (payload <= 5 && active == 0) {
               $('.btn').prop('disabled', false);
               $('#distance').html('OK');
             }
