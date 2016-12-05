@@ -31,6 +31,14 @@ p{
 .btn{
   letter-spacing: 210%;
 }
+.gh-list{
+  display: inline;
+  list-style-type: none;
+}
+.animation > img{
+  max-width: 100%;
+  max-height: 100%;
+}
 
 .container {
   position: relative;
