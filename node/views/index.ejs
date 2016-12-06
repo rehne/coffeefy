@@ -31,9 +31,6 @@
           </form>
         </div>
         <div class="col-md-4 panel panel-default panel-body"><p id="messages"></p>
-          <div class="animation">
-            <img src="img/coffeefy.gif">
-          </div>
         </div>
         <div class="col-md-4 panel panel-default panel-body">
           <form action="python/makeBigCoffee/" method="get" target="hiddenFrame">
@@ -44,9 +41,9 @@
       <div class="container-fluid">
         <div class="col-md-12 panel panel-default panel-footer">
           <ul class="gh-list">
-            <li><img src="img/github.png"></li>
+            <li><img src="img/github.png" class="gh-img"></li>
             <li><p>check out our project on GitHub !</p></li>
-            <li><img src="img/qr_code.png"></li>
+            <li><img src="img/qr_code.png" class="gh-img"></li>
           </ul>
         </div>
       </div>
@@ -78,11 +75,9 @@
             if(payload == 1){
               active = 1;
               $('.btn').prop('disabled', true);
-              $('animation').prop('hidden', true);
             } else {
               active = 0;
               $('.btn').prop('disabled', false);
-              $('animation').prop('hidden', false);
             }
           })
         }

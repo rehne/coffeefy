@@ -5,7 +5,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
-    <link rel='stylesheet' href='css/style.css'>
+    <link rel='stylesheet' href='../public/css/style.css'>
     <script src="js/jquery.js"></script>
     <script src="//code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
     <script src="js/external/browserMqtt.js"></script>
@@ -31,9 +31,6 @@
           </form>
         </div>
         <div class="col-md-4 panel panel-default panel-body"><p id="messages"></p>
-          <div class="animation">
-            <img src="../public/img/coffeefy.gif">
-          </div>
         </div>
         <div class="col-md-4 panel panel-default panel-body">
           <form action="python/makeBigCoffee/" method="get" target="hiddenFrame">
@@ -44,10 +41,23 @@
       <div class="container-fluid">
         <div class="col-md-12 panel panel-default panel-footer">
           <ul class="gh-list">
-            <li><img src="../public/img/github.png" width="50px"></li>
+            <li><img src="../public/img/github.png" class="gh-img"></li>
             <li><p>check out our project on GitHub !</p></li>
-            <li><img src="../public/img/qr_code.png" width="50px"></li>
+            <li><img src="../public/img/qr_code.png" class="gh-img"></li>
           </ul>
+          <table>
+            <thead>
+              <tr>
+                <th><p>check out our project on GitHub !</p></th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><img src="../public/img/github.png" class="gh-img"></td>
+                <td><img src="../public/img/qr_code.png" class="gh-img"></td>
+              </tr>
+            </tbody>
+          </table>
         </div>
       </div>
     </div>
@@ -77,11 +87,9 @@
             if(payload == 1){
               active = 1;
               $('.btn').prop('disabled', true);
-              $('animation').prop('hidden', true);
             } else {
               active = 0;
               $('.btn').prop('disabled', false);
-              $('animation').prop('hidden', false);
             }
           })
         }
