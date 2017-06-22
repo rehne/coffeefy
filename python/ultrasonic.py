@@ -94,4 +94,8 @@ if __name__ == '__main__':
   GPIO.output(TRIG, False)
 
   # call main function
-  main()
+  #main()
+
+
+  while True:
+    main()
