@@ -105,7 +105,7 @@ if __name__ == '__main__':
       #Kontinuierliches Veröffentlichen der Distanzwerte auf das Topic "coffeefy/sensors/ultrasonic"
       print "reading..."
       Distance = MeasureDistance()
-      #print("Measured Distance = %.1f cm" % Distance)
+      print("Measured Distance = %.1f cm" % Distance)
       mqttc.publish("coffeefy/sensors/ultrasonic", "%.1f" % Distance)
       mqttc.publish("coffeefy/sensors/ultrasonic", "Hello World")
       time.sleep(1)
