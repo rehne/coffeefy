@@ -19,7 +19,7 @@ import RPi.GPIO as GPIO
 import paho.mqtt.client as mqtt
 
 mqttc = mqtt.Client("python_pub")
-mqttc.connect("iot.eclipse.org", 1883, 60)
+mqttc.connect("test.mosquitto.org", 1883, 60)
 
 # define GPIO pins 
 TRIG = 4
