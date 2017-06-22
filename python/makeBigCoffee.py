@@ -55,7 +55,7 @@ try:
 	GPIO.output(SIG_2CUP, False)
 
 	# Lock UI
-	mqttc.publish("coffeefy/status", '1');
+	# mqttc.publish("coffeefy/status", '1');
 
 	# Kaffeemaschine einschalten
 	pressPowerBtn()
@@ -77,13 +77,13 @@ try:
 	count = 40
 	while (count >=0):
 		time.sleep(1)
-		mqttc.publish("coffeefy/messages", 'Preparing one cup... %6.2f%%' % (100-(count/40.0)*100))
+		#mqttc.publish("coffeefy/messages", 'Preparing one cup... %6.2f%%' % (100-(count/40.0)*100))
 		count -= 1
 	for x in xrange(1,5):
-		mqttc.publish("coffeefy/status", '00');
+		#mqttc.publish("coffeefy/status", '00');
 		time.sleep(1)
 	for x in xrange(1,5):
-		mqttc.publish("coffeefy/messages", "Done!")
+		#mqttc.publish("coffeefy/messages", "Done!")
 		time.sleep(1)
 	# Kaffeemaschine ausschalten
 	pressPowerBtn()
