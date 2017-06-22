@@ -96,4 +96,5 @@ except:
 	print "An error or exception occured!"
 	mqttc.publish("coffeefy/messages", "An error or exception occured!")
 finally:
-	GPIO.cleanup()
+	#GPIO.cleanup()
+	print "..."
