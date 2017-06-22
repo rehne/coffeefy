@@ -59,10 +59,6 @@ try:
 
 	# Kaffeemaschine einschalten
 	pressPowerBtn()
-	# for x in xrange(0,90):
-	# 	#print 'Heating water... %d' % (90-x)
-	# 	time.sleep(1)
-	# 	mqttc.publish("coffeefy/messages", 'Heating water... %d' % x)
 	count = 40
 	while (count >=0):
 		time.sleep(1)
@@ -70,16 +66,13 @@ try:
 		count -= 1
 	# Auswahl des 1Cup Programms
 	press1CupBtn()
-	# for x in xrange(0,4):
-	# 	#print 'Cooking one cup... %d' % (4-x)
-	# 	time.sleep(1)
-	# 	mqttc.publish("coffeefy/messages", 'Preparing one cup... %d' % x)
 	count = 40
 	while (count >=0):
 		time.sleep(1)
 		mqttc.publish("coffeefy/messages", 'Preparing one cup... %6.2f%%' % (100-(count/40.0)*100))
 		count -= 1
 	for x in xrange(1,5):
+		# Unlock UI
 		mqttc.publish("coffeefy/status", '00');
 		time.sleep(1)
 	for x in xrange(1,5):
@@ -97,4 +90,3 @@ except:
 	mqttc.publish("coffeefy/messages", "An error or exception occured!")
 finally:
 	GPIO.cleanup()
-	sys.stdout.flush()

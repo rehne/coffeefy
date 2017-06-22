@@ -55,35 +55,28 @@ try:
 	GPIO.output(SIG_2CUP, False)
 
 	# Lock UI
-	# mqttc.publish("coffeefy/status", '1');
+	mqttc.publish("coffeefy/status", '1');
 
 	# Kaffeemaschine einschalten
 	pressPowerBtn()
-	# for x in xrange(0,9):
-	# 	#print 'Heating water... %d' % (9-x)
-	# 	time.sleep(1)
-	# 	mqttc.publish("coffeefy/messages", 'Heating water... %d' % x)
 	count = 90
 	while (count >=0):
 		time.sleep(1)
-		# mqttc.publish("coffeefy/messages", 'Heating water... %6.2f%%' % (100-(count/90.0)*100))
+		mqttc.publish("coffeefy/messages", 'Heating water... %6.2f%%' % (100-(count/90.0)*100))
 		count -= 1
 	# Auswahl des 2Cup Programms
 	press2CupBtn()
-	# for x in xrange(0,4):
-	# 	#print 'Cooking one cup... %d' % (4-x)
-	# 	time.sleep(1)
-	# 	mqttc.publish("coffeefy/messages", 'Preparing one cup... %d' % x)
 	count = 40
 	while (count >=0):
 		time.sleep(1)
-		#mqttc.publish("coffeefy/messages", 'Preparing one cup... %6.2f%%' % (100-(count/40.0)*100))
+		mqttc.publish("coffeefy/messages", 'Preparing one cup... %6.2f%%' % (100-(count/40.0)*100))
 		count -= 1
 	for x in xrange(1,5):
-		#mqttc.publish("coffeefy/status", '00');
+		# Unlock UI
+		mqttc.publish("coffeefy/status", '00');
 		time.sleep(1)
 	for x in xrange(1,5):
-		#mqttc.publish("coffeefy/messages", "Done!")
+		mqttc.publish("coffeefy/messages", "Done!")
 		time.sleep(1)
 	# Kaffeemaschine ausschalten
 	pressPowerBtn()
@@ -96,5 +89,4 @@ except:
 	print "An error or exception occured!"
 	mqttc.publish("coffeefy/messages", "An error or exception occured!")
 finally:
-	#GPIO.cleanup()
-	print "..."
+	GPIO.cleanup()
