@@ -98,4 +98,21 @@ if __name__ == '__main__':
 
 
   while True:
-    main()
+    # Ignore ERRNO 32
+    signal(SIGPIPE, SIG_DFL)
+
+    try:
+      #Kontinuierliches Veröffentlichen der Distanzwerte auf das Topic "coffeefy/sensors/ultrasonic"
+      print "reading..."
+      Distance = MeasureDistance()
+      #print("Measured Distance = %.1f cm" % Distance)
+      mqttc.publish("coffeefy/sensors/ultrasonic", "%.1f" % Distance)
+      mqttc.publish("coffeefy/sensors/ultrasonic", "Hello World")
+      time.sleep(1)
+
+    # reset GPIO settings if user pressed Ctrl+C
+    except KeyboardInterrupt:
+      print("Measurement stopped by user")
+    except:
+      # Behandlung anderer Exceptions
+      print "An error or exception occured!"
