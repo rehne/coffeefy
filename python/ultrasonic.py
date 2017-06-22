@@ -78,8 +78,8 @@ def main():
 	print "An error or exception occured!"
 	#mqttc.publish("coffeefy/messages", "An error or exception occured!")
   finally:
-    GPIO.cleanup()
-    print "clean up"
+    #GPIO.cleanup()
+    #print "clean up"
 
 if __name__ == '__main__':
   GPIO.setwarnings(True)
