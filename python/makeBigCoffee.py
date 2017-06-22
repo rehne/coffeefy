@@ -16,7 +16,7 @@ import paho.mqtt.client as mqtt
 
 # Setup des mqtt-Clients
 mqttc = mqtt.Client("python_pub")
-mqttc.connect("test.mosquitto.org", 1883, 60)
+mqttc.connect("test.mosquitto.org", 1883, 30)
 mqttc.loop_start()
 
 
@@ -66,7 +66,7 @@ try:
 	count = 90
 	while (count >=0):
 		time.sleep(1)
-		mqttc.publish("coffeefy/messages", 'Heating water... %6.2f%%' % (100-(count/90.0)*100))
+		# mqttc.publish("coffeefy/messages", 'Heating water... %6.2f%%' % (100-(count/90.0)*100))
 		count -= 1
 	# Auswahl des 2Cup Programms
 	press2CupBtn()
