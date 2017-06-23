@@ -22,7 +22,7 @@ mqttc = mqtt.Client("python_pub")
 mqttc.connect("test.mosquitto.org", 1883, 60)
 mqttc.loop_start()
 
-# define GPIO pins 
+# define GPIO pins
 TRIG = 4
 ECHO = 18
 StartTime = 0
@@ -67,7 +67,7 @@ def main():
     while True:
       print "reading..."
       Distance = MeasureDistance()
-      #print("Measured Distance = %.1f cm" % Distance)
+      print("Measured Distance = %.1f cm" % Distance)
       mqttc.publish("coffeefy/sensors/ultrasonic", "%.1f" % Distance)
       mqttc.publish("coffeefy/sensors/ultrasonic", "Hello World")
       time.sleep(1)
