@@ -59,10 +59,10 @@ try:
 
 	# Kaffeemaschine einschalten
 	pressPowerBtn()
-	count = 90
+	count = 40
 	while (count >=0):
 		time.sleep(1)
-		mqttc.publish("coffeefy/messages", 'Heating water... %6.2f%%' % (100-(count/90.0)*100))
+		mqttc.publish("coffeefy/messages", 'Heating water... %6.2f%%' % (100-(count/40.0)*100))
 		count -= 1
 	# Auswahl des 2Cup Programms
 	press2CupBtn()
