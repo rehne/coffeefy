@@ -9,7 +9,7 @@ var debug   = require('debug')('coffeefy:server');
 var http    = require('http');
 var mqtt    = require('mqtt');
 //var mqttURL = 'mqtt://iot.eclipse.org';
-var mqttURL = 'mqtt://test.mosquitto.org/';
+var mqttURL = 'mqtt://172.20.10.6/';
 var pythonshell = require('python-shell');
 
 /**
