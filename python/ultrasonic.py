@@ -19,7 +19,7 @@ import RPi.GPIO as GPIO
 import paho.mqtt.client as mqtt
 
 mqttc = mqtt.Client("python_pub")
-mqttc.connect("172.20.10.6", 1883, 60)
+mqttc.connect("0.0.0.0", 1883, 60)
 mqttc.loop_start()
 
 # define GPIO pins
@@ -69,7 +69,6 @@ def main():
       Distance = MeasureDistance()
       print("Measured Distance = %.1f cm" % Distance)
       mqttc.publish("coffeefy/sensors/ultrasonic", "%.1f" % Distance)
-      mqttc.publish("coffeefy/sensors/ultrasonic", "Hello World")
       time.sleep(1)
 
   # reset GPIO settings if user pressed Ctrl+C
