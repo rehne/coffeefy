@@ -72,18 +72,16 @@
                 <h4>The Senseo Whisperer</h4>
                 <hr>
 
-                <form action="python/makeSmallCoffee/" method="get" target="hiddenFrame">
-                  <button id="small" class="btn btn-primary btn-xl page-scroll">Small Coffee</button> &nbsp;
-                   <form action="python/makeBigCoffee/" method="get" target="hiddenFrame">
-                     <button id="big" class="btn btn-primary btn-xl page-scroll">Big Coffee</button>
+                <form  class="form" action="python/makeSmallCoffee/" method="get" target="hiddenFrame">
+                  <button class="btn btn-primary btn-xl page-scroll">Small Coffee</button> &nbsp;
+                   <form class="form" action="python/makeBigCoffee/" method="get" target="hiddenFrame">
+                     <button class="btn btn-primary btn-xl page-scroll">Big Coffee</button>
                   </form>
 
                  <!-- <a href="#one" class="btn btn-primary btn-xl page-scroll">Big Coffee</a> -->
                 </form>
 
                   <div>
-                  <div id="myBar" class="w3-container w3-green" style="height:24px;width:20%"></div>
-                  </div>
                     <p id="status"></p>
                     <p id="messages"></p>
                   </div>
@@ -504,14 +502,15 @@
       var active = <%= status %>;
       if(active == 1){
         $('.btn').prop('disabled', true);
-        $('.btn').prop("value", "X");
-        $('.btn').css("color", "red");
+        //$('.btn').prop("value", "X");
+        $('.form').addClass("formo");
 
       } else {
         $('.btn').prop('disabled', false);
-        $('#small').prop("value", "Small Coffee");
-        $('#big').prop("value", "Big Coffee");
-        $('.btn').css("color", "green");
+        $('.form').removeClass("formo").addClass("formi");
+        //$('#small').prop("value", "Small Coffee");
+        //$('#big').prop("value", "Big Coffee");
+        //$('.btn').css("color", "green");
       }
       client.subscribe("coffeefy/messages");
       client.subscribe("coffeefy/sensors/ultrasonic");
