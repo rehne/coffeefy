@@ -472,10 +472,10 @@ fieldset[disabled] .btn-default.active {
     background-color: #fff;
     opacity: 0.7;
 }
-form.formi {
+form .formi {
   opacity: 0.3;
 }
-form.formo {
+form .formo {
   opacity: 1.0;
 }
 
