@@ -526,7 +526,8 @@
           $(document).ready(function(){
             if(payload == 1){
               active = 1;
-              $('.btn').prop('disabled', true).innerHTML = "X".style.Color  = "green";
+              $('.btn').prop('disabled', true);
+              $("#small").innerHTML = "X";
             } else {
               active = 0;
               $('.btn').prop('disabled', false);
