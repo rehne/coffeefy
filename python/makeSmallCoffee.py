@@ -16,7 +16,9 @@ import paho.mqtt.client as mqtt
 
 # Setup des mqtt-Clients
 mqttc = mqtt.Client("python_pub")
+
 mqttc.connect("192.168.1.62", 1883, 30)
+
 mqttc.loop_start()
 
 

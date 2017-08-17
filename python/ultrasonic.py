@@ -69,7 +69,6 @@ def main():
       Distance = MeasureDistance()
       print("Measured Distance = %.1f cm" % Distance)
       mqttc.publish("coffeefy/sensors/ultrasonic", "%.1f" % Distance)
-      mqttc.publish("coffeefy/sensors/ultrasonic", "Hello World")
       time.sleep(1)
 
   # reset GPIO settings if user pressed Ctrl+C
