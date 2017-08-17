@@ -77,6 +77,7 @@
                   <div>
                   <div id="myBar" class="w3-container w3-green" style="height:24px;width:20%"></div>
                   </div>
+                  <p id="status"></p>
                   <p id="messages"></p>
                   <p id="demo"></p>
                   <p id="coffee"></p>
@@ -499,7 +500,7 @@
       var output_messages = document.getElementById("messages");
       var output_status = document.getElementById("status");
       //var client = mqtt.connect('ws://test.mosquitto.org:8080');
-      var client = mqtt.connect('ws://0.0.0.0:1883');
+      var client = mqtt.connect('ws://192.168.1.62:8080');
       //var active = false;
       var active = <%= status %>;
       if(active == 1){
