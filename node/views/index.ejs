@@ -3,6 +3,12 @@
   <head>
     <meta charset="utf-8">
     <title>Coffeefy</title>
+    <script src="js/jquery.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/jquery.easing.min.js"></script>
+    <script src="js/wow.js"></script>
+    <script src="js/scripts.js"></script>
+    <script src="js/external/browserMqtt.js"></script>
     <meta name="description" content="The Senseo Whisperer" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="generator" content="Codeply">
@@ -77,6 +83,7 @@
                   <div>
                   <div id="myBar" class="w3-container w3-green" style="height:24px;width:20%"></div>
                   </div>
+                  <p id="status"></p>
                   <p id="messages"></p>
                   <p id="demo"></p>
                   <p id="coffee"></p>
@@ -499,7 +506,7 @@
       var output_messages = document.getElementById("messages");
       var output_status = document.getElementById("status");
       //var client = mqtt.connect('ws://test.mosquitto.org:8080');
-      var client = mqtt.connect('ws://0.0.0.0:1883');
+      var client = mqtt.connect('ws://192.168.1.62:8080');
       //var active = false;
       var active = <%= status %>;
       if(active == 1){
@@ -544,11 +551,5 @@
     </style>
     <!-- http://stackoverflow.com/a/5733858 -->
     <iframe name="hiddenFrame" class="hide"></iframe>
-    <script src="js/external/browserMqtt.js"></script>
-    <script src="./js/jquery.min.js"></script>
-    <script src="./js/bootstrap.min.js"></script>
-    <script src="./js/jquery.easing.min.js"></script>
-    <script src="./js/wow.js"></script>
-    <script src="./js/scripts.js"></script>
   </body>
 </html>
