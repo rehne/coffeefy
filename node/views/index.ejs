@@ -72,10 +72,10 @@
                 <h4>The Senseo Whisperer</h4>
                 <hr>
 
-                <form action="python/makeSmallCoffee/" method="get" target="hiddenFrame">
-                  <button id="small" class="btn btn-primary btn-xl page-scroll">Small Coffee</button> &nbsp;
+                <form  id="formi" action="python/makeSmallCoffee/" method="get" target="hiddenFrame">
+                  <button class="btn btn-primary btn-xl page-scroll">Small Coffee</button> &nbsp;
                    <form action="python/makeBigCoffee/" method="get" target="hiddenFrame">
-                     <button id="big" class="btn btn-primary btn-xl page-scroll">Big Coffee</button>
+                     <button class="btn btn-primary btn-xl page-scroll">Big Coffee</button>
                   </form>
 
                  <!-- <a href="#one" class="btn btn-primary btn-xl page-scroll">Big Coffee</a> -->
@@ -505,7 +505,7 @@
       if(active == 1){
         $('.btn').prop('disabled', true);
         //$('.btn').prop("value", "X");
-        $('.btn').css("opacity", "0.3");
+        $('.formi').css("opacity", "0.3");
 
       } else {
         $('.btn').prop('disabled', false);
