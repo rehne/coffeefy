@@ -512,13 +512,13 @@
       var active = <%= status %>;
       if(active == 1){
         $('.btn').prop('disabled', true);
-        $('.btn').prop("value", "X");
-        $('.btn').css("color", "red");
-      } else {
-        $('.btn').prop('disabled', false);
         $('#small').prop("value", "Small Coffee");
         $('#big').prop("value", "Big Coffee");
         $('.btn').css("color", "green");
+      } else {
+        $('.btn').prop('disabled', false);
+        $('.btn').prop("value", "X");
+        $('.btn').css("color", "red");
       }
       client.subscribe("coffeefy/messages");
       client.subscribe("coffeefy/sensors/ultrasonic");
