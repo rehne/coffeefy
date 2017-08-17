@@ -74,8 +74,9 @@
 
                 <form action="python/makeSmallCoffee/" method="get" target="hiddenFrame">
                   <button id="small" class="btn btn-primary btn-xl page-scroll">Small Coffee</button> &nbsp;
-                 <form action="python/makeBigCoffee/" method="get" target="hiddenFrame"> <button id="big" class="btn btn-primary btn-xl page-scroll">Big Coffee</button>
-                </form>
+                   <form action="python/makeBigCoffee/" method="get" target="hiddenFrame">
+                     <button id="big" class="btn btn-primary btn-xl page-scroll">Big Coffee</button>
+                  </form>
 
                  <!-- <a href="#one" class="btn btn-primary btn-xl page-scroll">Big Coffee</a> -->
                 </form>
@@ -527,14 +528,14 @@
             if(payload == 1){
               active = 1;
               $('.btn').prop('disabled', true);
-              $('.btn').innerHTML = "X";
-              $('.btn').style.Color  = "red";
+              $('.btn').prop("value", "X");
+              $('.btn').css("color", "red");
             } else {
               active = 0;
               $('.btn').prop('disabled', false);
-              $('#small').innerHTML = "Small Coffee";
-              $('#big').innerHTML = "Big Coffee";
-              $('.btn').style.Color  = "green";
+              $('#small').prop("value", "Small Coffee");
+              $('#big').prop("value", "Big Coffee");
+              $('.btn').css("color", "green");
             }
           })
         }
