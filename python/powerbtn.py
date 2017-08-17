@@ -11,7 +11,7 @@ import paho.mqtt.client as mqtt
 sys.stdout.flush()
 
 mqttc = mqtt.Client("python_pub")
-mqttc.connect("iot.eclipse.org", 1883, 60)
+mqttc.connect("192.168.1.62", 1883, 60)
 mqttc.loop_start()
 
 SIG = 19

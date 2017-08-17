@@ -3,7 +3,7 @@ var router = express.Router();
 var pythonshell = require('python-shell');
 var gpio = require('rpi-gpio');
 var mqtt = require('mqtt');
-var client = mqtt.connect("mqtt://172.20.10.6:1883");
+var client = mqtt.connect("mqtt://192.168.1.62:1883");
 var data;
 var device_is_working = 0;
 

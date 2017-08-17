@@ -19,7 +19,7 @@ import RPi.GPIO as GPIO
 import paho.mqtt.client as mqtt
 
 mqttc = mqtt.Client("python_pub")
-mqttc.connect("172.20.10.6", 1883, 60)
+mqttc.connect("192.168.1.62", 1883, 60)
 mqttc.loop_start()
 
 # define GPIO pins
