@@ -472,6 +472,12 @@ fieldset[disabled] .btn-default.active {
     background-color: #fff;
     opacity: 0.7;
 }
+.formi {
+  opacity: 0.3;
+}
+.formo {
+  opacity: 1.0;
+}
 
 .btn-default .badge {
     color: #fff;

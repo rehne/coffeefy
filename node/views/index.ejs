@@ -503,10 +503,11 @@
       if(active == 1){
         $('.btn').prop('disabled', true);
         //$('.btn').prop("value", "X");
-        $('.formi').css("opacity", "0.3");
+        $('.form').addClass("formi");
 
       } else {
         $('.btn').prop('disabled', false);
+        $('.form').removeClass("formi").addClass("forma");
         //$('#small').prop("value", "Small Coffee");
         //$('#big').prop("value", "Big Coffee");
         //$('.btn').css("color", "green");
