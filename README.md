@@ -50,7 +50,7 @@ To see what's going on, determine the logfile path by running `forever list` and
 
 
 ## Authors
-[Vanakh Chea](https://github.com/kanonenfutter/), [Alexander Thürling](https://github.com/revanjin), [René Honnen](https://github.com/rehne)
+[Vanakh Chea](https://github.com/kanonenfutter/), [Alexander Thürling](https://github.com/revanjin), [René Honnen](https://github.com/rehne), [Christian Krenn](https://github.com/Cuhater/)
 
 ## License
 
