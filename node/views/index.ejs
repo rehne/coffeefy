@@ -84,17 +84,9 @@
                   <div>
                   <div id="myBar" class="w3-container w3-green" style="height:24px;width:20%"></div>
                   </div>
-                  <p id="status"></p>
-                  <p id="messages"></p>
-                  <p id="demo"></p>
-                  <p id="coffee"></p>
-                  <p id="water"></p>
-                  <br>
-                  <p id="err"></p>
-
-
-                  <button class="w3-button w3-green" onclick="move()">Click Me</button>
-                </div>
+                    <p id="status"></p>
+                    <p id="messages"></p>
+                  </div>
 
 
 
@@ -512,13 +504,14 @@
       var active = <%= status %>;
       if(active == 1){
         $('.btn').prop('disabled', true);
+        $('.btn').prop("value", "X");
+        $('.btn').css("color", "red");
+
+      } else {
+        $('.btn').prop('disabled', false);
         $('#small').prop("value", "Small Coffee");
         $('#big').prop("value", "Big Coffee");
         $('.btn').css("color", "green");
-      } else {
-        $('.btn').prop('disabled', false);
-        $('.btn').prop("value", "X");
-        $('.btn').css("color", "red");
       }
       client.subscribe("coffeefy/messages");
       client.subscribe("coffeefy/sensors/ultrasonic");
