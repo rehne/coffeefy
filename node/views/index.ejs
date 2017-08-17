@@ -504,14 +504,14 @@
       var active = <%= status %>;
       if(active == 1){
         $('.btn').prop('disabled', true);
-        $('.btn').prop("value", "X");
-        $('.btn').css("color", "red");
+        //$('.btn').prop("value", "X");
+        $('.btn').css("opacity", "0.3");
 
       } else {
         $('.btn').prop('disabled', false);
-        $('#small').prop("value", "Small Coffee");
-        $('#big').prop("value", "Big Coffee");
-        $('.btn').css("color", "green");
+        //$('#small').prop("value", "Small Coffee");
+        //$('#big').prop("value", "Big Coffee");
+        //$('.btn').css("color", "green");
       }
       client.subscribe("coffeefy/messages");
       client.subscribe("coffeefy/sensors/ultrasonic");
