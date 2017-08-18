@@ -1,11 +1,18 @@
 var express = require('express');
 var router = express.Router();
 var pythonshell = require('python-shell');
-var gpio = require('rpi-gpio');
+var os = require('os');
+var gpio = null;
 var mqtt = require('mqtt');
 var client = mqtt.connect("mqtt://192.168.1.62:1883");
 var data;
 var device_is_working = 0;
+
+/* Check wheather the server is running on a win32- or darwin-based machine. 
+Useful for testing the node.js-part on a machine other than a raspberry pi */
+if (!(os.platform() === 'darwin' || os.platform() === 'win32')) {
+  var gpio = require('rpi-gpio');
+};
 
 /* GET resource "/" aka homepage */
 router.get('/', function(req, res, next) {
