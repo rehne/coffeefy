@@ -1,12 +1,13 @@
-# -*- coding: utf-8 -*-
+import json
 import paho.mqtt.client as mqtt
 import time
 
+with open('../config.json', 'r') as f:
+    data = json.load(f)
+
 mqttc = mqtt.Client("python_pub")
-mqttc.connect("192.168.1.62", 1883, 60)
+mqttc.connect(data['ip-address'], data['mqtt-port'], 60)
 mqttc.publish("coffeefy/messages", "Hello, World!")
-#timeout = 2s
-#mqttc.loop(2)
 
 def main():
  	mqttc.publish("coffeefy/messages", "Starting machine...")

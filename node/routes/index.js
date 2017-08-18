@@ -1,50 +1,59 @@
+var fs = require('fs');
 var express = require('express');
 var router = express.Router();
 var pythonshell = require('python-shell');
 var gpio = require('rpi-gpio');
 var mqtt = require('mqtt');
 var client = mqtt.connect("mqtt://192.168.1.62:1883");
-var data;
+var distance;
+var ipaddress;
+var port;
 var device_is_working = 0;
 
 /* GET resource "/" aka homepage */
 router.get('/', function(req, res, next) {
-    //data = readUltrasonicSensorPython();
-    //var data = 0;
-    res.render('index', { title: 'Coffeefy', distance: data, status: device_is_working });
-    res.end();
+  fs.readFile('../config.json', function(err, data){
+    var ipdata = JSON.parse(data);
+  });
+  res.render('index', { title: 'Coffeefy',
+                        distance: distance,
+                        status: device_is_working,
+                        ipaddress: ipdata['ip-address'],
+                        port: ipdata['ws-port']
+                      });
+  res.end();
 });
 
 /* GET resource "/test" aka secret page for testing purposes*/
 router.get('/test', function(req, res, next){
-    res.render('test');
+  res.render('test');
 });
 
 /* GET resource "/scripts/1" aka run script "helloworld.py" */
 router.get('/scripts/1/', function(req, res, next){
-    pythonshell.run('../python/helloworld.py', function(err, results){
-        if (err) throw err;
-        console.log('results: %j', results);
-    });
-    res.render('test');
-    res.end();
+  pythonshell.run('../python/helloworld.py', function(err, results){
+    if (err) throw err;
+    console.log('results: %j', results);
+  });
+  res.render('test');
+  res.end();
 });
 
 // PYTHON
 // GET resource "/python/powerButton" aka run powerbutton test
 router.get('/python/powerButton', function(req, res, next){
-    pressPowerButton();
-    res.end();
+  pressPowerButton();
+  res.end();
 });
 // GET resource "/python/makeSmallCoffee" aka make small coffee
 router.get('/python/makeSmallCoffee', function(req, res, next){
-    makeSmallCoffeePython();
-    res.end();
+  makeSmallCoffeePython();
+  res.end();
 });
 // GET resource "/python/makecoffee" aka make big coffee
 router.get('/python/makeBigCoffee', function(req, res, next){
-    makeBigCoffeePython();
-    res.end();
+  makeBigCoffeePython();
+  res.end();
 });
 
 // NODE.JS
@@ -123,41 +132,41 @@ function makeBigCoffee(){
 // PYTHON functions
 //TODO: Testen, ob readUltrasonicSensor() und makecoffee() sich nicht gegenseitig behindern.
 function runbuttontest(){
-    var pyshell_power = new pythonshell('../python/powerbtn.py');
-    pyshell_power.on('message', function (message){
-        console.log(message);
-    });
+  var pyshell_power = new pythonshell('../python/powerbtn.py');
+  pyshell_power.on('message', function (message){
+    console.log(message);
+  });
 }
 function makeSmallCoffeePython(){
-    device_is_working = 1;
+  device_is_working = 1;
+  console.log(device_is_working);
+  var pyshell_makecoffee = new pythonshell('../python/makeSmallCoffee.py');
+  pyshell_makecoffee.on('message', function (message){
+    console.log(message);
+  });
+  pyshell_makecoffee.end(function (err) {
+    //if (err) throw err;
+    device_is_working = 0;
     console.log(device_is_working);
-    var pyshell_makecoffee = new pythonshell('../python/makeSmallCoffee.py');
-    pyshell_makecoffee.on('message', function (message){
-        console.log(message);
-    });
-    pyshell_makecoffee.end(function (err) {
-      //if (err) throw err;
-      device_is_working = 0;
-      console.log(device_is_working);
-    })
+  });
 }
 function makeBigCoffeePython(){
-    device_is_working = 1;
-    var pyshell_makecoffee = new pythonshell('../python/makeBigCoffee.py');
-    pyshell_makecoffee.on('message', function (message){
-        console.log(message);
-    });
-    pyshell_makecoffee.end(function (err) {
-      //if (err) throw err;
-      device_is_working = 0;
-      console.log(device_is_working);
-    })
+  device_is_working = 1;
+  var pyshell_makecoffee = new pythonshell('../python/makeBigCoffee.py');
+  pyshell_makecoffee.on('message', function (message){
+    console.log(message);
+  });
+  pyshell_makecoffee.end(function (err) {
+    //if (err) throw err;
+    device_is_working = 0;
+    console.log(device_is_working);
+  });
 }
 function readUltrasonicSensorPython(){
-    var data;
-    pythonshell.run('../python/ultrasonic.py', function(err, results){
-        if (err) throw err;
-        data = results;
-    });
-    return data;
+  var data;
+  pythonshell.run('../python/ultrasonic.py', function(err, results){
+    if (err) throw err;
+    data = results;
+  });
+  return data;
 }

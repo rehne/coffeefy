@@ -11,16 +11,19 @@
 # (at your option) any later version.
 
 import RPi.GPIO as GPIO
+import json
 import time
 import paho.mqtt.client as mqtt
+
+with open('../config.json', 'r') as f:
+	data = json.load(f)
 
 # Setup des mqtt-Clients
 mqttc = mqtt.Client("python_pub")
 
-mqttc.connect("192.168.1.62", 1883, 30)
+mqttc.connect(data['ip-address'], data['port'], 30)
 
 mqttc.loop_start()
-
 
 # GPIO Pin Nummer zur Steuerung der Geraete Knoepfe
 # 1CUP Taste / Relais #1
