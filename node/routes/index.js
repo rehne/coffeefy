@@ -4,34 +4,28 @@ var router = express.Router();
 var pythonshell = require('python-shell');
 var os = require('os');
 var gpio = null;
+var config = require('../../config.json');
 var mqtt = require('mqtt');
-var client = mqtt.connect("mqtt://192.168.1.62:1883");
 var distance;
 var device_is_working = 0;
 
-/* Check wheather the server is running on a win32- or darwin-based machine.
+/* Check whether the server is running on a win32- or darwin-based machine.
 Useful for testing the node.js-part on a machine other than a raspberry pi */
 if (!(os.platform() === 'darwin' || os.platform() === 'win32')) {
-  var gpio = require('rpi-gpio');
+  gpio = require('rpi-gpio');
 };
+
+var mqtt_client = mqtt.connect("mqtt://" + config.address +":"+ config.mqtt);
 
 /* GET resource "/" aka homepage */
 router.get('/', function(req, res, next) {
-  fs.readFile('../config.json', function(err, data){
-    if(err){
-      console.log(err);
-    } else {
-
-    }
-    var ipdata = JSON.parse(data);
-    res.render('index', { title: 'Coffeefy',
+  res.render('index', { title: 'Coffeefy',
                           distance: distance,
                           status: device_is_working,
-                          ipaddress: ipdata["address"],
-                          port: ipdata.ws
-    });
-    res.end();
+                          ipaddress: config.address,
+                          port: config.ws
   });
+  res.end();
 });
 
 /* GET resource "/test" aka secret page for testing purposes*/
