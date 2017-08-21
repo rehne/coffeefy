@@ -456,13 +456,13 @@
         </div>
       </div>
     </div>
-    <!--scripts loaded here -->
     <script>
       var output_messages = document.getElementById("messages");
       var output_status = document.getElementById("status");
-      //var client = mqtt.connect('ws://test.mosquitto.org:8080');
-      var client = mqtt.connect('ws://<%= ipaddress %>:<%= port %>');
-      //var active = false;
+      var ipaddress = <%= ipaddress %>;
+      var port = <%= port %>;
+      var address = "ws://" + ipaddress + ":" + port;
+      var client = mqtt.connect(address);
       var active = <%= status %>;
       if(active == 1){
         $('.btn').prop('disabled', true);

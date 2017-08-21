@@ -1,0 +1,5 @@
+{
+  "address": "localhost",
+  "mqtt": 1883,
+  "ws": 8080
+}

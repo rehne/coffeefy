@@ -7,11 +7,9 @@ var gpio = null;
 var mqtt = require('mqtt');
 var client = mqtt.connect("mqtt://192.168.1.62:1883");
 var distance;
-var ipaddress;
-var port;
 var device_is_working = 0;
 
-/* Check wheather the server is running on a win32- or darwin-based machine. 
+/* Check wheather the server is running on a win32- or darwin-based machine.
 Useful for testing the node.js-part on a machine other than a raspberry pi */
 if (!(os.platform() === 'darwin' || os.platform() === 'win32')) {
   var gpio = require('rpi-gpio');
@@ -20,15 +18,20 @@ if (!(os.platform() === 'darwin' || os.platform() === 'win32')) {
 /* GET resource "/" aka homepage */
 router.get('/', function(req, res, next) {
   fs.readFile('../config.json', function(err, data){
+    if(err){
+      console.log(err);
+    } else {
+
+    }
     var ipdata = JSON.parse(data);
+    res.render('index', { title: 'Coffeefy',
+                          distance: distance,
+                          status: device_is_working,
+                          ipaddress: ipdata["address"],
+                          port: ipdata.ws
+    });
+    res.end();
   });
-  res.render('index', { title: 'Coffeefy',
-                        distance: distance,
-                        status: device_is_working,
-                        ipaddress: ipdata['ip-address'],
-                        port: ipdata['ws-port']
-                      });
-  res.end();
 });
 
 /* GET resource "/test" aka secret page for testing purposes*/
