@@ -1,7 +1,7 @@
 {
   "name": "coffeefy",
-  "version": "0.0.1",
-  "private": true,
+  "version": "0.1.0",
+  "private": false,
   "scripts": {
     "start": "node ./bin/www"
   },
@@ -9,8 +9,8 @@
     "type": "git",
     "url": "http://github.com/rehne/coffeefy"
   },
-  "author": "Vanakh Chea, Alexander Thürling, René Honnen",
-  "license": "ISC",
+  "author": "Vanakh Chea, Alexander Thürling, Christian Krenn, René Honnen",
+  "license": "GNU",
   "bugs": {
     "url": "https://github.com/rehne/coffeefy/issues"
   },

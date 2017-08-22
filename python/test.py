@@ -1,6 +1,6 @@
 import json
 
-with open('config.json', 'r') as f:
+with open('../config.json', 'r') as f:
      data = json.load(f)
 
-print data['ip-address']
+print data['address']

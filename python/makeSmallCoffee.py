@@ -21,7 +21,7 @@ with open('../config.json', 'r') as f:
 # Setup des mqtt-Clients
 mqttc = mqtt.Client("python_pub")
 
-mqttc.connect(data['ip-address'], data['port'], 30)
+mqttc.connect(data['address'], data['mqtt'], 30)
 
 mqttc.loop_start()
 

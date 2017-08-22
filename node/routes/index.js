@@ -15,15 +15,15 @@ if (!(os.platform() === 'darwin' || os.platform() === 'win32')) {
   gpio = require('rpi-gpio');
 };
 
-var mqtt_client = mqtt.connect("mqtt://" + config.address +":"+ config.mqtt);
+var mqtt_client = mqtt.connect("mqtt://" + config.address + ":" + config.mqtt);
+var ws_client = "ws://" + config.address + ":" + config.ws;
 
 /* GET resource "/" aka homepage */
 router.get('/', function(req, res, next) {
   res.render('index', { title: 'Coffeefy',
                           distance: distance,
                           status: device_is_working,
-                          ipaddress: config.address,
-                          port: config.ws
+                          address: ws_client
   });
   res.end();
 });

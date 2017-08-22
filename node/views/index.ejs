@@ -459,10 +459,7 @@
     <script>
       var output_messages = document.getElementById("messages");
       var output_status = document.getElementById("status");
-      var ipaddress = <%= ipaddress %>;
-      var port = <%= port %>;
-      var address = "ws://" + ipaddress + ":" + port;
-      var client = mqtt.connect(address);
+      var client = mqtt.connect(<%= address %>);
       var active = <%= status %>;
       if(active == 1){
         $('.btn').prop('disabled', true);

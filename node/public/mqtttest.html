@@ -5,14 +5,12 @@
   </head>
   <body>
     <table id="messages">
-
     </table>
   <script src="js/browserMqtt.js"></script>
   <script>
   	var table = document.getElementById("messages");
-        var client = mqtt.connect('ws://iot.eclipse.org:80/ws'); // you add a ws:// url here
+        var client = mqtt.connect('ws://localhost:8080/ws'); // you add a ws:// url here
         client.subscribe("coffeefy/messages");
-
         client.on("message", function(topic, payload) {
           //alert([topic, payload].join(": "));
           var row = table.insertRow(0);
@@ -20,7 +18,6 @@
           var cell1 = row.insertCell(1);
           cell0.innerHTML = topic;
           cell1.innerHTML = payload;
-
         });
         client.publish("coffeefy", "hi, this is browser!");
       </script>

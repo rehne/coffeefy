@@ -6,7 +6,7 @@ with open('../config.json', 'r') as f:
     data = json.load(f)
 
 mqttc = mqtt.Client("python_pub")
-mqttc.connect(data['ip-address'], data['mqtt-port'], 60)
+mqttc.connect(data['address'], data['mqtt'], 60)
 mqttc.publish("coffeefy/messages", "Hello, World!")
 
 def main():

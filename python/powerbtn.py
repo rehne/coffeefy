@@ -5,13 +5,17 @@
 
 import RPi.GPIO as GPIO
 import time
+import json
 import sys
 import paho.mqtt.client as mqtt
 
 sys.stdout.flush()
 
+with open('../config.json', 'r') as f:
+	data = json.load(f)
+
 mqttc = mqtt.Client("python_pub")
-mqttc.connect("192.168.1.62", 1883, 60)
+mqttc.connect(data['address'], data['mqtt'], 60)
 mqttc.loop_start()
 
 SIG = 19
