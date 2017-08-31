@@ -1,0 +1,285 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>Coffeefy</title>
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+		<link rel="stylesheet" href="css/reveal.css">
+		<link rel="stylesheet" href="css/theme/black.css" id="theme">
+
+		<!-- Theme used for syntax highlighting of code -->
+		<link rel="stylesheet" href="lib/css/zenburn.css">
+
+		<!-- Printing and PDF exports -->
+		<script>
+			var link = document.createElement( 'link' );
+			link.rel = 'stylesheet';
+			link.type = 'text/css';
+			link.href = window.location.search.match( /print-pdf/gi ) ? 'css/print/pdf.css' : 'css/print/paper.css';
+			document.getElementsByTagName( 'head' )[0].appendChild( link );
+		</script>
+
+		<!--[if lt IE 9]>
+		<script src="lib/js/html5shiv.js"></script>
+		<![endif]-->
+	</head>
+	<body>
+		<div class="reveal">
+			<!-- Any section element inside of this container is displayed as a slide -->
+			<div class="slides">
+				<section>
+					<h1>Coffeefy</h1>
+					<h3>The Senseo Whisperer</h3>
+					<p style="text-align: left;">
+						<small>Ein Projekt der Technischen Hochschule im Rahmen des Wahlpflichtfaches Internet of Things<br><br>
+							von:
+							<ul>
+								<li><a href="https://github.com/revanjin/">Alexander Thürling</a></li>
+								<li><a href="https://github.com/kanonenfutter/">Vanakh Chea</a></li>
+								<li><a href="https://github.com/rehne/">René Honnen</a></li>
+							</ul>
+						</small>
+					</p>
+				</section>
+
+				<section>
+					<h2>Idee</h2>
+					<img width="900" height="506" data-src="images/brainstorm.jpg" alt="Brainstorm">
+				</section>
+
+				<section>
+					<section>
+						<img width="640" height="480" data-src="images/1.jpg" alt="Lötaktion" style="float: left; width: 48%; height: 48%;">
+						<img width="640" height="480" data-src="images/2.jpg" alt="Lötaktion" style="float: right; width: 48%; height: 48%;">
+					</section>
+					<section>
+						<img width="640" height="480" data-src="images/4.jpg" alt="Lötaktion" style="float: center; width: 48%; height: 48%;">
+					</section>
+					<section data-transition="fade-in slide-out">
+						 <img width="640" height="480" data-src="images/5.jpg" alt="Lötaktion" style="width: 48%; height: 48%;">
+					</section>
+					<section>
+						<img width="640" height="480" data-src="images/8.jpg" alt="Lötaktion" style="float: center; width: 48%; height: 48%;">
+					</section>
+				</section>
+
+				<section>
+					<h2>Komponenten</h2>
+					<ul>
+						<li>Raspberry Pi 3</li>
+						<li>Senseo 7810 Kaffee Maschine</li>
+						<li>HC-SR04 Ultrasonic Sensor</li>
+						<li>3 Relays</li>
+						<li>2 Widerstände (680Ohm / 1kOhm)</li>
+						<li>Breadboard, Kabel, etc.</li>
+					</ul>
+				</section>
+
+				<section>
+					<h2>Umsetzung</h2>
+				</section>
+
+				<section>
+					<section>
+						<h3>Der Umbau</h3>
+						<a href="https://www.youtube.com/watch?v=VxuD05Z9ex4"><img width="640" height="400" data-src="images/bildschirmfoto_youtube.png" alt="Youtube Video"></a>
+						<small><a href="https://www.youtube.com/watch?v=VxuD05Z9ex4">https://www.youtube.com/watch?v=VxuD05Z9ex4</a></small>
+					</section>
+					<section>
+						<h3>Knöpfe anlöten & Kabel verlegen</h3>
+						<figure style="float: left;">
+							<img width="440" height="330" data-src="images/IMG_0457.jpg" alt="Lötaktion">
+							<figcaption><small>(alte Kaffeemaschine)</small></figcaption>
+						</figure>
+						<figure style="float: right;">
+							<img width="400" height="533" data-src="images/IMG_0462.jpg" alt="Lötaktion">
+							<figcaption></figcaption>
+						</figure>
+					</section>
+					<section>
+						<img width="640" height="480" data-src="images/IMG_0471.jpg" alt="Verkabelung">
+					</section>
+					<section>
+						<img width="50%" height="50%" data-src="images/Coffeefy_Steckplatine.png" alt="Verkabelung Grafik">
+					</section>
+				</section>
+
+				<section>
+					<section>
+						<h2>Idee Systemarchitektur</h2>
+						<img width="924" height="520" data-src="images/idee_architektur.jpg" alt="1. Idee komplette Architektur">
+					</section>
+					<section data-transition="slide-in fade-out">
+						<h2>Umsetzung Systemarchitektur</h2>
+						<img width="603" height="488" data-src="images/Arch1.png" alt="Umsetzung Architektur">
+					</section>
+					<section data-transition="fade-out">
+						<h2>Umsetzung Systemarchitektur 2.0</h2>
+						<img width="603" height="488" data-src="images/Arch2.png" alt="Umsetzung Architektur 2.0">
+					</section>
+					<section data-transition="fade-out">
+						<h2>Umsetzung Systemarchitektur 3.0</h2>
+						<img width="603" height="488" data-src="images/Arch3.png" alt="Umsetzung Architektur 3.0">
+					</section>
+					<section>
+						<h2>MQTT Kommunikation</h2>
+						<img width="604" height="582" data-src="images/topics.png" alt="mqtt Architektur">
+					</section>
+				</section>
+
+				<section>
+					<section>
+						<h2>Programmierung</h2>
+						<p>Auf den folgenden Folien wollen wir ein paar Code Schnipsel zeigen</p>
+					</section>
+					<section>
+						<h2>Ultrasonic sensor</h2>
+						<pre><code class="hljs" data-trim contenteditable>
+def MeasureDistance():
+  GPIO.output(TRIG, True)
+
+  time.sleep(0.00001)
+
+	GPIO.output(TRIG, False)
+
+	StartTime = time.time()
+
+	while GPIO.input(ECHO) == 0:
+    StartTime = time.time()
+
+	while GPIO.input(ECHO) == 1:
+    StopTime = time.time()
+
+	TimeElapsed = StopTime - StartTime
+
+	Distance = (TimeElapsed * 34300) / 2
+
+	return Distance
+						</code></pre>
+					</section>
+					<section>
+						<h2>Ultrasonic sensor</h2>
+						<pre><code class="hljs" data-trim contenteditable>
+try:
+#Kontinuierliches pushen der Distanzwerte auf das mqtt Topic
+  while True:
+    date = str(datetime.datetime.now())
+    print "[" + date + "] " + Distance + "cm .Running..."
+    Distance = MeasureDistance()
+    mqttc.publish("coffeefy/sensors/ultrasonic", "%.1f" % Distance)
+    time.sleep(1)
+						</code></pre>
+					</section>
+					<section>
+						<h2>make coffee</h2>
+						<pre><code class="hljs" data-trim contenteditable>
+# Kaffeemaschine einschalten
+pressPowerBtn()
+for x in xrange(0,90):
+	mqttc.publish("coffeefy/messages", 'Heating water.. %d' % (90-x))
+	time.sleep(1)
+
+# Auswahl des Programms
+press2CupBtn()
+for x in xrange(0,40):
+	mqttc.publish("coffeefy/messages", 'Preparing cup.. %d' % (40-x))
+	time.sleep(1)
+mqttc.publish("coffeefy/messages", "Done!")
+
+pressPowerBtn()
+						</code></pre>
+						<pre><code class="hljs" data-trim contenteditable>
+def press2CupBtn():
+	GPIO.output(SIG_2CUP, True)
+	time.sleep(0.5)
+	GPIO.output(SIG_2CUP, False)
+						</code></pre>
+					</section>
+					<section>
+						<h2>script in der index.html</h2>
+						<pre><code class="hljs" data-trim contenteditable>
+client.subscribe("coffeefy/messages");
+client.subscribe("coffeefy/sensors/ultrasonic");
+client.on("message", function(topic, payload) {
+  if (topic == "coffeefy/messages") {
+    output_messages.innerHTML = payload;
+    $(document).ready(function(){
+      if(payload.length > 5){
+        $('.btn').prop('disabled', true);
+      } else {
+        $('.btn').prop('disabled', false);
+      }
+    })
+  }
+						</code></pre>
+					</section>
+				</section>
+
+				<section>
+					<section>
+						<h2>Probleme</h2>
+						<figure>
+							<img width="281.25" height="500" data-src="images/senseo_unfall.jpg" alt="Senseo Unfall">
+							<figcaption>1. Maschine war defekt</figcaption>
+						</figure>
+					</section>
+					<section>
+						<h3>Umstellung Python -> Node.js</h3>
+					</section>
+				</section>
+
+				<section>
+					<section>
+						<h2>Fazit / Aussicht</h2>
+					</section>
+					<section>
+						<h2>Countdown fertig implementieren</h2>
+					</section>
+					<section>
+						<h2>weitere Sensoren</h2>
+					</section>
+				</section>
+
+				<section>
+					<h3>Demo</h3>
+				</section>
+
+				<section style="text-align: left;">
+					<h2>Quellen</h2>
+					<p>
+						- <a href="https://www.youtube.com/watch?v=VxuD05Z9ex4">(Youtube) Senseo reparieren</a><br>
+						- <a href="http://cschirp.de/senseo_autostart.html">Idee für die Automation des "Knöpfe-Drückens"</a><br>
+						- <a href="https://www.youtube.com/watch?v=xACy8l3LsXI">(Youtube) Schaltplan Ultrasonic Sensor</a><br>
+						- <a href="http://www.gtkdb.de/index_36_2272.html">Script für den Ultrasonic Sensor</a><br>
+					</p>
+				</section>
+
+			</div>
+		</div>
+		<script src="lib/js/head.min.js"></script>
+		<script src="js/reveal.js"></script>
+		<script>
+			// More info https://github.com/hakimel/reveal.js#configuration
+			Reveal.initialize({
+				controls: true,
+				progress: true,
+				history: true,
+				center: true,
+
+				transition: 'slide', // none/fade/slide/convex/concave/zoom
+
+				// More info https://github.com/hakimel/reveal.js#dependencies
+				dependencies: [
+					{ src: 'lib/js/classList.js', condition: function() { return !document.body.classList; } },
+					{ src: 'plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: 'plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
+					{ src: 'plugin/zoom-js/zoom.js', async: true },
+					{ src: 'plugin/notes/notes.js', async: true }
+				]
+			});
+		</script>
+	</body>
+</html>
