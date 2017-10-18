@@ -1,0 +1,13 @@
+*.sublime-workspace
+*.sublime-project
+
+build/
+node_modules/
+npm-debug.log
+
+.AppleDouble/
+.DS_Store
+
+TODO
+test/coverage.html
+test/lcov.info
