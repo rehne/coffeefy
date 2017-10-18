@@ -15,6 +15,7 @@
 # import required modules
 from signal import signal, SIGPIPE, SIG_DFL
 import time
+import json
 import RPi.GPIO as GPIO
 import paho.mqtt.client as mqtt
 
