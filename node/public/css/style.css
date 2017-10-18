@@ -42,11 +42,6 @@ p{
 .container {
   position: relative;
   height: 14rem;
-  /*border: 1px solid;*/
-}
-
-.container-fluid {
-	/*border: 1px solid;*/
 }
 
 .centered {

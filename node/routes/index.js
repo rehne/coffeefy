@@ -34,8 +34,8 @@ router.get('/test', function(req, res, next){
 });
 
 /* GET resource "/scripts/1" aka run script "helloworld.py" */
-router.get('/scripts/1/', function(req, res, next){
-  pythonshell.run('../python/helloworld.py', function(err, results){
+router.get('/scripts/test/', function(req, res, next){
+  pythonshell.run('../python/test.py', function(err, results){
     if (err) throw err;
     console.log('results: %j', results);
   });
