@@ -19,7 +19,7 @@ import json
 import RPi.GPIO as GPIO
 import paho.mqtt.client as mqtt
 
-with open('/coffeefy/config.json', 'r') as f:
+with open('coffeefy/config.json', 'r') as f:
 	data = json.load(f)
 
 mqttc = mqtt.Client("python_pub")
