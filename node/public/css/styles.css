@@ -259,7 +259,11 @@ header .header-content .inner p {
   font-size: 16px;
   font-weight: 300;
   color: rgba(255,255,255,0.7);
-  background-color: rgba(55, 55, 55, 0.4);
+  background: rgba(110, 110, 110, 0.4); /* For browsers that do not support gradients */
+  background: -webkit-linear-gradient(rgba(255, 255, 255, 0), rgba(110, 110, 110, 0.5), rgba(255, 255, 255, 0)); /*Safari 5.1-6*/
+  background: -o-linear-gradient(rgba(255, 255, 255, 0), rgba(110, 110, 110, 0.5), rgba(255, 255, 255, 0)); /*Opera 11.1-12*/
+  background: -moz-linear-gradient(rgba(255, 255, 255, 0), rgba(110, 110, 110, 0.5), rgba(255, 255, 255, 0)); /*Firefox 3.6-15*/
+  background: linear-gradient(rgba(255, 255, 255, 0), rgba(110, 110, 110, 0.5), rgba(255, 255, 255, 0)); /*Standard*/
 }
 
 #video-background {
