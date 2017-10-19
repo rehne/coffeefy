@@ -303,6 +303,7 @@ footer {
     margin-left: auto;
     max-width: 1000px;
     color: rgba(255,255,255,0.7);
+    border-radius: 50%;
     background: rgba(110, 110, 110, 0.4); /* For browsers that do not support gradients */
     background: -webkit-linear-gradient(left, rgba(255, 255, 255, 0), rgba(88, 88, 88, 0.5), rgba(255, 255, 255, 0)); /*Safari 5.1-6*/
     background: -o-linear-gradient(right, rgba(255, 255, 255, 0), rgba(88, 88, 88, 0.5), rgba(255, 255, 255, 0)); /*Opera 11.1-12*/
