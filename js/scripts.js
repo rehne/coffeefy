@@ -33,8 +33,15 @@
 
 })(jQuery);
 
-$(document).ready(function(){
-	$('.toggle').click(function() {
-		$('.toggleoff, .toggleon').toggle();
-  });
-});
+function swapVideo() {
+    player.src = this.getAttribute("data-video-url");
+    player.load();
+    player.play();
+}
+
+var videoPlayButtons = document.querySelectorAll("button"),
+    player = document.getElementById("player");
+
+for (var i=0; i<videoPlayButtons.length; i++){
+    videoPlayButtons[i].addEventListener('click', swapVideo);
+}
