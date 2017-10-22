@@ -74,12 +74,18 @@
             </div>
             <div class="col-md-3">
               <form action="python/makeSmallCoffee/" method="get" target="hiddenFrame">
-                <button class="btn">kleiner Kaffee</button>
+                <button class="progress-button" data-style="fill" data-vertical="" data-video-url="./assets/coffee_small.mp4">
+                  <span class="content">kleiner Kaffee</span>
+                  <span class="progress progress-inner notransition" style="width: 0%; opacity: 1;">
+                </button>
               </form>
             </div>
             <div class="col-md-3">
               <form action="python/makeBigCoffee/" method="get" target="hiddenFrame">
-                <button class="btn">grosser Kaffee</button>
+                <button class="progress-button" data-style="fill" data-vertical="" data-video-url="./assets/coffee_small.mp4">
+                  <span class="content">grosser Kaffee</span>
+                  <span class="progress progress-inner notransition" style="width: 0%; opacity: 1;">
+                </button>
               </form>
             </div>
             <div class="col-md-3">
@@ -543,10 +549,10 @@
       var client = mqtt.connect('<%= address %>');
       var active = <%= status %>;
       if(active == 1){
-        $('.btn').prop('disabled', true);
+        $('.progress-button').prop('disabled', true);
         $('.form').addClass("formo");
       } else {
-        $('.btn').prop('disabled', false);
+        $('.progress-button').prop('disabled', false);
         $('.form').removeClass("formo").addClass("formi");
       }
       client.subscribe("coffeefy/messages");
@@ -561,25 +567,25 @@
           $(document).ready(function(){
             if(payload == 1){
               active = 1;
-              $('.btn').prop('disabled', true);
-              $('.btn').prop("value", "X");
-              $('.btn').css("color", "red");
+              $('.progress-button').prop('disabled', true);
+              $('.progress-button').prop("value", "X");
+              $('.progress-button').css("color", "red");
             } else {
               active = 0;
-              $('.btn').prop('disabled', false);
+              $('.progress-button').prop('disabled', false);
               $('#small').prop("value", "Small Coffee");
               $('#big').prop("value", "Big Coffee");
-              $('.btn').css("color", "green");
+              $('.progress-button').css("color", "green");
             }
           })
         }
         if (topic=="coffeefy/sensors/ultrasonic") {
           $(document).ready(function(){
             if(payload > 5 && active == 0){
-              $('.btn').prop('disabled', true);
+              $('.progress-button').prop('disabled', true);
               $('#distance').html('no Cup !');
             } else if (payload <= 5 && active == 0) {
-              $('.btn').prop('disabled', false);
+              $('.progress-button').prop('disabled', false);
               $('#distance').html('OK');
             }
           })
