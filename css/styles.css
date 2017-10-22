@@ -1,6 +1,15 @@
-@import url(https://fonts.googleapis.com/css?family=Questrial);
+/*@import url(https://fonts.googleapis.com/css?family=Questrial);
 @import url(http://fonts.googleapis.com/css?family=Dancing+Script:700);
-
+*/
+@font-face {
+	font-family: 'Questrial';
+	src: url('../fonts/Questrial-Regular.ttf') format('truetype');
+}
+@font-face {
+	font-family: 'Dancing Script';
+	src: url('../fonts/DancingScript-Regular.ttf') format('truetype');
+	font-weight: 700;
+}
 html,
 body {
     width: 100%;

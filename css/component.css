@@ -50,7 +50,7 @@
 	right: 20px;
 	color: #42cc8c;
 	font-family: "icomoon";
-	font-size: 2em;
+	font-size: 1em;
 	opacity: 0;
 	-webkit-transition: opacity 0.3s 0.3s;
 	transition: opacity 0.3s 0.3s;
@@ -135,7 +135,7 @@
 	right: 20px;
 	color: #42cc8c;
 	font-family: "icomoon";
-	font-size: 2em;
+	font-size: 1em;
 	opacity: 0;
 	-webkit-transition: opacity 0.3s 0.3s;
 	transition: opacity 0.3s 0.3s;
@@ -179,7 +179,32 @@
 	-webkit-transition: height 0.3s, opacity 0.3s;
 	transition: height 0.3s, opacity 0.3s;
 }
+@media(min-width:768px) {
+.progress-button .content::before,
+.progress-button .content::after  {
+	position: absolute;
+	right: 20px;
+	color: #42cc8c;
+	font-family: "icomoon";
+	font-size: 2em;
+	opacity: 0;
+	-webkit-transition: opacity 0.3s 0.3s;
+	transition: opacity 0.3s 0.3s;
+}
+.progress-button-big .content::before,
+.progress-button-big .content::after  {
+	position: absolute;
+	right: 20px;
+	color: #42cc8c;
+	font-family: "icomoon";
+	font-size: 2em;
+	opacity: 0;
+	-webkit-transition: opacity 0.3s 0.3s;
+	transition: opacity 0.3s 0.3s;
+}
 
+
+}
 /* Individual styles */
 /* Choose the effect(s) you want, delete the rest */
 
