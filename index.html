@@ -11,6 +11,9 @@
     <link rel="stylesheet" href="./css/ionicons.min.css" />
     <link rel="stylesheet" href="./css/styles.css" />
     <link rel="stylesheet" href="./css/font-mfizz.css" />
+    <link rel="stylesheet" type="text/css" href="css/normalize.css">
+		<link rel="stylesheet" type="text/css" href="css/component.css">
+		<script src="js/modernizr.custom.js"></script>
   </head>
   <body>
     <nav id="topNav" class="navbar navbar-default navbar-fixed-top">
@@ -34,16 +37,7 @@
             <li><a class="page-scroll" href="#last">Kontakt</a></li>
             <li><a class="page-scroll" href="./quellen.html#source">Quellen</a></li>
           </ul>
-          <ul class="nav navbar-nav navbar-right">
-            <li>
-              <div class="toggle">
-                <a class="nav navbar-nav" href="#video-background" id="toggleVideo" data-toggle="collapse">
-                  <i class="icon ion-toggle-filled toggleon" id="on" style="display:none">VIDEO AN</i>
-                  <i class="icon ion-toggle toggleoff" id="off">VIDEO AUS</i>
-                </a>
-              </div>
-            </li>
-          </ul>
+
         </div>
       </div>
     </nav>
@@ -53,16 +47,34 @@
           <h1 class="cursive">- Coffeefy -</h1>
           <h4>The Senseo Whisperer</h4>
           <hr>
-          <a href="#" id="toggleVideo" data-toggle="collapse" class="btn btn-primary btn-xl">Small Coffee</a>
-          &nbsp;
-          <a href="#" class="btn btn-primary btn-xl page-scroll">Big Coffee</a>
+          <div class="row">
+            <div class="col-md-3"></div>
+            <div class="col-md-3">
+              <!-- <form class="form" action="python/makeSmallCoffee/" method="get" target="hiddenFrame"> -->
+                <button class="progress-button" data-style="fill" data-vertical="" data-video-url="./assets/coffee_small.mp4"><span class="content">Small coffee</span><span class="progress"><span class="progress-inner notransition" style="width: 0%; opacity: 1;"></span></span></button>
+              <!--  <button class="btn btn-primary btn-xl" style="background-color:#42cc8c;" data-video-url="./assets/coffee_small.mp4">Small Coffee</button> -->
+              <!-- </form> -->
+            </div>
+            <div class="col-md-3">
+              <!-- <form class="form" action="python/makeBigCoffee/" method="get" target="hiddenFrame"> -->
+                <button class="progress-button-big" data-style="fill" data-vertical="" data-video-url="./assets/coffee_small.mp4"><span class="content">Big coffee</span><span class="progress"><span class="progress-inner notransition" style="width: 0%; opacity: 1;"></span></span></button>
+              <!--   <button class="btn btn-primary btn-xl" style="background-color:#42cc8c;" data-video-url="./assets/coffee_small.mp4">Big Coffee</button> -->
+              <!-- </form> -->
+            </div>
+            <div class="col-md-3"></div>
+          </div>
+          <div>
+            <!-- <p id="status"></p> only for testing -->
+            <p id="messages"></p>
+          </div>
         </div>
-      </div>
-      <video autoplay="" loop="" class="fillWidth fadeIn wow collapse in" data-wow-delay="0.5s" poster="./assets/coffee_stop.png" id="video-background">
-        <source media="screen and (min-device-width:768)" src="./assets/coffee.mp4" type="video/mp4" >
-        <source media="screen and (max-device-width:767)" src="./assets/coffee_small.mp4" type="video/mp4">
-        Your browser does not support the video tag. I suggest you upgrade your browser.
 
+
+  </div>
+      </div>
+      <video class="fillWidth fadeIn wow collapse in" data-wow-delay="0.5s" poster="./assets/coffee_stop.png" id="player">
+        <!-- <source media="screen and (min-device-width:768)" src="./assets/coffee.mp4" type="video/mp4" > -->
+        Your browser does not support the video tag. I suggest you upgrade your browser.
       </video>
     </header>
     <section class="bg-primary" id="one">
@@ -76,11 +88,8 @@
                 als QQ2-Projekt (Querschnitsqualifikation) ausgearbeitet wurde.
               </p>
               <hr>
-              <div class="col-lg-4 col-sm-6">
-                <img src="./assets/logo.png" class="img-responsive" alt="TH Koeln Logo">
-              </div>
               <p class="text-faded">
-                Coffeefy lässt den Nutzer mithilfe seines Computer, Tablet oder Handy frischen Kaffee per Knopfdruck brühen.
+                Coffeefy lässt den Nutzer mithilfe seines Computers, Tablet oder Handy frischen Kaffee per Knopfdruck brühen.
                 Die Idee ist es, seine Senseo Kaffeemaschine mit zusätzlicher Hardware auszustatten und diese mit unserem Programm anzusteuern.
               </p>
               <hr>
@@ -93,8 +102,8 @@
         </div>
         <div class="row">
           <div class="col">
-            <a href="#galleryModal" class="gallery-box" data-toggle="modal" data-src="./assets/bild2.png">
-            <img src="./assets/bild2.png" class="img-responsive" alt="TH Koeln Logo">
+            <a href="#galleryModal" class="gallery-box" data-toggle="modal" data-src="./assets/schaubild.png">
+            <img src="./assets/schaubild.png" class="img-responsive" alt="TH Koeln Logo">
               <div class="gallery-box-caption">
                 <div class="gallery-box-content">
                   <div>
@@ -479,5 +488,42 @@
     <script src="./js/jquery.easing.min.js"></script>
     <script src="./js/wow.js"></script>
     <script src="./js/scripts.js"></script>
+    <script src="js/classie.js"></script>
+		<script src="js/progressButton.js"></script>
+		<script>
+    [].slice.call( document.querySelectorAll( 'button.progress-button' ) ).forEach( function( bttn ) {
+      new ProgressButton( bttn, {
+        callback : function( instance ) {
+          var progress = 0,
+            interval = setInterval( function() {
+              progress = Math.min( progress + Math.random() * 0.1, 1 );
+              instance._setProgress( progress );
+
+              if( progress === 1 ) {
+                instance._stop(1);
+                clearInterval( interval );
+              }
+            }, 500 );
+        }
+      } );
+    } );
+
+    [].slice.call( document.querySelectorAll( 'button.progress-button-big' ) ).forEach( function( bttn ) {
+      new ProgressButton( bttn, {
+        callback : function( instance ) {
+          var progress = 0,
+            interval = setInterval( function() {
+              progress = Math.min( progress + Math.random() * 0.1, 1 );
+              instance._setProgress( progress );
+
+              if( progress === 1 ) {
+                instance._stop(1);
+                clearInterval( interval );
+              }
+            }, 1000 );
+        }
+      } );
+    } );
+		</script>
   </body>
 </html>
