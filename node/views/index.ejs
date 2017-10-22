@@ -3,14 +3,14 @@
   <head>
     <meta charset="utf-8">
     <title>Coffeefy</title>
-    <meta name="description" content="The Senseo Whisperer" />
+    <meta name="description" content="The Senseo Whisperer">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="generator" content="Codeply">
-    <link rel="stylesheet" type="text/css" href="./css/bootstrap.min.css" />
-    <link rel="stylesheet" type="text/css" href="./css/animate.min.css" />
-    <link rel="stylesheet" type="text/css" href="./css/ionicons.min.css" />
-    <link rel="stylesheet" type="text/css" href="./css/styles.css" />
-    <link rel="stylesheet" type="text/css" href="./css/font-mfizz.css" />
+    <link rel="stylesheet" type="text/css" href="./css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="./css/animate.min.css">
+    <link rel="stylesheet" type="text/css" href="./css/ionicons.min.css">
+    <link rel="stylesheet" type="text/css" href="./css/styles.css">
+    <link rel="stylesheet" type="text/css" href="./css/font-mfizz.css">
     <link rel="stylesheet" type="text/css" href="./css/normalize.css">
 		<link rel="stylesheet" type="text/css" href="./css/component.css">
   </head>
@@ -98,6 +98,7 @@
       </video>
     </header>
 
+    <!-- including main info content -->
     <%- include content.ejs %>
 
     <div id="galleryModal" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
@@ -195,10 +196,10 @@
           $(document).ready(function(){
             if(payload > 5 && active == 0){
               $('.btn').prop('disabled', true);
-              $('#distance').html('no Cup !');
+              $('#distance').html(payload + 'no Cup !');
             } else if (payload <= 5 && active == 0) {
               $('.btn').prop('disabled', false);
-              $('#distance').html('OK');
+              $('#distance').html(payload + 'OK');
             }
           })
         }
