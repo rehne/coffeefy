@@ -64,17 +64,32 @@ try:
 
 	# Kaffeemaschine einschalten
 	pressPowerBtn()
-	count = 40
+
+	# Je nach Zeitpunkt des letzten Kaffees die Zeit für den Heizvorgang wählen
+	lastcoffee = data['timestamp']
+	if ((lastcoffee - time.time()) % 60 <= 5):
+		count = 20
+		heattime = 20
+	else if ((lastcoffee - time.time()) % 60 <= 10):
+		count = 35
+		heattime = 35
+	else if ((lastcoffee - time.time()) % 60 <= 15):
+		count = 50
+		heattime = 50
+	else:
+		count = 65
+		heattime = 65
+
 	while (count >=0):
 		time.sleep(1)
-		mqttc.publish("coffeefy/messages", 'Heating water... %6.2f%%' % (100-(count/40.0)*100))
+		mqttc.publish("coffeefy/messages", 'Heating water... %6.2f%%' % (100-(count/heattime)*100))
 		count -= 1
 	# Auswahl des 1Cup Programms
 	press1CupBtn()
-	count = 40
+	count = 30
 	while (count >=0):
 		time.sleep(1)
-		mqttc.publish("coffeefy/messages", 'Preparing one cup... %6.2f%%' % (100-(count/40.0)*100))
+		mqttc.publish("coffeefy/messages", 'Preparing one cup... %6.2f%%' % (100-(count/30.0)*100))
 		count -= 1
 	for x in xrange(1,5):
 		# Unlock UI
@@ -85,6 +100,11 @@ try:
 		time.sleep(1)
 	# Kaffeemaschine ausschalten
 	pressPowerBtn()
+
+	# Zeitpunkt als timestamp in der config.json speichern
+	data['timestamp'] = time.time()
+	with open('../config.json', 'w') as f:
+		json.dump(data, f, indent=2)
 
 except KeyboardInterrupt:
 	print "Program terminated by KeyboardInterrupt"
