@@ -140,7 +140,13 @@
     [].slice.call( document.querySelectorAll( 'button.progress-button' ) ).forEach( function( bttn ) {
       new ProgressButton( bttn, {
         callback : function( instance ) {
-          $( "#button.progress-button" ).load( "python/makeSmallCoffee/" );
+          $(function()
+{
+        $.get("python/makeSmallCoffee/", function(data, textStatus)
+        {
+                alert("Done, with the following status: " + textStatus + ". Here is the response: " + data);
+        });
+});
           var progress = 0,
             interval = setInterval( function() {
               progress = Math.min( progress + Math.random() * 0.1, 1 );
