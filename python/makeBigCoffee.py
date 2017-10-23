@@ -70,10 +70,10 @@ try:
 	if ((lastcoffee - time.time()) % 60 <= 5):
 		count = 20
 		heattime = 20
-	else if ((time.time() - lastcoffee) % 60 <= 10):
+	elif ((time.time() - lastcoffee) % 60 <= 10):
 		count = 35
 		heattime = 35
-	else if ((time.time() - lastcoffee) % 60 <= 15):
+	elif ((time.time() - lastcoffee) % 60 <= 15):
 		count = 50
 		heattime = 50
 	else:
