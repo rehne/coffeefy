@@ -147,8 +147,10 @@
       var active = <%= status %>;
       if(active == 1){
         $('.progress-button').prop('disabled', true);
+        $('.progress-button-big').prop('disabled', true);
       } else {
         $('.progress-button').prop('disabled', false);
+        $('.progress-button-big').prop('disabled', false);
       }
       client.subscribe("coffeefy/messages");
       client.subscribe("coffeefy/sensors/ultrasonic");
@@ -163,9 +165,11 @@
             if(payload == 1){
               active = 1;
               $('.progress-button').prop('disabled', true);
+              $('.progress-button-big').prop('disabled', true);
             } else {
               active = 0;
               $('.progress-button').prop('disabled', false);
+              $('.progress-button-big').prop('disabled', false);
             }
           })
         }
@@ -173,9 +177,11 @@
           $(document).ready(function(){
             if(payload > 5 && active == 0){
               $('.progress-button').prop('disabled', true);
+              $('.progress-button-big').prop('disabled', true);
               $('#distance').html(payload + 'CM | no Cup !');
             } else if (payload <= 5 && active == 0) {
               $('.progress-button').prop('disabled', false);
+              $('.progress-button-big').prop('disabled', false);
               $('#distance').html(payload + 'CM | OK');
             }
           })
