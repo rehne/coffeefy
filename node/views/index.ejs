@@ -46,7 +46,7 @@
           <h4>The Senseo Whisperer</h4>
           <hr>
 
-          <!--
+
           <div class="row">
             <div class="col-md-3"></div>
             <div class="col-md-3">
@@ -66,9 +66,9 @@
               </form>
             </div>
             <div class="col-md-3"></div>
-          </div> -->
+          </div>
 
-          <!-- TEST -->
+          <!-- TEST
           <div class="row">
             <div class="col-md-3">
             </div>
@@ -85,7 +85,7 @@
             <div class="col-md-3">
             </div>
           </div>
-
+-->
           <div>
             <p id="distance"></p>
             <p id="messages"></p>
@@ -196,10 +196,10 @@
           $(document).ready(function(){
             if(payload > 5 && active == 0){
               $('.btn').prop('disabled', true);
-              $('#distance').html(payload + 'no Cup !');
+              $('#distance').html(payload + 'CM | no Cup !');
             } else if (payload <= 5 && active == 0) {
               $('.btn').prop('disabled', false);
-              $('#distance').html(payload + 'OK');
+              $('#distance').html(payload + 'CM | OK');
             }
           })
         }
