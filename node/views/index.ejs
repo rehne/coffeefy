@@ -174,11 +174,9 @@
       var client = mqtt.connect('<%= address %>');
       var active = <%= status %>;
       if(active == 1){
-        $('.btn').prop('disabled', true);
-        $('.form').addClass("formo");
+        $('.progress-button').prop('disabled', true);
       } else {
-        $('.btn').prop('disabled', false);
-        $('.form').removeClass("formo").addClass("formi");
+        $('.progress-button').prop('disabled', false);
       }
       client.subscribe("coffeefy/messages");
       client.subscribe("coffeefy/sensors/ultrasonic");
@@ -192,25 +190,20 @@
           $(document).ready(function(){
             if(payload == 1){
               active = 1;
-              $('.btn').prop('disabled', true);
-              $('.btn').prop("value", "X");
-              $('.btn').css("color", "red");
+              $('.progress-button').prop('disabled', true);
             } else {
               active = 0;
-              $('.btn').prop('disabled', false);
-              $('#small').prop("value", "Small Coffee");
-              $('#big').prop("value", "Big Coffee");
-              $('.btn').css("color", "green");
+              $('.progress-button').prop('disabled', false);
             }
           })
         }
         if (topic=="coffeefy/sensors/ultrasonic") {
           $(document).ready(function(){
             if(payload > 5 && active == 0){
-              $('.btn').prop('disabled', true);
+              $('.progress-button').prop('disabled', true);
               $('#distance').html(payload + 'CM | no Cup !');
             } else if (payload <= 5 && active == 0) {
-              $('.btn').prop('disabled', false);
+              $('.progress-button').prop('disabled', false);
               $('#distance').html(payload + 'CM | OK');
             }
           })
