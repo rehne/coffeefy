@@ -15,13 +15,13 @@ import json
 import time
 import paho.mqtt.client as mqtt
 
-with open('../config.json', 'r') as f:
+with open("../config.json", "r") as f:
 	data = json.load(f)
 
 # Setup des mqtt-Clients
 mqttc = mqtt.Client("python_pub")
 
-mqttc.connect(data['address'], data['mqtt'], 30)
+mqttc.connect(data["address"], data["mqtt"], 30)
 
 mqttc.loop_start()
 
@@ -60,20 +60,20 @@ try:
 	GPIO.output(SIG_2CUP, False)
 
 	# Lock UI
-	mqttc.publish("coffeefy/status", '1');
+	mqttc.publish("coffeefy/status", "1");
 
 	# Kaffeemaschine einschalten
 	pressPowerBtn()
 
 	# Je nach Zeitpunkt des letzten Kaffees die Zeit für den Heizvorgang wählen
-	lastcoffee = data['timestamp']
+	lastcoffee = data["timestamp"]
 	if ((lastcoffee - time.time()) % 60 <= 5):
 		count = 20
 		heattime = 20
-	else if ((lastcoffee - time.time()) % 60 <= 10):
+	else if ((time.time() - lastcoffee) % 60 <= 10):
 		count = 35
 		heattime = 35
-	else if ((lastcoffee - time.time()) % 60 <= 15):
+	else if ((time.time() - lastcoffee) % 60 <= 15):
 		count = 50
 		heattime = 50
 	else:
@@ -82,18 +82,18 @@ try:
 
 	while (count >=0):
 		time.sleep(1)
-		mqttc.publish("coffeefy/messages", 'Heating water... %6.2f%%' % (100-(count/heattime)*100))
+		mqttc.publish("coffeefy/messages", "Heating water... %6.2f%%" % (100-(count/heattime)*100))
 		count -= 1
 	# Auswahl des 2Cup Programms
 	press2CupBtn()
 	count = 40
 	while (count >=0):
 		time.sleep(1)
-		mqttc.publish("coffeefy/messages", 'Preparing one cup... %6.2f%%' % (100-(count/40.0)*100))
+		mqttc.publish("coffeefy/messages", "Preparing one cup... %6.2f%%" % (100-(count/40.0)*100))
 		count -= 1
 	for x in xrange(1,5):
 		# Unlock UI
-		mqttc.publish("coffeefy/status", '00');
+		mqttc.publish("coffeefy/status", "00");
 		time.sleep(1)
 	for x in xrange(1,5):
 		mqttc.publish("coffeefy/messages", "Done!")
@@ -102,8 +102,8 @@ try:
 	pressPowerBtn()
 
 	# Zeitpunkt als timestamp in der config.json speichern
-	data['timestamp'] = time.time()
-	with open('../config.json', 'w') as f:
+	data["timestamp"] = time.time()
+	with open("../config.json", "w") as f:
 		json.dump(data, f, indent=2)
 
 except KeyboardInterrupt:
