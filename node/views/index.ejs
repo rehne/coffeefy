@@ -46,7 +46,7 @@
           <h4>The Senseo Whisperer</h4>
           <hr>
 
-
+          <!--
           <div class="row">
             <div class="col-md-3"></div>
             <div class="col-md-3">
@@ -66,9 +66,9 @@
               </form>
             </div>
             <div class="col-md-3"></div>
-          </div>
+          </div> -->
 
-          <!-- TEST
+          <!-- TEST -->
           <div class="row">
             <div class="col-md-3">
             </div>
@@ -91,9 +91,7 @@
             <p id="messages"></p>
           </div>
         </div>
-          -->
       </div>
-
       <video class="fillWidth fadeIn wow collapse in" data-wow-delay="0.5s" poster="./assets/coffee_stop.png" id="player">
         <!-- <source media="screen and (min-device-width:768)" src="./assets/coffee.mp4" type="video/mp4" > -->
         Your browser does not support the video tag. I suggest you upgrade your browser.
@@ -198,10 +196,10 @@
           $(document).ready(function(){
             if(payload > 5 && active == 0){
               $('.btn').prop('disabled', true);
-              $('#distance').html(payload + 'cm | no Cup !');
+              $('#distance').html(payload + 'no Cup !');
             } else if (payload <= 5 && active == 0) {
               $('.btn').prop('disabled', false);
-              $('#distance').html(payload + 'cm | OK');
+              $('#distance').html(payload + 'OK');
             }
           })
         }
