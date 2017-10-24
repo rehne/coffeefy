@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/python
 # -*- coding: utf-8 -*-
 #
 # Creation:    25.05.2016
@@ -19,7 +19,7 @@ import json
 import RPi.GPIO as GPIO
 import paho.mqtt.client as mqtt
 
-with open('../config.json', 'r') as f:
+with open('/home/pi/coffeefy/config.json', 'r') as f:
 	data = json.load(f)
 
 mqttc = mqtt.Client("python_pub")
@@ -65,6 +65,8 @@ def main():
   # Ignore ERRNO 32
   #TODO: Prüfen, ob es noch notwendig ist, da "mqttc.loop_start()" errno 32 verhindert
   signal(SIGPIPE, SIG_DFL)
+
+  time.sleep(10)
 
   try:
     #Kontinuierliches Veröffentlichen der Distanzwerte auf das Topic "coffeefy/sensors/ultrasonic"
