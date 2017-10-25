@@ -37,8 +37,15 @@ def MeasureDistance():
   # set trigger to high
   GPIO.output(TRIG, True)
 
+  print "test vor time.sleep(bla)"
+
   # set trigger after 10µs to low
   time.sleep(0.00001)
+
+  print "test nach time.sleep(xyz)"
+
+
+
   # time.sleep(3.0)
   GPIO.output(TRIG, False)
 
