@@ -1,7 +1,8 @@
-// Copyright (c) 2016 - 2017 by 
+// Copyright (c) 2016 - 2017 by
 // [Vanakh Chea](https://github.com/kanonenfutter/),
 // [Alexander Thürling](https://github.com/athuerli),
-// [René Honnen](https://github.com/rehne)
+// [René Honnen](https://github.com/rehne),
+// [Christian Krenn](https://github.com/cuhater)
 //
 // This program is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -39,6 +40,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')))
 
 app.use('/', routes);
 app.use('/users', users);

@@ -1,9 +1,12 @@
-#!/usr/bin/env python
+#!/usr/bin/python
 # -*- coding: utf-8 -*-
 #
 # Creation:    17.06.2016
 #
-# Copyright (c) 2016 by Vanakh Chea <https://github.com/kanonenfutter/>
+# Copyright (c) 2016 - 2017 by
+# Vanakh Chea <https://github.com/kanonenfutter/>,
+# René Honnen <https://github.com/rehne/>,
+# Christian Krenn <https://github.com/cuhater/>,
 #
 # This program is free software; you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -69,20 +72,23 @@ try:
 	lastcoffee = data["timestamp"]
 	if ((lastcoffee - time.time()) % 60 <= 5):
 		count = 20
-		heattime = 20
+		heattime = 20.0
 	elif ((time.time() - lastcoffee) % 60 <= 10):
 		count = 35
-		heattime = 35
+		heattime = 35.0
 	elif ((time.time() - lastcoffee) % 60 <= 15):
 		count = 50
-		heattime = 50
+		heattime = 50.0
 	else:
 		count = 65
-		heattime = 65
+		heattime = 65.0
+
+	mqttc.publish("coffeefy/heattime", "%6.2f%%" % heattime)
 
 	while (count >=0):
 		time.sleep(1)
 		mqttc.publish("coffeefy/messages", "Heating water... %6.2f%%" % (100-(count/heattime)*100))
+		mqttc.publish("coffeefy/heattime", "%6.2f%%" % heattime)
 		count -= 1
 	# Auswahl des 2Cup Programms
 	press2CupBtn()

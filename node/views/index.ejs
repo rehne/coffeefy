@@ -45,25 +45,19 @@
           <h1 class="cursive">- Coffeefy -</h1>
           <h4>The Senseo Whisperer</h4>
           <hr>
-
-
           <div class="row">
             <div class="col-md-3"></div>
             <div class="col-md-3">
-              <!-- <form action="python/makeBigCoffee/" method="get" target="hiddenFrame"> -->
-                <button class="progress-button" data-style="fill" data-vertical="" data-video-url="./assets/coffee_small.mp4">
-                  <span class="content">Small coffee</span>
-                  <span class="progress progress-inner notransition" style="width: 0%; opacity: 1;"></span>
-                </button>
-              <!-- </form> -->
+              <button class="progress-button" data-style="fill" data-vertical="" data-video-url="./assets/coffee_small.mp4">
+                <span class="content">Small coffee</span>
+                <span class="progress progress-inner notransition" style="width: 0%; opacity: 1;"></span>
+              </button>
             </div>
             <div class="col-md-3">
-              <!-- <form action="python/makeSmallCoffee/" method="get" target="hiddenFrame"> -->
-                <button class="progress-button-big" data-style="fill" data-vertical="" data-video-url="./assets/coffee_small.mp4">
-                  <span class="content">Big coffee</span>
-                  <span class="progress progress-inner notransition" style="width: 0%; opacity: 1;"></span>
-                </button>
-              <!-- </form> -->
+              <button class="progress-button-big" data-style="fill" data-vertical="" data-video-url="./assets/coffee_small.mp4">
+                <span class="content">Big coffee</span>
+                <span class="progress progress-inner notransition" style="width: 0%; opacity: 1;"></span>
+              </button>
             </div>
           </div>
           <div>
@@ -74,7 +68,6 @@
         </div>
       </div>
       <video class="fillWidth fadeIn wow collapse in" data-wow-delay="0.5s" poster="./assets/coffee_stop.png" id="player">
-        <!-- <source media="screen and (min-device-width:768)" src="./assets/coffee.mp4" type="video/mp4" > -->
         Your browser does not support the video tag. I suggest you upgrade your browser.
       </video>
     </header>
@@ -95,6 +88,7 @@
       </div>
       </div>
     </div>
+
     <!--scripts loaded here -->
     <script src="./js/external/browserMqtt.js"></script>
     <script src="./js/modernizr.custom.js"></script>
@@ -110,16 +104,14 @@
       new ProgressButton( bttn, {
         callback : function( instance ) {
           $.get("python/makeSmallCoffee/");
-
-          var progress = 0,
-            interval = setInterval( function() {
-              progress = Math.min( progress + Math.random() * 0.1, 1 );
-              instance._setProgress( progress );
-              if( progress === 1 ) {
-                instance._stop(1);
-                clearInterval( interval );
-              }
-            }, 500 );
+          var progress = 0, interval = setInterval( function() {
+            progress = Math.min( progress + Math.random() * 0.1, 1 );
+            instance._setProgress( progress );
+            if( progress === 1 ) {
+              instance._stop(1);
+              clearInterval( interval );
+            }
+          }, 500 );
         }
       } );
     } );
@@ -127,16 +119,14 @@
       new ProgressButton( bttn, {
         callback : function( instance ) {
           $.get("python/makeBigCoffee/");
-
-          var progress = 0,
-            interval = setInterval( function() {
-              progress = Math.min( progress + Math.random() * 0.1, 1 );
-              instance._setProgress( progress );
-              if( progress === 1 ) {
-                instance._stop(1);
-                clearInterval( interval );
-              }
-            }, 1000 );
+          var progress = 0, interval = setInterval( function() {
+            progress = Math.min( progress + Math.random() * 0.1, 1 );
+            instance._setProgress( progress );
+            if( progress === 1 ) {
+              instance._stop(1);
+              clearInterval( interval );
+            }
+          }, 1000 );
         }
       } );
     } );
