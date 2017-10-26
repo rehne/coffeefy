@@ -106,12 +106,3 @@ function onListening() {
   debug('Listening on ' + bind);
   console.log('[Express] Server listening on port ' + addr.port + '.');
 }
-
-function readUltrasonicSensorPython(){
-    var pyshell_sensor = new pythonshell('../python/test.py');
-    pyshell_sensor.on('message', function (message){
-        console.log(message);
-    });
-    console.log("test.py");
-    //return data;
-}

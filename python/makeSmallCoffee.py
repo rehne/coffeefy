@@ -60,7 +60,7 @@ try:
 	GPIO.output(SIG_2CUP, False)
 
 	# Lock UI
-	mqttc.publish("coffeefy/status", '1');
+	mqttc.publish("coffeefy/status", '1')
 
 	# Kaffeemaschine einschalten
 	pressPowerBtn()
@@ -80,11 +80,10 @@ try:
 		count = 65
 		heattime = 65
 
-	mqttc.publish("coffeefy/heattime", "%6.2f%% %" % heattime)
-
 	while (count >=0):
 		time.sleep(1)
 		mqttc.publish("coffeefy/messages", 'Heating water... %6.2f%%' % (100-(count/heattime)*100))
+		mqttc.publish("coffeefy/heattime", "%6.2f%% %" % heattime)
 		count -= 1
 	# Auswahl des 1Cup Programms
 	press1CupBtn()
@@ -95,7 +94,7 @@ try:
 		count -= 1
 	for x in xrange(1,5):
 		# Unlock UI
-		mqttc.publish("coffeefy/status", '00');
+		mqttc.publish("coffeefy/status", '00')
 		time.sleep(1)
 	for x in xrange(1,5):
 		mqttc.publish("coffeefy/messages", "Done!")
