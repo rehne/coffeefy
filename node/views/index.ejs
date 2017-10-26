@@ -69,6 +69,7 @@
           <div>
             <p id="distance"></p>
             <p id="messages"></p>
+            <p id="heattime"></p>
           </div>
         </div>
       </div>
@@ -155,6 +156,7 @@
       client.subscribe("coffeefy/messages");
       client.subscribe("coffeefy/sensors/ultrasonic");
       client.subscribe("coffeefy/status");
+      client.subscribe("coffeefy/heattime");
       client.on("message", function(topic, payload) {
         if (topic=="coffeefy/messages") {
           output_messages.innerHTML = payload;
@@ -184,6 +186,11 @@
               $('.progress-button-big').prop('disabled', false);
               $('#distance').html(payload + 'CM | OK');
             }
+          })
+        }
+        if (topic=="coffeefy/heattime") {
+          $(document).ready(function(){
+            $('#heattime').html(payload);
           })
         }
       });
