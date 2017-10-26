@@ -43,8 +43,6 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')))
 
 app.use('/', routes);
-app.use('/users', users);
-//app.use('/ultrasonic', ultrasonic);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
