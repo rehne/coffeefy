@@ -164,7 +164,7 @@
               $('.progress-button').prop('disabled', false);
               $('.progress-button-big').prop('disabled', false);
             }
-          })
+          });
         }
         if (topic=="coffeefy/sensors/ultrasonic") {
           $(document).ready(function(){
@@ -177,7 +177,7 @@
               $('.progress-button-big').prop('disabled', false);
               $('#distance').html(payload + 'CM | OK');
             }
-          })
+          });
         }
         if (topic=="coffeefy/heattime") {
           output_heattime.innerHTML = payload;
@@ -185,7 +185,7 @@
             if(active){
               $('#heattime').html('Heattime: ' + payload);
             }
-          })
+          });
         }
       });
     </script>
