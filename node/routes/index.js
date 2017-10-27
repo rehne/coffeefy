@@ -28,21 +28,6 @@ router.get('/', function(req, res, next) {
   res.end();
 });
 
-/* GET resource "/test" aka secret page for testing purposes*/
-router.get('/test', function(req, res, next){
-  res.render('test');
-});
-
-/* GET resource "/scripts/1" aka run script "helloworld.py" */
-router.get('/scripts/test/', function(req, res, next){
-  pythonshell.run('../python/test.py', function(err, results){
-    if (err) throw err;
-    console.log('results: %j', results);
-  });
-  res.render('test');
-  res.end();
-});
-
 // PYTHON
 // GET resource "/python/powerButton" aka run powerbutton test
 router.get('/python/powerButton', function(req, res, next){
@@ -75,10 +60,6 @@ router.get('/node/makeSmallCoffee', function(req, res, next){
 router.get('/node/makeBigCoffee', function(req, res, next){
   makeBigCoffee();
   res.end();
-});
-// GET device status
-router.get('/status', function(req, res, next){
-
 });
 
 module.exports = router;
@@ -134,7 +115,6 @@ function makeBigCoffee(){
 }
 
 // PYTHON functions
-//TODO: Testen, ob readUltrasonicSensor() und makecoffee() sich nicht gegenseitig behindern.
 function runbuttontest(){
   var pyshell_power = new pythonshell('../python/powerbtn.py');
   pyshell_power.on('message', function (message){
@@ -149,7 +129,6 @@ function makeSmallCoffeePython(){
     console.log(message);
   });
   pyshell_makecoffee.end(function (err) {
-    //if (err) throw err;
     device_is_working = 0;
     console.log(device_is_working);
   });
@@ -161,7 +140,6 @@ function makeBigCoffeePython(){
     console.log(message);
   });
   pyshell_makecoffee.end(function (err) {
-    //if (err) throw err;
     device_is_working = 0;
     console.log(device_is_working);
   });
