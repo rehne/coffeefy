@@ -153,7 +153,7 @@
           output_messages.innerHTML = payload;
         }
         if (topic=="coffeefy/status") {
-          output_status.innerHTML = payload;
+          // output_status.innerHTML = payload;
           $(document).ready(function(){
             if(payload == 1){
               active = 1;
@@ -180,7 +180,6 @@
           });
         }
         if (topic=="coffeefy/heattime") {
-          output_heattime.innerHTML = payload;
           $(document).ready(function(){
             if(active){
               $('#heattime').html('Heattime: ' + payload);
