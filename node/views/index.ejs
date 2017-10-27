@@ -132,9 +132,6 @@
     } );
 		</script>
     <script>
-      var output_messages = document.getElementById("messages");
-      var output_status = document.getElementById("status");
-      var output_heattime = document.getElementById("heattime");
       var client = mqtt.connect('<%= address %>');
       var active = <%= status %>;
       if(active == 1){
@@ -149,11 +146,7 @@
       client.subscribe("coffeefy/status");
       client.subscribe("coffeefy/heattime");
       client.on("message", function(topic, payload) {
-        if (topic=="coffeefy/messages") {
-          output_messages.innerHTML = payload;
-        }
         if (topic=="coffeefy/status") {
-          // output_status.innerHTML = payload;
           $(document).ready(function(){
             if(payload == 1){
               active = 1;

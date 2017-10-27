@@ -28,7 +28,7 @@ var client  = mqtt.connect('mptt://' + config.address + '/');
 
 client.on('connect', function () {
   client.subscribe('coffeefy/messages');
-  client.publish('coffeefy/messages', '[ mqtt ] client is listening to mqtt://' + config.address + '/');
+  client.publish('coffeefy/messages', '[   mqtt] client is listening to mqtt://' + config.address + '/');
 });
 
 client.on('message', function (topic, message) {

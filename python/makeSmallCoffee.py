@@ -83,7 +83,7 @@ try:
 		count = 65
 		heattime = 65.0
 
-	mqttc.publish("coffeefy/heattime", "%6.2f%%" % heattime)
+	mqttc.publish("coffeefy/heattime", "%6.2f%" % heattime)
 
 	while (count >=0):
 		time.sleep(1)
