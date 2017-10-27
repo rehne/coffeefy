@@ -63,7 +63,7 @@
           <div>
             <p id="distance"></p>
             <p id="messages"></p>
-            <p id="heattime"></p>
+            <p id="time"></p>
           </div>
         </div>
       </div>
@@ -179,8 +179,11 @@
           })
         }
         if (topic=="coffeefy/heattime") {
+          output_heattime.innerHTML = payload;
           $(document).ready(function(){
-            $('#heattime').html(payload);
+            if(active){
+              $('#time').html('Heattime: ' + payload);
+            }
           })
         }
       });
