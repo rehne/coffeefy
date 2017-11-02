@@ -70,7 +70,10 @@ try:
 
 	# Je nach Zeitpunkt des letzten Kaffees die Zeit für den Heizvorgang wählen
 	lastcoffee = data["timestamp"]
-	if ((lastcoffee - time.time()) % 60 <= 5):
+	if ((time.time() - lastcoffee) % 60 <= 3):
+		count = 10
+		heattime = 10.0
+	elif ((time.time() - lastcoffee) % 60 <= 5):
 		count = 20
 		heattime = 20.0
 	elif ((time.time() - lastcoffee) % 60 <= 10):
@@ -83,7 +86,7 @@ try:
 		count = 65
 		heattime = 65.0
 
-	mqttc.publish("coffeefy/heattime", "%6.2f%" % heattime)
+	mqttc.publish("coffeefy/heattime", "%6.2f" % heattime)
 
 	while (count >=0):
 		time.sleep(1)

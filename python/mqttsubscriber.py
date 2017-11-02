@@ -2,7 +2,7 @@ import json
 import time
 import paho.mqtt.client as mqtt
 
-with open('../config.json', 'r') as f:
+with open("../config.json", "r") as f:
 	data = json.load(f)
 
 # The callback for when the client receives a CONNACK response from the server.
@@ -16,13 +16,13 @@ def on_connect(client, userdata, rc):
 
 # The callback for when a PUBLISH message is received from the server.
 def on_message(client, userdata, msg):
-	print "Topic: ", msg.topic + '\nMessage: ' + str(msg.payload)
+	print "Topic: ", msg.topic + "\nMessage: " + str(msg.payload)
 
 client = mqtt.Client()
 client.on_connect = on_connect
 client.on_message = on_message
 
-client.connect(data['address'], data['mqtt'], 60)
+client.connect(data["address"], data["mqtt"], 60)
 
 # Blocking call that processes network traffic, dispatches callbacks and
 # handles reconnecting.
