@@ -32,9 +32,3 @@
     });
 
 })(jQuery);
-
-$(document).ready(function(){
-	$('.toggle').click(function() {
-		$('.toggleoff, .toggleon').toggle();
-  });
-});
