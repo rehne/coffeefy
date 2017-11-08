@@ -7,10 +7,8 @@ with open("../config.json", "r") as f:
 
 mqttc = mqtt.Client("python_pub")
 mqttc.connect(data["address"], data["mqtt"], 60)
-mqttc.publish("coffeefy/messages", "Hello, World!")
 
 def main():
-    mqttc.publish("coffeefy/heattime", "1. %6.2f%%" % 10.0)
-    time.sleep(3)
-    mqttc.publish("coffeefy/heattime", "2. %6.2f" % 20.0)
+    time.sleep(1)
+    mqttc.publish("coffeefy/heattime", "%.1f" % 2.0)
 main()

@@ -75,20 +75,6 @@
     <!-- including main info content -->
     <%- include content.ejs %>
 
-    <div id="galleryModal" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
-      <div class="modal-dialog modal-lg">
-      <div class="modal-content">
-      	<div class="modal-body">
-      		<img src="" id="galleryImage" class="img-responsive" />
-      		<p>
-    		    <br/>
-    		    <button class="btn btn-primary btn-lg center-block" data-dismiss="modal" aria-hidden="true">Close <i class="ion-android-close"></i></button>
-      		</p>
-      	</div>
-      </div>
-      </div>
-    </div>
-
     <!--scripts loaded here -->
     <script src="./js/external/browserMqtt.js"></script>
     <script src="./js/modernizr.custom.js"></script>
@@ -100,184 +86,150 @@
     <script src="./js/classie.js"></script>
 		<script src="./js/progressButton.js"></script>
     <script>
-
-
-    var output_messages = document.getElementById("messages");
-    var output_status = document.getElementById("status");
-    var output_heattime = document.getElementById("heattime");
-    var client = mqtt.connect('<%= address %>');
-    var active = <%= status %>;
-    if(active == 1){
-      $('.progress-button').prop('disabled', true);
-      $('.progress-button-big').prop('disabled', true);
-    } else {
-      $('.progress-button').prop('disabled', false);
-      $('.progress-button-big').prop('disabled', false);
-    }
-    client.subscribe("coffeefy/messages");
-    client.subscribe("coffeefy/sensors/ultrasonic");
-    client.subscribe("coffeefy/status");
-    client.subscribe("coffeefy/heattime");
-    client.on("message", function(topic, payload) {
-      if (topic=="coffeefy/messages") {
-        output_messages.innerHTML = payload;
+      var output_messages = document.getElementById("messages");
+      var output_status = document.getElementById("status");
+      var output_heattime = document.getElementById("heattime");
+      var client = mqtt.connect('<%= address %>');
+      var active = <%= status %>;
+      if(active == 1){
+        $('.progress-button').prop('disabled', true);
+        $('.progress-button-big').prop('disabled', true);
+      } else {
+        $('.progress-button').prop('disabled', false);
+        $('.progress-button-big').prop('disabled', false);
       }
-      if (topic=="coffeefy/status") {
-        // output_status.innerHTML = payload;
-        $(document).ready(function(){
-          if(payload == 1){
-            active = 1;
-            $('.progress-button').prop('disabled', true);
-            $('.progress-button-big').prop('disabled', true);
-          } else {
-            active = 0;
-            $('.progress-button').prop('disabled', false);
-            $('.progress-button-big').prop('disabled', false);
-          }
-        });
-      }
-      if (topic=="coffeefy/sensors/ultrasonic") {
-        $(document).ready(function(){
-          if(payload > 5 && active == 0){
-            /*
-            $('.progress-button').prop('disabled', true);
-            $('.progress-button-big').prop('disabled', true);
-            $('#distance').html(payload + 'CM | no Cup !');
-            */
-          } else if (payload <= 5 && active == 0) {
-            /*
-            $('.progress-button').prop('disabled', false);
-            $('.progress-button-big').prop('disabled', false);
-            $('#distance').html(payload + 'CM | OK');
-            */
-          }
-        });
-      }
-      if (topic=="coffeefy/heattime") {
-        $(document).ready(function(){
-          if(active){
-            $('#heattime').html('Heattime: ' + payload);
-            var heattime = payload;
-          }
-        });
-      }
-    });
-
-
-      //var heattime = $('#heattime').html();
+      client.subscribe("coffeefy/messages");
+      client.subscribe("coffeefy/ultrasonic");
+      client.subscribe("coffeefy/status");
+      client.subscribe("coffeefy/heattime");
+      client.on("message", function(topic, payload) {
+        if (topic=="coffeefy/messages") {
+          output_messages.innerHTML = payload;
+        }
+        if (topic=="coffeefy/status") {
+          $(document).ready(function(){
+            if(payload == 1){
+              active = 1;
+              $('.progress-button').prop('disabled', true);
+              $('.progress-button-big').prop('disabled', true);
+            } else {
+              active = 0;
+              $('.progress-button').prop('disabled', false);
+              $('.progress-button-big').prop('disabled', false);
+            }
+          });
+        }
+        if (topic=="coffeefy/sensors/ultrasonic") {
+          $(document).ready(function(){
+            if(payload > 5 && active == 0){
+              $('.progress-button').prop('disabled', true);
+              $('.progress-button-big').prop('disabled', true);
+              $('#distance').html(payload + 'CM | no Cup !');
+            } else if (payload <= 5 && active == 0) {
+              $('.progress-button').prop('disabled', false);
+              $('.progress-button-big').prop('disabled', false);
+              $('#distance').html(payload + 'CM | OK');
+            }
+          });
+        }
+        if (topic=="coffeefy/heattime") {
+          $(document).ready(function(){
+            if(active){
+              $('#heattime').html('Heattime: ' + payload);
+              var heattime = payload;
+            }
+          });
+        }
+      });
       var stime;
       var btime;
-      var progress;
-      var videoFile;
       var temp = true;
-
-      if (heattime = 80)
-      {
+      if (heattime == 80.0) {
         stime = -3.3;
         btime = -1.86;
-      }
-      if (heattime = 55)
-      {
+      } else if (heattime == 55.0) {
         stime = -2.29;
         btime = -1.25;
-      }
-      if (heattime = 35)
-      {
+      } else if (heattime == 35.0) {
         stime= -1.45;
         btime= -0.79;
-      }
-      if (heattime = 20)
-      {
+      } else if (heattime == 20.0) {
         stime = -0.83;
         btime= -0.45;
-      }
-      if (heattime = 10)
-      {
+      } else if (heattime == 10.0) {
         stime = -0.40;
         btime= -0.22;
+      } else {
+        console.log('Error! else teil heattime');
       }
 
-
       [].slice.call( document.querySelectorAll( 'button.progress-button' ) ).forEach( function( bttn ) {
-        progress = stime;
+        var progress = stime;
         new ProgressButton( bttn, {
           callback : function( instance ) {
             $.get("python/makeSmallCoffee/");
             progress, interval = setInterval( function() {
               progress = Math.min( progress + 0.5 * 0.1, 1 );
               instance._setProgress( progress );
-              if (progress < 1)
-              {
+              if (progress < 1) {
                 $("button.progress-button-big .content").fadeTo(1000, 0.5);
                 $("button.progress-button-big").prop("disabled", true);
               }
-              if (progress < 0)
-              {
-                  $("button.progress-button .content").text("Heating Water");
+              if (progress < 0) {
+                $("button.progress-button .content").text("Heating Water");
               }
-              if (progress < 1 && progress > 0)
-              {
-                if(temp == true)
-                {
+              if (progress < 1 && progress > 0) {
+                if(temp == true) {
                   player = document.getElementById("player");
                   player.src = "./assets/coffee_small.mp4";
                   player.load();
                   player.play();
                   temp = false;
                 }
-                  $("button.progress-button .content").text("Brew Coffee");
+                $("button.progress-button .content").text("Brew Coffee");
               }
-              if( progress === 1 ) {
+              if ( progress === 1 ) {
                 instance._stop(1);
                 clearInterval( interval );
-                    $("button.progress-button .content").text("Small Coffee");
-                    $("button.progress-button-big .content").fadeTo(1000, 1);
-                    $("button.progress-button-big").prop("disabled", false);
+                $("button.progress-button .content").text("Small Coffee");
+                $("button.progress-button-big .content").fadeTo(1000, 1);
+                $("button.progress-button-big").prop("disabled", false);
               }
             }, 1200 );
           }
         } );
       } );
-
       [].slice.call( document.querySelectorAll( 'button.progress-button-big' ) ).forEach( function( bttn ) {
-        progress = stime;
+        var progress = stime;
         new ProgressButton( bttn, {
           callback : function( instance ) {
             $.get("python/makeBigCoffee/");
             progress, interval = setInterval( function() {
               progress = Math.min( progress + 0.5 * 0.1, 1 );
               instance._setProgress( progress );
-              if (progress < 1)
-              {
+              if (progress < 1) {
                 $("button.progress-button .content").fadeTo(1000, 0.5);
                 $("button.progress-button").prop("disabled", true);
               }
-              if (progress < 0)
-              {
-                  $("button.progress-button-big .content").text("Heating Water");
+              if (progress < 0) {
+                $("button.progress-button-big .content").text("Heating Water");
               }
-              if (progress < 1 && progress > 0)
-              {
-
-                if(temp == true)
-                {
+              if (progress < 1 && progress > 0) {
+                if(temp == true) {
                   player = document.getElementById("player");
                   player.src = "./assets/coffee_big.mp4";
                   player.load();
                   player.play();
                   temp = false;
                 }
-                  $("button.progress-button-big .content").text("Brew Coffee");
-
+                $("button.progress-button-big .content").text("Brew Coffee");
               }
-
               if( progress === 1 ) {
-
-                    $("button.progress-button-big .content").text("Small Coffee");
-                    $("button.progress-button .content").fadeTo(1000, 1);
-                    $("button.progress-button").prop("disabled", false);
-                    instance._stop(1);
-                    clearInterval( interval );
+                $("button.progress-button-big .content").text("Small Coffee");
+                $("button.progress-button .content").fadeTo(1000, 1);
+                $("button.progress-button").prop("disabled", false);
+                instance._stop(1);
+                clearInterval( interval );
               }
             }, 2200 );
           }
