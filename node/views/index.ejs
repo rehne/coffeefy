@@ -139,13 +139,17 @@
       if (topic=="coffeefy/sensors/ultrasonic") {
         $(document).ready(function(){
           if(payload > 5 && active == 0){
+            /*
             $('.progress-button').prop('disabled', true);
             $('.progress-button-big').prop('disabled', true);
             $('#distance').html(payload + 'CM | no Cup !');
+            */
           } else if (payload <= 5 && active == 0) {
+            /*
             $('.progress-button').prop('disabled', false);
             $('.progress-button-big').prop('disabled', false);
             $('#distance').html(payload + 'CM | OK');
+            */
           }
         });
       }
@@ -153,38 +157,39 @@
         $(document).ready(function(){
           if(active){
             $('#heattime').html('Heattime: ' + payload);
+            var heattime = payload;
           }
         });
       }
     });
 
 
-      var heattime = $('#heattime').html();
+      //var heattime = $('#heattime').html();
       var stime;
       var btime;
       var progress;
       var videoFile;
       var temp = true;
 
-      if (heattime = 75)
+      if (heattime = 80)
       {
-        stime = -3.1;
-        btime = -1.7;
+        stime = -3.3;
+        btime = -1.86;
       }
-      if (heattime = 50)
+      if (heattime = 55)
       {
-        stime = -2.08;
-        btime = -1.1;
+        stime = -2.29;
+        btime = -1.25;
       }
       if (heattime = 35)
       {
         stime= -1.45;
         btime= -0.79;
       }
-      if (heattime = 25)
+      if (heattime = 20)
       {
-        stime = -1.04;
-        btime= -0.56;
+        stime = -0.83;
+        btime= -0.45;
       }
       if (heattime = 10)
       {
