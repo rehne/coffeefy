@@ -80,11 +80,11 @@ try:
 		count = 35
 		heattime = 35.0
 	elif ((time.time() - lastcoffee) % 60 <= 15):
-		count = 50
-		heattime = 50.0
+		count = 55
+		heattime = 55.0
 	else:
-		count = 65
-		heattime = 65.0
+		count = 80
+		heattime = 80.0
 
 	mqttc.publish("coffeefy/heattime", "%6.2f" % heattime)
 
