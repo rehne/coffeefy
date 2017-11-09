@@ -60,10 +60,18 @@
               </button>
             </div>
           </div>
-          <div>
-            <p id="distance"></p>
-            <p id="messages"></p>
-            <p id="heattime"></p>
+          <div class="row">
+            <div class="col-md-1"></div>
+            <div class="col-md-3">
+              <p id="distance"></p>
+            </div>
+            <div class="col-md-4">
+              <p id="messages"></p>
+            </div>
+            <div class="col-md-3">
+              <p id="heattime"></p>
+            </div>
+            <div class="col-md-1"></div>
           </div>
         </div>
       </div>
@@ -91,6 +99,7 @@
       var output_heattime = document.getElementById("heattime");
       var client = mqtt.connect('<%= address %>');
       var active = <%= status %>;
+      var heattime;
       if(active == 1){
         $('.progress-button-small').prop('disabled', true);
         $('.progress-button-big').prop('disabled', true);
@@ -127,11 +136,11 @@
             if(payload > 5 && active == 0){
               $('.progress-button-small').prop('disabled', true);
               $('.progress-button-big').prop('disabled', true);
-              $('#distance').html(payload + 'CM | no Cup !');
+              $('#distance').html(payload + 'CM | keine Tasse !');
             } else if (payload <= 5 && active == 0) {
               $('.progress-button-small').prop('disabled', false);
               $('.progress-button-big').prop('disabled', false);
-              $('#distance').html(payload + 'CM | OK');
+              $('#distance').html(payload + 'CM | Bereit !');
             }
           });
         }
@@ -139,7 +148,7 @@
           $(document).ready(function(){
             if(active){
               $('#heattime').html('Heattime: ' + payload);
-              var heattime = payload;
+              heattime = payload;
             }
           });
         }
