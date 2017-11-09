@@ -28,30 +28,25 @@ mqttc = mqtt.Client("python_pub")
 mqttc.connect(data['address'], data['mqtt'], 60)
 mqttc.loop_start()
 
-lastcoffee = data["timestamp"]
-if ((time.time() - lastcoffee) % 60 <= 3):
-	count = 10
-	heattime = 10.0
-elif ((time.time() - lastcoffee) % 60 <= 5):
-	count = 20
-	heattime = 20.0
-elif ((time.time() - lastcoffee) % 60 <= 10):
-	count = 35
-	heattime = 35.0
-elif ((time.time() - lastcoffee) % 60 <= 15):
-	count = 55
-	heattime = 55.0
-else:
-	count = 80
-	heattime = 80.0
+def main():
+try:
+	lastcoffee = data["timestamp"]
+	if ((time.time() - lastcoffee) % 60 <= 3):
+		count = 10
+		heattime = 10.0
+	elif ((time.time() - lastcoffee) % 60 <= 5):
+		count = 20
+		heattime = 20.0
+	elif ((time.time() - lastcoffee) % 60 <= 10):
+		count = 35
+		heattime = 35.0
+	elif ((time.time() - lastcoffee) % 60 <= 15):
+		count = 55
+		heattime = 55.0
+	else:
+		count = 80
+		heattime = 80.0
 
-
-  # Ignore ERRNO 32
-  #ODO: Prüfen, ob es noch notwendig ist, da "mqttc.loop_start()" errno 32 verhindert
-  #signal(SIGPIPE, SIG_DFL)
-
-  try:
-    #Kontinuierliches Veröffentlichen der Distanzwerte auf das Topic "coffeefy/sensors/ultrasonic"
     while True:
       print "heattime..."
 	  print("Heattime = %.1f cm" % heattime)
