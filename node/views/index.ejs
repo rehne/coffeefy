@@ -99,8 +99,6 @@
       var output_status = document.getElementById("status");
       var client = mqtt.connect('<%= address %>');
       var active = <%= status %>;
-      var stime;
-      var btime;
       if(active == 1){
         $('.progress-button').prop('disabled', true);
         $('.progress-button-big').prop('disabled', true);
@@ -146,12 +144,13 @@
         }
       });
 
-      var temp = true;
+      /*
       [].slice.call(document.querySelectorAll('.progress-button')).forEach(function(bttn) {
         $.getJSON("./config.json", function(json) {
           console.log(json.timestamp);
           readTimestamp(json.timestamp);
         });
+        var temp = true;
         var progress = stime;
         new ProgressButton( bttn, {
           callback : function(instance) {
@@ -195,7 +194,7 @@
         var progress = btime;
         new ProgressButton(bttn, {
           callback : function(instance) {
-	    console.log(progress);
+            console.log(progress);
             $.get("python/makeBigCoffee/");
             progress, interval = setInterval(function() {
               progress = Math.min( progress + 0.5 * 0.1, 1 );
@@ -226,19 +225,116 @@
               }
             }, 2200 );
           }
-        } );
-      } );
+        });
+      });
+      */
+    </script>
+    <script>
+      var stime;
+      var btime;
+      var progress;
+      var temp = true;
+      $(document).ready(function(){
+        $('.progress-button').click(function(){
+          $.get("python/makeSmallCoffee/");
+          $.getJSON("./config.json", function(json) {
+            console.log(json.timestamp);
+            readTimestamp(json.timestamp);
+          });
+
+          [].slice.call(document.querySelectorAll('.progress-button')).forEach(function(bttn) {
+            progress = stime;
+            new ProgressButton( bttn, {
+              callback : function(instance) {
+                progress, interval = setInterval(function() {
+                  progress = Math.min( progress + 0.5 * 0.1, 1 );
+                  instance._setProgress( progress );
+                  if (progress < 1) {
+                    $(".progress-button-big .content").fadeTo(1000, 0.5);
+                    $(".progress-button-big").prop("disabled", true);
+                  }
+                  if (progress < 0) {
+                    $(".progress-button .content").text("Heating Water");
+                  }
+                  if (progress < 1 && progress > 0) {
+                    if(temp == true) {
+                      player = document.getElementById("player");
+                      player.src = "./assets/coffee_small.mp4";
+                      player.load();
+                      player.play();
+                      temp = false;
+                    }
+                    $(".progress-button .content").text("Brew Coffee");
+                  }
+                  if (progress === 1) {
+                    instance._stop(1);
+                    clearInterval( interval );
+                    $(".progress-button .content").text("Small Coffee");
+                    $(".progress-button-big .content").fadeTo(1000, 1);
+                    $(".progress-button-big").prop("disabled", false);
+                  }
+                }, 1200 );
+              }
+            } );
+          } );
+
+        });
+        $('.progress-button-big').click(function(){
+          $.get("python/makeBigCoffee/");
+          $.getJSON("./config.json", function(json) {
+            console.log(json.timestamp);
+            readTimestamp(json.timestamp);
+          });
+
+          [].slice.call(document.querySelectorAll('.progress-button-big')).forEach(function(bttn) {
+            progress = btime;
+            new ProgressButton(bttn, {
+              callback : function(instance) {
+                console.log(progress);
+                progress, interval = setInterval(function() {
+                  progress = Math.min( progress + 0.5 * 0.1, 1 );
+                  instance._setProgress( progress );
+                  if (progress < 1) {
+                    $(".progress-button .content").fadeTo(1000, 0.5);
+                    $(".progress-button").prop("disabled", true);
+                  }
+                  if (progress < 0) {
+                    $(".progress-button-big .content").text("Heating Water");
+                  }
+                  if (progress < 1 && progress > 0) {
+                    if(temp == true) {
+                      player = document.getElementById("player");
+                      player.src = "./assets/coffee_big.mp4";
+                      player.load();
+                      player.play();
+                      temp = false;
+                    }
+                    $(".progress-button-big .content").text("Brew Coffee");
+                  }
+                  if( progress === 1 ) {
+                    $(".progress-button-big .content").text("Small Coffee");
+                    $(".progress-button .content").fadeTo(1000, 1);
+                    $(".progress-button").prop("disabled", false);
+                    instance._stop(1);
+                    clearInterval( interval );
+                  }
+                }, 2200 );
+              }
+            });
+          });
+        });
+      });
       function readTimestamp(lastCoffee){
-        if (Math.floor((Date.now() - lastCoffee) / 1000) <= 180) {
+        if (Math.floor((Date.now() - lastCoffee) / 1000) <= 180) { // 3 Minuten
           stime = -0.40;
           btime= -0.22;
-        } else if (Math.floor((Date.now() - lastCoffee) / 1000) <= 300) {
+        } else if (Math.floor((Date.now() - lastCoffee) / 1000) <= 300) { // 5 Minuten
           stime = -0.83;
           btime= -0.45;
-        } else if (Math.floor((Date.now() - lastCoffee) / 1000) <= 600) {
+        } else if (Math.floor((Date.now() - lastCoffee) / 1000) <= 600) { // 10 Minuten
           stime= -1.45;
           btime= -0.79;
-        } else if (Math.floor((Date.now() - lastCoffee) / 1000) <= 900) {
+        } else if (Math.floor((Date.now() - lastCoffee) / 1000) <= 900) { // 15 Minuten
           stime = -2.29;
           btime = -1.25;
         } else {

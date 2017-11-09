@@ -18,14 +18,12 @@ import json
 import time
 import paho.mqtt.client as mqtt
 
-with open("../config.json", "r") as f:
+with open("../node/public/config.json", "r") as f:
 	data = json.load(f)
 
 # Setup des mqtt-Clients
 mqttc = mqtt.Client("python_pub")
-
 mqttc.connect(data["address"], data["mqtt"], 30)
-
 mqttc.loop_start()
 
 # GPIO Pin Nummer zur Steuerung der Geraete Knoepfe
@@ -68,31 +66,32 @@ try:
 	# Kaffeemaschine einschalten
 	pressPowerBtn()
 
+	# Zeit für den Heatvorgang anhand des letzten Kaffees bestimmen
 	lastcoffee = data["timestamp"]
-	if ((time.time() - lastcoffee) % 60 <= 3):
-		count = 10
-		heattime = 10.0
-	elif ((time.time() - lastcoffee) % 60 <= 5):
-		count = 20
-		heattime = 20.0
-	elif ((time.time() - lastcoffee) % 60 <= 10):
-		count = 35
-		heattime = 35.0
-	elif ((time.time() - lastcoffee) % 60 <= 15):
-		count = 55
-		heattime = 55.0
-	else:
-		count = 80
-		heattime = 80.0
+	if ( ( Math.floor( ( time.time() - lastcoffee ) / 60 ) ) <= 180 ):
+		count = 10
+		heattime = 10.0
+	elif ( ( Math.floor( ( time.time() - lastcoffee ) / 60 ) ) <= 300 ):
+		count = 20
+		heattime = 20.0
+	elif ( ( Math.floor( ( time.time() - lastcoffee ) / 60 ) ) <= 600 ):
+		count = 35
+		heattime = 35.0
+	elif ( ( Math.floor( ( time.time() - lastcoffee ) / 60 ) ) <= 900 ):
+		count = 55
+		heattime = 55.0
+	else:
+		count = 80
+		heattime = 80.0
 
-	while (count >=0):
+	while (count >= 0):
 		time.sleep(1)
 		mqttc.publish("coffeefy/messages", "Heating water... %6.2f%%" % (100-(count/heattime)*100))
 		count -= 1
 	# Auswahl des 1Cup Programms
 	press1CupBtn()
 	count = 30
-	while (count >=0):
+	while (count >= 0):
 		time.sleep(1)
 		mqttc.publish("coffeefy/messages", "Preparing one cup... %6.2f%%" % (100-(count/30.0)*100))
 		count -= 1
