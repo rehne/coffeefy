@@ -48,7 +48,7 @@
           <div class="row">
             <div class="col-md-3"></div>
             <div class="col-md-3">
-              <button class="progress-button-small" data-style="fill" data-vertical="" data-video-url="./assets/coffee_small.mp4">
+              <button class="progress-button" data-style="fill" data-vertical="" data-video-url="./assets/coffee_small.mp4">
                 <span class="content">Small coffee</span>
                 <span class="progress progress-inner notransition" style="width: 0%; opacity: 1;"></span>
               </button>
@@ -101,10 +101,10 @@
       var active = <%= status %>;
       var heattime;
       if(active == 1){
-        $('.progress-button-small').prop('disabled', true);
+        $('.progress-button').prop('disabled', true);
         $('.progress-button-big').prop('disabled', true);
       } else {
-        $('.progress-button-small').prop('disabled', false);
+        $('.progress-button').prop('disabled', false);
         $('.progress-button-big').prop('disabled', false);
       }
       client.subscribe("coffeefy/messages");
@@ -122,11 +122,11 @@
           $(document).ready(function(){
             if(payload == 1){
               active = 1;
-              $('.progress-button-small').prop('disabled', true);
+              $('.progress-button').prop('disabled', true);
               $('.progress-button-big').prop('disabled', true);
             } else {
               active = 0;
-              $('.progress-button-small').prop('disabled', false);
+              $('.progress-button').prop('disabled', false);
               $('.progress-button-big').prop('disabled', false);
             }
           });
@@ -134,11 +134,11 @@
         if (topic=="coffeefy/ultrasonic") {
           $(document).ready(function(){
             if(payload > 5 && active == 0){
-              $('.progress-button-small').prop('disabled', true);
+              $('.progress-button').prop('disabled', true);
               $('.progress-button-big').prop('disabled', true);
               $('#distance').html(payload + 'CM | keine Tasse !');
             } else if (payload <= 5 && active == 0) {
-              $('.progress-button-small').prop('disabled', false);
+              $('.progress-button').prop('disabled', false);
               $('.progress-button-big').prop('disabled', false);
               $('#distance').html(payload + 'CM | Bereit !');
             }
@@ -175,7 +175,7 @@
         console.log('Error! else teil heattime');
       }
 
-      [].slice.call(document.querySelectorAll('.progress-button-small')).forEach(function(bttn) {
+      [].slice.call(document.querySelectorAll('.progress-button')).forEach(function(bttn) {
         var progress = stime;
         new ProgressButton( bttn, {
           callback : function(instance) {
@@ -188,7 +188,7 @@
                 $(".progress-button-big").prop("disabled", true);
               }
               if (progress < 0) {
-                $(".progress-button-small .content").text("Heating Water");
+                $(".progress-button .content").text("Heating Water");
               }
               if (progress < 1 && progress > 0) {
                 if(temp == true) {
@@ -198,12 +198,12 @@
                   player.play();
                   temp = false;
                 }
-                $(".progress-button-small .content").text("Brew Coffee");
+                $(".progress-button .content").text("Brew Coffee");
               }
               if ( progress === 1 ) {
                 instance._stop(1);
                 clearInterval( interval );
-                $(".progress-button-small .content").text("Small Coffee");
+                $(".progress-button .content").text("Small Coffee");
                 $(".progress-button-big .content").fadeTo(1000, 1);
                 $(".progress-button-big").prop("disabled", false);
               }
@@ -220,8 +220,8 @@
               progress = Math.min( progress + 0.5 * 0.1, 1 );
               instance._setProgress( progress );
               if (progress < 1) {
-                $(".progress-button-small .content").fadeTo(1000, 0.5);
-                $(".progress-button-small").prop("disabled", true);
+                $(".progress-button .content").fadeTo(1000, 0.5);
+                $(".progress-button").prop("disabled", true);
               }
               if (progress < 0) {
                 $(".progress-button-big .content").text("Heating Water");
@@ -238,8 +238,8 @@
               }
               if( progress === 1 ) {
                 $(".progress-button-big .content").text("Small Coffee");
-                $(".progress-button-small .content").fadeTo(1000, 1);
-                $(".progress-button-small").prop("disabled", false);
+                $(".progress-button .content").fadeTo(1000, 1);
+                $(".progress-button").prop("disabled", false);
                 instance._stop(1);
                 clearInterval( interval );
               }
