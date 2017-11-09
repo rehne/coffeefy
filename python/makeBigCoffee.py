@@ -66,6 +66,8 @@ try:
 	# Kaffeemaschine einschalten
 	pressPowerBtn()
 
+	mqttc.publish("coffeefy/messages", "69")
+
 	# Zeit für den Heatvorgang anhand des letzten Kaffees bestimmen
 	lastcoffee = data["timestamp"]
 	if ( ( Math.floor( ( time.time() - lastcoffee ) / 60 ) ) <= 180 ):
@@ -84,10 +86,15 @@ try:
 		count = 80
 		heattime = 80.0
 
+	mqttc.publish("coffeefy/messages", "89")
+
 	while (count >= 0):
 		time.sleep(1)
 		mqttc.publish("coffeefy/messages", "Heating water... %6.2f%%" % (100-(count/heattime)*100))
 		count -= 1
+
+	mqttc.publish("coffeefy/messages", "96")
+
 	# Auswahl des 2Cup Programms
 	press2CupBtn()
 	count = 40
