@@ -98,7 +98,6 @@
       var output_status = document.getElementById("status");
       var client = mqtt.connect('<%= address %>');
       var active = <%= status %>;
-      var lastCoffee = <%= lastCoffee %>;
       var stime;
       var btime;
       if(active == 1){
