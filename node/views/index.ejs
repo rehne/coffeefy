@@ -146,7 +146,7 @@
       });
       var temp = true;
       [].slice.call(document.querySelectorAll('.progress-button')).forEach(function(bttn) {
-        $.getJSON("../../config.json", function(json) {
+        $.getJSON("../config.json", function(json) {
           var data = JSON.parse(json);
           console.log(data.timestamp);
           readTimestamp(data.timestamp);
