@@ -18,9 +18,6 @@ import json
 import time
 import paho.mqtt.client as mqtt
 
-with open("../config.json", "r") as f:
-	data = json.load(f)
-
 # Setup des mqtt-Clients
 mqttc = mqtt.Client("python_pub")
 
@@ -91,7 +88,7 @@ try:
 
 	# Zeitpunkt als timestamp in der config.json speichern
 	data["timestamp"] = time.time()
-	with open("../config.json", "w") as f:
+	with open("../node/public/config.json", "w") as f:
 		json.dump(data, f, indent=2)
 
 except KeyboardInterrupt:

@@ -132,11 +132,11 @@
         }
         if (topic=="coffeefy/ultrasonic") {
           $(document).ready(function(){
-            if(payload > 5 && active == 0){
+            if(payload > 15 && active == 0){
               $('.progress-button').prop('disabled', true);
               $('.progress-button-big').prop('disabled', true);
               $('#distance').html(payload + 'CM | keine Tasse !');
-            } else if (payload <= 5 && active == 0) {
+            } else if (payload <= 15 && active == 0) {
               $('.progress-button').prop('disabled', false);
               $('.progress-button-big').prop('disabled', false);
               $('#distance').html(payload + 'CM | Bereit !');
@@ -146,10 +146,9 @@
       });
       var temp = true;
       [].slice.call(document.querySelectorAll('.progress-button')).forEach(function(bttn) {
-        $.getJSON("../config.json", function(json) {
-          var data = JSON.parse(json);
-          console.log(data.timestamp);
-          readTimestamp(data.timestamp);
+        $.getJSON("./config.json", function(json) {
+          console.log(json.timestamp);
+          readTimestamp(json.timestamp);
         });
         var progress = stime;
         new ProgressButton( bttn, {
@@ -187,14 +186,14 @@
         } );
       } );
       [].slice.call(document.querySelectorAll('.progress-button-big')).forEach(function(bttn) {
-        $.getJSON("../../config.json", function(json) {
-          var data = JSON.parse(json);
-          console.log(data.timestamp);
-          readTimestamp(data.timestamp);
+        $.getJSON("./config.json", function(json) {
+          console.log(json.timestamp);
+          readTimestamp(json.timestamp);
         });
         var progress = btime;
         new ProgressButton(bttn, {
           callback : function(instance) {
+	    console.log(progress);
             $.get("python/makeBigCoffee/");
             progress, interval = setInterval(function() {
               progress = Math.min( progress + 0.5 * 0.1, 1 );
@@ -228,16 +227,16 @@
         } );
       } );
       function readTimestamp(lastCoffee){
-        if ((Date.now() - lastCoffee) % 60 <= 3) {
+        if (Math.floor((Date.now() - lastCoffee) / 1000) <= 180) {
           stime = -0.40;
           btime= -0.22;
-        } else if ((Date.now() - lastCoffee) % 60 <= 5) {
+        } else if (Math.floor((Date.now() - lastCoffee) / 1000) <= 300) {
           stime = -0.83;
           btime= -0.45;
-        } else if ((Date.now() - lastCoffee) % 60 <= 10) {
+        } else if (Math.floor((Date.now() - lastCoffee) / 1000) <= 600) {
           stime= -1.45;
           btime= -0.79;
-        } else if ((Date.now() - lastCoffee) % 60 <= 15) {
+        } else if (Math.floor((Date.now() - lastCoffee) / 1000) <= 900) {
           stime = -2.29;
           btime = -1.25;
         } else {

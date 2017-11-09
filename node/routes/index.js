@@ -4,7 +4,7 @@ var router = express.Router();
 var pythonshell = require('python-shell');
 var os = require('os');
 var gpio = null;
-var config = require('../../config.json');
+var config = require('../public/config.json');
 var mqtt = require('mqtt');
 var distance;
 var device_is_working = 0;
