@@ -12,7 +12,7 @@
     <link rel="stylesheet" type="text/css" href="./css/styles.css">
     <link rel="stylesheet" type="text/css" href="./css/font-mfizz.css">
     <link rel="stylesheet" type="text/css" href="./css/normalize.css">
-		<link rel="stylesheet" type="text/css" href="./css/component.css">
+    <link rel="stylesheet" type="text/css" href="./css/component.css">
   </head>
   <body>
     <nav id="topNav" class="navbar navbar-default navbar-fixed-top">
@@ -59,6 +59,7 @@
                 <span class="progress progress-inner notransition" style="width: 0%; opacity: 1;"></span>
               </button>
             </div>
+	    <div class="col-md-3"></div>
           </div>
           <div class="row">
             <div class="col-md-1"></div>
@@ -92,7 +93,7 @@
     <script src="./js/wow.js"></script>
     <script src="./js/scripts.js"></script>
     <script src="./js/classie.js"></script>
-		<script src="./js/progressButton.js"></script>
+    <script src="./js/progressButton.js"></script>
     <script>
       var output_messages = document.getElementById("messages");
       var output_status = document.getElementById("status");
@@ -144,6 +145,7 @@
           });
         }
       });
+
       var temp = true;
       [].slice.call(document.querySelectorAll('.progress-button')).forEach(function(bttn) {
         $.getJSON("./config.json", function(json) {

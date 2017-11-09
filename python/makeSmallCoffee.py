@@ -18,6 +18,9 @@ import json
 import time
 import paho.mqtt.client as mqtt
 
+with open("../config.json", "r") as f:
+	data = json.load(f)
+
 # Setup des mqtt-Clients
 mqttc = mqtt.Client("python_pub")
 
@@ -64,6 +67,23 @@ try:
 
 	# Kaffeemaschine einschalten
 	pressPowerBtn()
+
+	lastcoffee = data["timestamp"]
+	if ((time.time() - lastcoffee) % 60 <= 3):
+		count = 10
+		heattime = 10.0
+	elif ((time.time() - lastcoffee) % 60 <= 5):
+		count = 20
+		heattime = 20.0
+	elif ((time.time() - lastcoffee) % 60 <= 10):
+		count = 35
+		heattime = 35.0
+	elif ((time.time() - lastcoffee) % 60 <= 15):
+		count = 55
+		heattime = 55.0
+	else:
+		count = 80
+		heattime = 80.0
 
 	while (count >=0):
 		time.sleep(1)
