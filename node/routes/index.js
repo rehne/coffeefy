@@ -21,9 +21,9 @@ var ws_client = "ws://" + config.address + ":" + config.ws;
 /* GET resource "/" aka homepage */
 router.get('/', function(req, res, next) {
   res.render('index', { title: 'Coffeefy',
-                          distance: distance,
-                          status: device_is_working,
-                          address: ws_client
+                        distance: distance,
+                        status: device_is_working,
+                        address: ws_client
   });
   res.end();
 });

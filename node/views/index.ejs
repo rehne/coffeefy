@@ -96,10 +96,11 @@
     <script>
       var output_messages = document.getElementById("messages");
       var output_status = document.getElementById("status");
-      var output_heattime = document.getElementById("heattime");
       var client = mqtt.connect('<%= address %>');
       var active = <%= status %>;
-      var heattime;
+      var lastCoffee = <%= lastCoffee %>;
+      var stime;
+      var btime;
       if(active == 1){
         $('.progress-button').prop('disabled', true);
         $('.progress-button-big').prop('disabled', true);
@@ -110,7 +111,6 @@
       client.subscribe("coffeefy/messages");
       client.subscribe("coffeefy/ultrasonic");
       client.subscribe("coffeefy/status");
-      client.subscribe("coffeefy/heattime");
       client.on("message", function(topic, payload) {
         if (topic=="coffeefy/messages") {
           output_messages.innerHTML = payload;
@@ -144,39 +144,14 @@
             }
           });
         }
-        if (topic=="coffeefy/heattime") {
-          $(document).ready(function(){
-            if(active){
-              $('#heattime').html('Heattime: ' + payload);
-              heattime = payload;
-              console.log(payload);
-            }
-          });
-        }
       });
-      var stime;
-      var btime;
       var temp = true;
-      if (heattime == 80.0) {
-        stime = -3.3;
-        btime = -1.86;
-      } else if (heattime == 55.0) {
-        stime = -2.29;
-        btime = -1.25;
-      } else if (heattime == 35.0) {
-        stime= -1.45;
-        btime= -0.79;
-      } else if (heattime == 20.0) {
-        stime = -0.83;
-        btime= -0.45;
-      } else if (heattime == 10.0) {
-        stime = -0.40;
-        btime= -0.22;
-      } else {
-        console.log('Error! else teil heattime');
-      }
-
       [].slice.call(document.querySelectorAll('.progress-button')).forEach(function(bttn) {
+        $.getJSON("../../config.json", function(json) {
+          var data = JSON.parse(json);
+          console.log(data.timestamp);
+          readTimestamp(data.timestamp);
+        });
         var progress = stime;
         new ProgressButton( bttn, {
           callback : function(instance) {
@@ -201,7 +176,7 @@
                 }
                 $(".progress-button .content").text("Brew Coffee");
               }
-              if ( progress === 1 ) {
+              if (progress === 1) {
                 instance._stop(1);
                 clearInterval( interval );
                 $(".progress-button .content").text("Small Coffee");
@@ -213,7 +188,12 @@
         } );
       } );
       [].slice.call(document.querySelectorAll('.progress-button-big')).forEach(function(bttn) {
-        var progress = stime;
+        $.getJSON("../../config.json", function(json) {
+          var data = JSON.parse(json);
+          console.log(data.timestamp);
+          readTimestamp(data.timestamp);
+        });
+        var progress = btime;
         new ProgressButton(bttn, {
           callback : function(instance) {
             $.get("python/makeBigCoffee/");
@@ -248,6 +228,24 @@
           }
         } );
       } );
+      function readTimestamp(lastCoffee){
+        if ((Date.now() - lastCoffee) % 60 <= 3) {
+          stime = -0.40;
+          btime= -0.22;
+        } else if ((Date.now() - lastCoffee) % 60 <= 5) {
+          stime = -0.83;
+          btime= -0.45;
+        } else if ((Date.now() - lastCoffee) % 60 <= 10) {
+          stime= -1.45;
+          btime= -0.79;
+        } else if ((Date.now() - lastCoffee) % 60 <= 15) {
+          stime = -2.29;
+          btime = -1.25;
+        } else {
+          stime = -3.3;
+          btime = -1.86;
+        }
+      }
     </script>
     <style>
       .hide { position:absolute; top:-1px; left:-1px; width:1px; height:1px; }

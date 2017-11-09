@@ -68,26 +68,6 @@ try:
 	# Kaffeemaschine einschalten
 	pressPowerBtn()
 
-	# Je nach Zeitpunkt des letzten Kaffees die Zeit für den Heizvorgang wählen
-	lastcoffee = data["timestamp"]
-	if ((time.time() - lastcoffee) % 60 <= 3):
-		count = 10
-		heattime = 10.0
-	elif ((time.time() - lastcoffee) % 60 <= 5):
-		count = 20
-		heattime = 20.0
-	elif ((time.time() - lastcoffee) % 60 <= 10):
-		count = 35
-		heattime = 35.0
-	elif ((time.time() - lastcoffee) % 60 <= 15):
-		count = 55
-		heattime = 55.0
-	else:
-		count = 80
-		heattime = 80.0
-
-	mqttc.publish("coffeefy/heattime", "%.1f" % heattime)
-
 	while (count >=0):
 		time.sleep(1)
 		mqttc.publish("coffeefy/messages", "Heating water... %6.2f%%" % (100-(count/heattime)*100))
