@@ -11,6 +11,7 @@ mqttc = mqtt.Client("python_pub")
 mqttc.connect(data["address"], data["mqtt"], 60)
 
 def main():
-    time.sleep(1)
-    mqttc.publish("coffeefy/ultrasonic", "%.1f" % Distance)
+    while True:
+        time.sleep(1)
+        mqttc.publish("coffeefy/ultrasonic", "%.1f" % Distance)
 main()
