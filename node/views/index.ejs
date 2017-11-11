@@ -225,16 +225,16 @@
       });
 
       function readTimestamp(lastCoffee){
-        if (Math.floor((Date.now() - lastCoffee) / 1000) <= 180) { // 3 Minuten
+        if (Math.floor((Date.now() - lastCoffee * 1000) / 1000) <= 180) { // 3 Minuten
           stime = -0.40;
           btime = -0.22;
-        } else if (Math.floor((Date.now() - lastCoffee) / 1000) <= 300) { // 5 Minuten
+        } else if (Math.floor((Date.now() - lastCoffee * 1000) / 1000) <= 300) { // 5 Minuten
           stime = -0.83;
           btime = -0.45;
-        } else if (Math.floor((Date.now() - lastCoffee) / 1000) <= 600) { // 10 Minuten
+        } else if (Math.floor((Date.now() - lastCoffee * 1000) / 1000) <= 600) { // 10 Minuten
           stime = -1.45;
           btime = -0.79;
-        } else if (Math.floor((Date.now() - lastCoffee) / 1000) <= 900) { // 15 Minuten
+        } else if (Math.floor((Date.now() - lastCoffee * 1000) / 1000) <= 900) { // 15 Minuten
           stime = -2.29;
           btime = -1.25;
         } else {
