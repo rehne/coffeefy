@@ -1,1 +1,252 @@
-<!DOCTYPE html><html>  <head>    <meta charset="utf-8">    <title>Coffeefy</title>    <meta name="description" content="The Senseo Whisperer">    <meta name="viewport" content="width=device-width, initial-scale=1.0">    <meta name="generator" content="Codeply">    <link rel="stylesheet" type="text/css" href="./css/bootstrap.min.css">    <link rel="stylesheet" type="text/css" href="./css/animate.min.css">    <link rel="stylesheet" type="text/css" href="./css/ionicons.min.css">    <link rel="stylesheet" type="text/css" href="./css/styles.css">    <link rel="stylesheet" type="text/css" href="./css/font-mfizz.css">    <link rel="stylesheet" type="text/css" href="./css/normalize.css">    <link rel="stylesheet" type="text/css" href="./css/component.css">  </head>  <body>    <nav id="topNav" class="navbar navbar-default navbar-fixed-top">      <div class="container-fluid">        <div class="navbar-header">          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-navbar">            <span class="sr-only">Toggle navigation</span>            <span class="icon-bar"></span>            <span class="icon-bar"></span>            <span class="icon-bar"></span>          </button>          <a class="navbar-brand page-scroll" href="#first"><i class="ion-coffee"></i> Coffeefy</a>        </div>        <div class="navbar-collapse collapse" id="bs-navbar">          <ul class="nav navbar-nav">            <li><a class="page-scroll" href="#one">Info</a></li>            <li><a class="page-scroll" href="#two">Hardware</a></li>            <li><a class="page-scroll" href="#twotwo">Software</a></li>            <li><a class="page-scroll" href="#three">Bilder</a></li>            <li><a class="page-scroll" href="#four">Features</a></li>            <li><a class="page-scroll" href="#last">Kontakt</a></li>            <li><a class="page-scroll" href="./quellen.html#source">Quellen</a></li>          </ul>        </div>      </div>    </nav>    <header id="first">      <div class="header-content">        <div class="inner">          <h1 class="cursive">- Coffeefy -</h1>          <h4>The Senseo Whisperer</h4>          <hr>          <div class="row">            <div class="col-md-3"></div>            <div class="col-md-3">              <button class="progress-button" data-style="fill" data-vertical="" data-video-url="./assets/coffee_small.mp4">                <span class="content">Small coffee</span>                <span class="progress progress-inner notransition" style="width: 0%; opacity: 1;"></span>              </button>            </div>            <div class="col-md-3">              <button class="progress-button-big" data-style="fill" data-vertical="" data-video-url="./assets/coffee_small.mp4">                <span class="content">Big coffee</span>                <span class="progress progress-inner notransition" style="width: 0%; opacity: 1;"></span>              </button>            </div>	    <div class="col-md-3"></div>          </div>          <div class="row">            <div class="col-md-1"></div>            <div class="col-md-3">              <p id="distance"></p>            </div>            <div class="col-md-4">              <p id="messages"></p>            </div>            <div class="col-md-3">              <p id="heattime"></p>            </div>            <div class="col-md-1"></div>          </div>        </div>      </div>      <video class="fillWidth fadeIn wow collapse in" data-wow-delay="0.5s" poster="./assets/coffee_stop.png" id="player">        Your browser does not support the video tag. I suggest you upgrade your browser.      </video>    </header>    <!-- including main info content -->    <%- include content.ejs %>    <!--scripts loaded here -->    <script src="./js/external/browserMqtt.js"></script>    <script src="./js/modernizr.custom.js"></script>    <script src="./js/jquery.min.js"></script>    <script src="./js/bootstrap.min.js"></script>    <script src="./js/jquery.easing.min.js"></script>    <script src="./js/wow.js"></script>    <script src="./js/scripts.js"></script>    <script src="./js/classie.js"></script>    <script src="./js/progressButton.js"></script>    <script>      var output_messages = document.getElementById("messages");      var output_status = document.getElementById("status");      var client = mqtt.connect('<%= address %>');      var active = <%= status %>;      if(active == 1) {        $('.progress-button').prop('disabled', true);        $('.progress-button-big').prop('disabled', true);      } else {        $('.progress-button').prop('disabled', false);        $('.progress-button-big').prop('disabled', false);      }      client.subscribe("coffeefy/messages");      client.subscribe("coffeefy/ultrasonic");      client.subscribe("coffeefy/status");      client.on("message", function(topic, payload) {        if (topic=="coffeefy/messages") {          output_messages.innerHTML = payload;          if (payload == "Done!") { location.reload(true); }        }        if (topic=="coffeefy/status") {          $(document).ready(function() {            if(payload == 1) {              active = 1;              $('.progress-button').prop('disabled', true);              $('.progress-button-big').prop('disabled', true);            } else {              active = 0;              $('.progress-button').prop('disabled', false);              $('.progress-button-big').prop('disabled', false);            }          });        }        if (topic=="coffeefy/ultrasonic") {          $(document).ready(function() {            if(payload > 15 && active == 0) {              $('.progress-button').prop('disabled', true);              $('.progress-button-big').prop('disabled', true);              $('#distance').html(payload + 'CM | keine Tasse !');            } else if (payload <= 15 && active == 0) {              $('.progress-button').prop('disabled', false);              $('.progress-button-big').prop('disabled', false);              $('#distance').html(payload + 'CM | Bereit !');            }          });        }      });      var stime;      var progress;      var btime;	//$.getJSON("./config.json", function(json) { readTimestamp(json.timestamp); });                progress = stime;	var intervall = setInterval(function() {	$.getJSON("./config.json", function(json) { readTimestamp(json.timestamp); });		console.log(active);if( active == true){  clearInterval(intervall);}progress = stime;}, 10 * 500);      var temp = true;      [].slice.call(document.querySelectorAll('.progress-button')).forEach(function(bttn) {          new ProgressButton( bttn, {            callback : function(instance) {             //   $.getJSON("./config.json", function(json) { readTimestamp(json.timestamp); });makecoffee = true;//		progress = stime;//              $('.progress-button').click(function(){                $.getJSON("./config.json", function(json) { readTimestamp(json.timestamp); });                progress = stime;//		console.log(stime);		console.log(active);		console.log(progress);              $.get("python/makeSmallCoffee/");              progress, interval = setInterval(function() {                progress = Math.min( progress + 0.4 * 0.1, 1 );                instance._setProgress( progress );		console.log("FUCK");console.log(makecoffee);                if (progress < 1) {                  $(".progress-button-big .content").fadeTo(1000, 0.5);                  $(".progress-button-big").prop("disabled", true);                }                if (progress < 0) { $(".progress-button .content").text("Heating Water"); console.log(progress);}                if (progress < 1 && progress > 0) {                  console.log(progress);                  if(temp == true) {                    player = document.getElementById("player");                    player.src = "./assets/coffee_small.mp4";                    player.load();                    player.play();                    temp = false;                  } $(".progress-button .content").text("Brew Coffee");                }                if (progress === 1) {                  instance._stop(1);                  clearInterval( interval );                  $(".progress-button .content").text("Small Coffee");                  $(".progress-button-big .content").fadeTo(1000, 1);                  $(".progress-button-big").prop("disabled", false);                }              }, 1200 );           // });          }        });      });      [].slice.call(document.querySelectorAll('.progress-button-big')).forEach(function(bttn) {        $('.progress-button-big').click(function(){          $.get("python/makeBigCoffee/");          $.getJSON("./config.json", function(json) { readTimestamp(json.timestamp); });          progress = btime;          new ProgressButton(bttn, {            callback : function(instance) {              progress, interval = setInterval(function() {                progress = Math.min( progress + 0.5 * 0.1, 1 );                instance._setProgress( progress );                if (progress < 1) {                  $(".progress-button .content").fadeTo(1000, 0.5);                  $(".progress-button").prop("disabled", true);                }                if (progress < 0) { $(".progress-button-big .content").text("Heating Water"); }                if (progress < 1 && progress > 0) {                  if(temp == true) {                    player = document.getElementById("player");                    player.src = "./assets/coffee_big.mp4";                    player.load();                    player.play();                    temp = false;                  } $(".progress-button-big .content").text("Brew Coffee");                }                if( progress === 1 ) {                  $(".progress-button-big .content").text("Small Coffee");                  $(".progress-button .content").fadeTo(1000, 1);                  $(".progress-button").prop("disabled", false);                  instance._stop(1);                  clearInterval( interval );                }              }, 3000 );            }          });        });      });      function readTimestamp(lastCoffee){        if (Math.floor((Date.now() - lastCoffee) / 1000) <= 180) { // 3 Minuten          stime = -0.60;          btime= -0.22;        } else if (Math.floor((Date.now() - lastCoffee) / 1000) <= 300) { // 5 Minuten          stime = -0.83;          btime= -0.45;        } else if (Math.floor((Date.now() - lastCoffee) / 1000) <= 600) { // 10 Minuten          stime= -1.45;          btime= -0.79;        } else if (Math.floor((Date.now() - lastCoffee) / 1000) <= 900) { // 15 Minuten          stime = -2.29;          btime = -1.25;        } else {var test = (Date.now() - lastCoffee) / 1000console.log(test);          stime = -0.4;          btime = -1.86;        }      }    </script>    <style>      .hide { position:absolute; top:-1px; left:-1px; width:1px; height:1px; }    </style>    <!-- http://stackoverflow.com/a/5733858 -->    <iframe name="hiddenFrame" class="hide"></iframe>  </body></html>
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Coffeefy</title>
+    <meta name="description" content="The Senseo Whisperer">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="generator" content="Codeply">
+    <link rel="stylesheet" type="text/css" href="./css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="./css/animate.min.css">
+    <link rel="stylesheet" type="text/css" href="./css/ionicons.min.css">
+    <link rel="stylesheet" type="text/css" href="./css/styles.css">
+    <link rel="stylesheet" type="text/css" href="./css/font-mfizz.css">
+    <link rel="stylesheet" type="text/css" href="./css/normalize.css">
+    <link rel="stylesheet" type="text/css" href="./css/component.css">
+  </head>
+  <body>
+    <nav id="topNav" class="navbar navbar-default navbar-fixed-top">
+      <div class="container-fluid">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-navbar">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand page-scroll" href="#first"><i class="ion-coffee"></i> Coffeefy</a>
+        </div>
+        <div class="navbar-collapse collapse" id="bs-navbar">
+          <ul class="nav navbar-nav">
+            <li><a class="page-scroll" href="#one">Info</a></li>
+            <li><a class="page-scroll" href="#two">Hardware</a></li>
+            <li><a class="page-scroll" href="#twotwo">Software</a></li>
+            <li><a class="page-scroll" href="#three">Bilder</a></li>
+            <li><a class="page-scroll" href="#four">Features</a></li>
+            <li><a class="page-scroll" href="#last">Kontakt</a></li>
+            <li><a class="page-scroll" href="./quellen.html#source">Quellen</a></li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+    <header id="first">
+      <div class="header-content">
+        <div class="inner">
+          <h1 class="cursive">- Coffeefy -</h1>
+          <h4>The Senseo Whisperer</h4>
+          <hr>
+          <div class="row">
+            <div class="col-md-3"></div>
+            <div class="col-md-3">
+              <button class="progress-button" data-style="fill" data-vertical="" data-video-url="./assets/coffee_small.mp4">
+                <span class="content">Small coffee</span>
+                <span class="progress progress-inner notransition" style="width: 0%; opacity: 1;"></span>
+              </button>
+            </div>
+            <div class="col-md-3">
+              <button class="progress-button-big" data-style="fill" data-vertical="" data-video-url="./assets/coffee_small.mp4">
+                <span class="content">Big coffee</span>
+                <span class="progress progress-inner notransition" style="width: 0%; opacity: 1;"></span>
+              </button>
+            </div>
+	    <div class="col-md-3"></div>
+          </div>
+          <div class="row">
+            <div class="col-md-1"></div>
+            <div class="col-md-3">
+              <p id="distance"></p>
+            </div>
+            <div class="col-md-4">
+              <p id="messages"></p>
+            </div>
+            <div class="col-md-3">
+              <p id="heattime"></p>
+            </div>
+            <div class="col-md-1"></div>
+          </div>
+        </div>
+      </div>
+      <video class="fillWidth fadeIn wow collapse in" data-wow-delay="0.5s" poster="./assets/coffee_stop.png" id="player">
+        Your browser does not support the video tag. I suggest you upgrade your browser.
+      </video>
+    </header>
+
+    <!-- including main info content -->
+    <%- include content.ejs %>
+
+    <!--scripts loaded here -->
+    <script src="./js/external/browserMqtt.js"></script>
+    <script src="./js/modernizr.custom.js"></script>
+    <script src="./js/jquery.min.js"></script>
+    <script src="./js/bootstrap.min.js"></script>
+    <script src="./js/jquery.easing.min.js"></script>
+    <script src="./js/wow.js"></script>
+    <script src="./js/scripts.js"></script>
+    <script src="./js/classie.js"></script>
+    <script src="./js/progressButton.js"></script>
+    <script>
+      var output_messages = document.getElementById("messages");
+      var output_status = document.getElementById("status");
+      var client = mqtt.connect('<%= address %>');
+      var active = <%= status %>;
+      if(active == 1) {
+        $('.progress-button').prop('disabled', true);
+        $('.progress-button-big').prop('disabled', true);
+      } else {
+        $('.progress-button').prop('disabled', false);
+        $('.progress-button-big').prop('disabled', false);
+      }
+      client.subscribe("coffeefy/messages");
+      client.subscribe("coffeefy/ultrasonic");
+      client.subscribe("coffeefy/status");
+      client.on("message", function(topic, payload) {
+        if (topic=="coffeefy/messages") {
+          output_messages.innerHTML = payload;
+          if (payload == "Done!") { location.reload(true); }
+        }
+        if (topic=="coffeefy/status") {
+          $(document).ready(function() {
+            if(payload == 1) {
+              active = 1;
+              $('.progress-button').prop('disabled', true);
+              $('.progress-button-big').prop('disabled', true);
+            } else {
+              active = 0;
+              $('.progress-button').prop('disabled', false);
+              $('.progress-button-big').prop('disabled', false);
+            }
+          });
+        }
+        if (topic=="coffeefy/ultrasonic") {
+          $(document).ready(function() {
+            if(payload > 15 && active == 0) {
+              $('.progress-button').prop('disabled', true);
+              $('.progress-button-big').prop('disabled', true);
+              $('#distance').html(payload + 'CM | keine Tasse !');
+            } else if (payload <= 15 && active == 0) {
+              $('.progress-button').prop('disabled', false);
+              $('.progress-button-big').prop('disabled', false);
+              $('#distance').html(payload + 'CM | Bereit !');
+            }
+          });
+        }
+      });
+    </script>
+    <script>
+      var stime;
+      var btime;
+      var progress;
+      var temp = true;
+      [].slice.call(document.querySelectorAll('.progress-button')).forEach(function(bttn) {
+        $('.progress-button').click(function() {
+          $.get("makeSmallCoffee").then(function() {
+            $.getJSON("./config.json", function(json) { readTimestamp(json.timestamp) });
+            progress = stime;
+            console.log(progress);
+            new ProgressButton( bttn, {
+              callback : function(instance) {
+                progress, interval = setInterval(function() {
+                  progress = Math.min( progress + 0.5 * 0.1, 1 );
+                  instance._setProgress( progress );
+                  if (progress < 1) {
+                    $(".progress-button-big .content").fadeTo(1000, 0.5);
+                    $(".progress-button-big").prop("disabled", true);
+                  }
+                  if (progress < 0) { $(".progress-button .content").text("Heating Water") }
+                  if (progress < 1 && progress > 0) {
+                    if(temp == true) {
+                      player = document.getElementById("player");
+                      player.src = "./assets/coffee_small.mp4";
+                      player.load();
+                      player.play();
+                      temp = false;
+                    } $(".progress-button .content").text("Brew Coffee");
+                  }
+                  if (progress === 1) {
+                    instance._stop(1);
+                    clearInterval( interval );
+                    $(".progress-button .content").text("Small Coffee");
+                    $(".progress-button-big .content").fadeTo(1000, 1);
+                    $(".progress-button-big").prop("disabled", false);
+                  }
+                }, 1200 );
+              }
+            });
+          });
+        });
+      });
+      [].slice.call(document.querySelectorAll('.progress-button-big')).forEach(function(bttn) {
+        $('.progress-button-big').click(function() {
+          $.get("makeBigCoffee").then(function() {
+            $.getJSON("./config.json", function(json) { readTimestamp(json.timestamp) });
+            progress = btime;
+            console.log(progress);
+            new ProgressButton(bttn, {
+              callback : function(instance) {
+                progress, interval = setInterval(function() {
+                  progress = Math.min( progress + 0.5 * 0.1, 1 );
+                  instance._setProgress( progress );
+                  if (progress < 1) {
+                    $(".progress-button .content").fadeTo(1000, 0.5);
+                    $(".progress-button").prop("disabled", true);
+                  }
+                  if (progress < 0) { $(".progress-button-big .content").text("Heating Water") }
+                  if (progress < 1 && progress > 0) {
+                    if(temp == true) {
+                      player = document.getElementById("player");
+                      player.src = "./assets/coffee_big.mp4";
+                      player.load();
+                      player.play();
+                      temp = false;
+                    } $(".progress-button-big .content").text("Brew Coffee");
+                  }
+                  if( progress === 1 ) {
+                    $(".progress-button-big .content").text("Small Coffee");
+                    $(".progress-button .content").fadeTo(1000, 1);
+                    $(".progress-button").prop("disabled", false);
+                    instance._stop(1);
+                    clearInterval( interval );
+                  }
+                }, 2200 );
+              }
+            });
+          });
+        });
+      });
+
+      function readTimestamp(lastCoffee){
+        if (Math.floor((Date.now() - lastCoffee) / 1000) <= 180) { // 3 Minuten
+          stime = -0.40;
+          btime = -0.22;
+        } else if (Math.floor((Date.now() - lastCoffee) / 1000) <= 300) { // 5 Minuten
+          stime = -0.83;
+          btime = -0.45;
+        } else if (Math.floor((Date.now() - lastCoffee) / 1000) <= 600) { // 10 Minuten
+          stime = -1.45;
+          btime = -0.79;
+        } else if (Math.floor((Date.now() - lastCoffee) / 1000) <= 900) { // 15 Minuten
+          stime = -2.29;
+          btime = -1.25;
+        } else {
+          stime = -3.3;
+          btime = -1.86;
+        }
+      }
+    </script>
+    <style>
+      .hide { position:absolute; top:-1px; left:-1px; width:1px; height:1px; }
+    </style>
+    <!-- http://stackoverflow.com/a/5733858 -->
+    <iframe name="hiddenFrame" class="hide"></iframe>
+  </body>
+</html>
